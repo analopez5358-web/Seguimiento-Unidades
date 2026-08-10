@@ -4,611 +4,1555 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
+      content="width=device-width,initial-scale=1">
 
-<meta name="theme-color" content="#111827">
+<meta name="theme-color"
+      content="#111827">
 
-<title>Seguimiento de Unidades V4</title>
+<title>Seguimiento de Unidades V5</title>
 
 <style>
+
 *{
-    box-sizing:border-box;
+box-sizing:border-box;
 }
 
 body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:#f3f4f6;
-    color:#111827;
+margin:0;
+background:#f3f4f6;
+color:#111827;
+font-family:Arial,sans-serif;
 }
 
 .app{
-    width:100%;
-    max-width:600px;
-    margin:auto;
-    min-height:100vh;
-    background:white;
+max-width:650px;
+margin:auto;
+padding:16px;
 }
 
 .header{
-    background:#111827;
-    color:white;
-    padding:22px 18px;
+text-align:center;
+margin:10px 0 18px;
 }
 
-.header h1{
-    margin:0;
-    font-size:24px;
+.icon{
+font-size:44px;
 }
 
-.header p{
-    margin:7px 0 0;
-    color:#cbd5e1;
-    font-size:14px;
+h1{
+font-size:26px;
+margin:4px 0;
 }
 
-.content{
-    padding:16px;
+.sub{
+color:#6b7280;
 }
 
 .card{
-    background:white;
-    border-radius:14px;
-    padding:16px;
-    margin-bottom:14px;
-    box-shadow:0 2px 10px rgba(0,0,0,.08);
+background:#fff;
+border-radius:18px;
+padding:18px;
+margin-bottom:16px;
+box-shadow:0 3px 12px rgba(0,0,0,.08);
+}
+
+h2{
+font-size:19px;
+margin:0 0 14px;
 }
 
 label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:7px;
+display:block;
+font-weight:700;
+margin:10px 0 7px;
 }
 
-input,select,textarea{
-    width:100%;
-    padding:13px;
-    border:1px solid #d1d5db;
-    border-radius:10px;
-    font-size:16px;
-    outline:none;
+select,
+input{
+width:100%;
+padding:14px;
+border:1px solid #d1d5db;
+border-radius:11px;
+font-size:16px;
+background:#fff;
 }
 
-input:focus,
-select:focus,
-textarea:focus{
-    border-color:#2563eb;
+.row{
+display:flex;
+gap:9px;
+}
+
+.grow{
+flex:1;
 }
 
 button{
-    width:100%;
-    border:0;
-    border-radius:10px;
-    padding:13px;
-    font-size:16px;
-    font-weight:bold;
-    cursor:pointer;
-    margin-top:10px;
+border:0;
+border-radius:11px;
+padding:14px;
+font-weight:700;
+font-size:15px;
+cursor:pointer;
 }
 
-.btn-primary{
-    background:#2563eb;
-    color:white;
+.primary{
+width:100%;
+background:#111827;
+color:#fff;
+margin-top:14px;
 }
 
-.btn-success{
-    background:#16a34a;
-    color:white;
+.add{
+background:#e5e7eb;
+color:#111827;
+white-space:nowrap;
 }
 
-.btn-secondary{
-    background:#e5e7eb;
-    color:#111827;
+.destinos{
+display:grid;
+grid-template-columns:1fr 1fr 1fr;
+gap:8px;
 }
 
-.unit{
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    padding:14px;
-    margin-top:12px;
+.destinos button{
+background:#e5e7eb;
+color:#111827;
+font-size:13px;
 }
 
-.unit-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.destinos button.selected{
+background:#111827;
+color:#fff;
 }
 
-.unit-name{
-    font-weight:bold;
-    font-size:18px;
+.item{
+border:1px solid #e5e7eb;
+border-radius:12px;
+padding:13px;
+margin-top:10px;
 }
 
-.status{
-    padding:5px 9px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-    background:#dcfce7;
-    color:#166534;
+.item strong{
+font-size:17px;
 }
 
-.info{
-    margin-top:10px;
-    color:#4b5563;
-    font-size:14px;
-    line-height:1.6;
+.meta{
+font-size:14px;
+line-height:1.6;
+margin-top:6px;
+color:#374151;
 }
 
-.actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:8px;
+.item-actions{
+display:flex;
+gap:8px;
+margin-top:10px;
 }
 
-.actions button{
-    margin-top:8px;
+.item-actions button{
+flex:1;
+padding:10px;
+font-size:13px;
 }
 
-.message{
-    background:#f9fafb;
-    border:1px solid #e5e7eb;
-    border-radius:10px;
-    padding:12px;
-    margin-top:12px;
-    white-space:pre-line;
-    font-size:14px;
+.danger{
+background:#fee2e2;
+color:#991b1b;
+}
+
+.secondary{
+background:#e5e7eb;
+color:#111827;
+}
+
+.report{
+white-space:pre-wrap;
+background:#f9fafb;
+border:1px solid #e5e7eb;
+border-radius:11px;
+padding:13px;
+line-height:1.55;
+font-size:14px;
+}
+
+.copy{
+width:100%;
+background:#16a34a;
+color:#fff;
+margin-top:10px;
 }
 
 .empty{
-    text-align:center;
-    color:#6b7280;
-    padding:25px 10px;
+text-align:center;
+color:#6b7280;
+padding:14px;
 }
 
-.footer{
-    text-align:center;
-    padding:20px;
-    color:#6b7280;
-    font-size:12px;
+.small{
+font-size:13px;
+color:#6b7280;
+margin-top:7px;
 }
+
+@media(max-width:430px){
+
+.destinos{
+grid-template-columns:1fr;
+}
+
+.row{
+align-items:stretch;
+}
+
+}
+
 </style>
+
 </head>
 
 <body>
 
 <div class="app">
 
-<header class="header">
-    <h1>Seguimiento de Unidades</h1>
-    <p>Control y monitoreo de unidades</p>
-</header>
 
-<main class="content">
+<div class="header">
 
-<div class="card">
+<div class="icon">
+📋
+</div>
 
-    <label for="unidad">Unidad</label>
+<h1>
+Seguimiento de Unidades
+</h1>
 
-    <input
-        id="unidad"
-        type="text"
-        placeholder="Ej. Unidad 101"
-    >
+<div class="sub">
+Reporte consolidado para WhatsApp
+</div>
 
-    <label for="ubicacion" style="margin-top:14px;">
-        Ubicación
-    </label>
+</div>
 
-    <input
-        id="ubicacion"
-        type="text"
-        placeholder="Ej. Tegucigalpa"
-    >
 
-    <label for="estado" style="margin-top:14px;">
-        Estado
-    </label>
+<!-- REGISTRO -->
 
-    <select id="estado">
-        <option value="En ruta">En ruta</option>
-        <option value="Detenida">Detenida</option>
-        <option value="En cliente">En cliente</option>
-        <option value="Finalizada">Finalizada</option>
-    </select>
+<section class="card">
 
-    <button
-        class="btn-primary"
-        onclick="agregarUnidad()">
-        + Agregar unidad
-    </button>
+<h2>
+Registrar seguimiento
+</h2>
+
+
+<label>
+Placa
+</label>
+
+
+<div class="row">
+
+<div class="grow">
+
+<select id="placa">
+
+<option value="">
+Seleccione una placa
+</option>
+
+</select>
 
 </div>
 
 
-<div class="card">
+<button
+class="add"
+onclick="agregarPlaca()">
 
-    <h2 style="margin-top:0;">
-        Unidades
-    </h2>
+＋ Placa
 
-    <div id="listaUnidades">
-        <div class="empty">
-            No hay unidades registradas.
-        </div>
-    </div>
+</button>
 
 </div>
 
 
-<div class="card">
+<label>
+Ubicado en
+</label>
 
-    <h2 style="margin-top:0;">
-        Reporte
-    </h2>
 
-    <div id="reporte" class="message">
-        Aún no hay información para generar el reporte.
-    </div>
+<input
+id="ubicado"
+type="text"
+placeholder="Ej. Siguatepeque"
+autocomplete="off"
+>
 
-    <button
-        class="btn-success"
-        onclick="copiarReporte()">
-        Copiar reporte
-    </button>
 
-    <button
-        class="btn-secondary"
-        onclick="limpiarTodo()">
-        Limpiar unidades
-    </button>
+<label>
+Destino
+</label>
+
+
+<div class="destinos">
+
+<button
+data-destino="CD SPS">
+
+CD SPS
+
+</button>
+
+
+<button
+data-destino="CD COMAYAGUA">
+
+CD COMAYAGUA
+
+</button>
+
+
+<button
+data-destino="CD JUTICALPA">
+
+CD JUTICALPA
+
+</button>
 
 </div>
 
-</main>
 
-<div class="footer">
-    Seguimiento de Unidades V4
+<button
+class="primary"
+onclick="registrar()">
+
+AGREGAR AL REPORTE
+
+</button>
+
+
+<div class="small">
+
+La hora se registra automáticamente.
+
 </div>
 
+</section>
+
+
+
+<!-- UNIDADES -->
+
+<section class="card">
+
+<h2>
+Unidades del reporte
+</h2>
+
+<div id="registros"></div>
+
+</section>
+
+
+
+<!-- REPORTE -->
+
+<section class="card">
+
+<h2>
+Reporte consolidado
+</h2>
+
+
+<div
+id="reporte"
+class="report">
+
+Aún no hay unidades en el reporte.
+
 </div>
+
+
+<button
+class="copy"
+onclick="copiarReporte()">
+
+📲 COPIAR PARA WHATSAPP
+
+</button>
+
+
+<button
+class="secondary"
+style="width:100%;margin-top:9px"
+onclick="limpiarReporte()">
+
+Limpiar reporte actual
+
+</button>
+
+</section>
+
+
+
+<!-- PLACAS -->
+
+<section class="card">
+
+<h2>
+Placas guardadas
+</h2>
+
+<div id="placas"></div>
+
+</section>
+
+
+
+<!-- HISTORIAL -->
+
+<section class="card">
+
+<h2>
+Historial
+</h2>
+
+<div id="historial"></div>
+
+</section>
+
+
+</div>
+
 
 
 <script>
 
-let unidades =
-    JSON.parse(localStorage.getItem("unidadesV4")) || [];
+
+const CLAVE_PLACAS =
+"seguimiento_placas_v5";
 
 
-function guardar(){
+const CLAVE_REPORTE =
+"seguimiento_reporte_v5";
 
-    localStorage.setItem(
-        "unidadesV4",
-        JSON.stringify(unidades)
-    );
+
+const CLAVE_HISTORIAL =
+"seguimiento_historial_v5";
+
+
+let placas =
+JSON.parse(
+localStorage.getItem(
+CLAVE_PLACAS
+)
+||
+'["TCA2222","TEA9111"]'
+);
+
+
+let registros =
+JSON.parse(
+localStorage.getItem(
+CLAVE_REPORTE
+)
+||
+"[]"
+);
+
+
+let historial =
+JSON.parse(
+localStorage.getItem(
+CLAVE_HISTORIAL
+)
+||
+"[]"
+);
+
+
+let destinoSeleccionado =
+"";
+
+
+
+/* =========================
+   HORA
+========================= */
+
+
+function obtenerHora(){
+
+return new Intl.DateTimeFormat(
+"es-HN",
+{
+hour:"2-digit",
+minute:"2-digit",
+hour12:true
+}
+).format(
+new Date()
+);
 
 }
 
 
-function horaActual(){
 
-    const ahora = new Date();
+/* =========================
+   FECHA
+========================= */
 
-    return ahora.toLocaleTimeString(
-        "es-HN",
-        {
-            hour:"2-digit",
-            minute:"2-digit",
-            hour12:false
-        }
-    );
+
+function obtenerFecha(){
+
+return new Intl.DateTimeFormat(
+"es-HN",
+{
+day:"2-digit",
+month:"2-digit",
+year:"numeric"
+}
+).format(
+new Date()
+);
 
 }
 
 
-function agregarUnidad(){
 
-    const unidad =
-        document.getElementById("unidad").value.trim();
-
-    const ubicacion =
-        document.getElementById("ubicacion").value.trim();
-
-    const estado =
-        document.getElementById("estado").value;
-
-
-    if(!unidad){
-
-        alert("Escribe el nombre de la unidad.");
-
-        return;
-
-    }
-
-
-    const nueva = {
-
-        id:Date.now(),
-
-        unidad:unidad,
-
-        ubicacion:
-            ubicacion || "Sin ubicación",
-
-        estado:estado,
-
-        hora:horaActual()
-
-    };
-
-
-    unidades.push(nueva);
-
-    guardar();
-
-    mostrar();
-
-
-    document.getElementById("unidad").value="";
-
-    document.getElementById("ubicacion").value="";
-
-}
-
-
-function eliminarUnidad(id){
-
-    unidades =
-        unidades.filter(
-            unidad => unidad.id !== id
-        );
-
-    guardar();
-
-    mostrar();
-
-}
-
-
-function cambiarEstado(id){
-
-    const unidad =
-        unidades.find(
-            u => u.id === id
-        );
-
-    if(!unidad) return;
-
-
-    const estados = [
-        "En ruta",
-        "Detenida",
-        "En cliente",
-        "Finalizada"
-    ];
-
-
-    const actual =
-        estados.indexOf(unidad.estado);
-
-
-    unidad.estado =
-        estados[
-            (actual + 1) % estados.length
-        ];
-
-
-    unidad.hora = horaActual();
-
-    guardar();
-
-    mostrar();
-
-}
-
-
-function mostrar(){
-
-    const lista =
-        document.getElementById("listaUnidades");
-
-
-    if(unidades.length === 0){
-
-        lista.innerHTML =
-            '<div class="empty">No hay unidades registradas.</div>';
-
-        generarReporte();
-
-        return;
-
-    }
-
-
-    lista.innerHTML = "";
-
-
-    unidades.forEach(u => {
-
-        const div =
-            document.createElement("div");
-
-        div.className="unit";
-
-
-        div.innerHTML = `
-
-            <div class="unit-header">
-
-                <div class="unit-name">
-                    ${escapar(u.unidad)}
-                </div>
-
-                <div class="status">
-                    ${escapar(u.estado)}
-                </div>
-
-            </div>
-
-            <div class="info">
-
-                📍 ${escapar(u.ubicacion)}
-                <br>
-
-                🕐 Última actualización:
-                ${escapar(u.hora)}
-
-            </div>
-
-            <div class="actions">
-
-                <button
-                    class="btn-secondary"
-                    onclick="cambiarEstado(${u.id})">
-                    Cambiar estado
-                </button>
-
-                <button
-                    class="btn-secondary"
-                    onclick="eliminarUnidad(${u.id})">
-                    Eliminar
-                </button>
-
-            </div>
-
-        `;
-
-
-        lista.appendChild(div);
-
-    });
-
-
-    generarReporte();
-
-}
-
-
-function generarReporte(){
-
-    const reporte =
-        document.getElementById("reporte");
-
-
-    if(unidades.length === 0){
-
-        reporte.textContent =
-            "Aún no hay información para generar el reporte.";
-
-        return;
-
-    }
-
-
-    let texto =
-        "📋 REPORTE DE SEGUIMIENTO\n\n";
-
-
-    unidades.forEach((u,index) => {
-
-        texto +=
-            `${index + 1}. ${u.unidad}\n`;
-
-        texto +=
-            `📍 Ubicación: ${u.ubicacion}\n`;
-
-        texto +=
-            `🚚 Estado: ${u.estado}\n`;
-
-        texto +=
-            `🕐 Hora: ${u.hora}\n\n`;
-
-    });
-
-
-    reporte.textContent = texto;
-
-}
-
-
-function copiarReporte(){
-
-    const texto =
-        document.getElementById("reporte").textContent;
-
-
-    if(
-        !texto ||
-        texto.includes("Aún no hay")
-    ){
-
-        alert("No hay reporte para copiar.");
-
-        return;
-
-    }
-
-
-    navigator.clipboard.writeText(texto)
-
-        .then(() => {
-
-            alert("Reporte copiado correctamente.");
-
-        })
-
-        .catch(() => {
-
-            alert(
-                "No se pudo copiar automáticamente."
-            );
-
-        });
-
-}
-
-
-function limpiarTodo(){
-
-    if(unidades.length === 0) return;
-
-
-    if(
-        confirm(
-            "¿Quieres eliminar todas las unidades?"
-        )
-    ){
-
-        unidades=[];
-
-        guardar();
-
-        mostrar();
-
-    }
-
-}
+/* =========================
+   SEGURIDAD
+========================= */
 
 
 function escapar(texto){
 
-    return String(texto)
+return String(texto)
 
-        .replace(/&/g,"&amp;")
+.replace(
+/[&<>"']/g,
 
-        .replace(/</g,"&lt;")
+function(c){
 
-        .replace(/>/g,"&gt;")
+return {
 
-        .replace(/"/g,"&quot;")
+"&":"&amp;",
+"<":"&lt;",
+">":"&gt;",
+'"':"&quot;",
+"'":"&#039;"
 
-        .replace(/'/g,"&#039;");
+}[c];
+
+}
+
+);
 
 }
 
 
-mostrar();
+
+/* =========================
+   GUARDAR
+========================= */
+
+
+function guardarDatos(){
+
+localStorage.setItem(
+CLAVE_PLACAS,
+JSON.stringify(placas)
+);
+
+
+localStorage.setItem(
+CLAVE_REPORTE,
+JSON.stringify(registros)
+);
+
+
+localStorage.setItem(
+CLAVE_HISTORIAL,
+JSON.stringify(historial)
+);
+
+}
+
+
+
+/* =========================
+   SELECTOR DE PLACAS
+========================= */
+
+
+function mostrarSelector(){
+
+const selector =
+document.getElementById(
+"placa"
+);
+
+
+selector.innerHTML =
+'<option value="">Seleccione una placa</option>';
+
+
+placas.forEach(
+
+function(placa){
+
+const opcion =
+document.createElement(
+"option"
+);
+
+opcion.value =
+placa;
+
+opcion.textContent =
+placa;
+
+selector.appendChild(
+opcion
+);
+
+}
+
+);
+
+}
+
+
+
+/* =========================
+   AGREGAR PLACA
+========================= */
+
+
+function agregarPlaca(){
+
+const nueva =
+prompt(
+"Escribe la nueva placa:"
+);
+
+
+if(!nueva){
+
+return;
+
+}
+
+
+const placa =
+nueva
+.trim()
+.toUpperCase();
+
+
+if(!placa){
+
+return;
+
+}
+
+
+if(
+placas.includes(
+placa
+)
+){
+
+alert(
+"Esa placa ya está guardada."
+);
+
+return;
+
+}
+
+
+placas.push(
+placa
+);
+
+
+placas.sort();
+
+
+guardarDatos();
+
+
+mostrarSelector();
+
+mostrarPlacas();
+
+
+document.getElementById(
+"placa"
+).value =
+placa;
+
+}
+
+
+
+/* =========================
+   MOSTRAR PLACAS
+========================= */
+
+
+function mostrarPlacas(){
+
+const contenedor =
+document.getElementById(
+"placas"
+);
+
+
+if(
+placas.length === 0
+){
+
+contenedor.innerHTML =
+'<div class="empty">No hay placas guardadas.</div>';
+
+return;
+
+}
+
+
+contenedor.innerHTML =
+"";
+
+
+placas.forEach(
+
+function(placa,index){
+
+const div =
+document.createElement(
+"div"
+);
+
+
+div.className =
+"item";
+
+
+div.innerHTML =
+
+`
+<strong>
+🚛 ${escapar(placa)}
+</strong>
+
+<div class="item-actions">
+
+<button
+class="danger"
+onclick="eliminarPlaca(${index})">
+
+Eliminar
+
+</button>
+
+</div>
+`;
+
+
+contenedor.appendChild(
+div
+);
+
+}
+
+);
+
+}
+
+
+
+/* =========================
+   ELIMINAR PLACA
+========================= */
+
+
+function eliminarPlaca(index){
+
+const placa =
+placas[index];
+
+
+if(
+!confirm(
+"¿Eliminar la placa " +
+placa +
+"?"
+)
+){
+
+return;
+
+}
+
+
+placas.splice(
+index,
+1
+);
+
+
+guardarDatos();
+
+
+mostrarSelector();
+
+mostrarPlacas();
+
+}
+
+
+
+/* =========================
+   DESTINO
+========================= */
+
+
+document
+.querySelectorAll(
+"[data-destino]"
+)
+.forEach(
+
+function(boton){
+
+boton.onclick =
+function(){
+
+destinoSeleccionado =
+boton.dataset.destino;
+
+
+document
+.querySelectorAll(
+"[data-destino]"
+)
+.forEach(
+
+function(b){
+
+b.classList.remove(
+"selected"
+);
+
+}
+);
+
+
+boton.classList.add(
+"selected"
+);
+
+};
+
+}
+);
+
+
+
+/* =========================
+   REGISTRAR
+========================= */
+
+
+function registrar(){
+
+const placa =
+document.getElementById(
+"placa"
+).value;
+
+
+const ubicado =
+document.getElementById(
+"ubicado"
+).value.trim();
+
+
+if(!placa){
+
+alert(
+"Selecciona una placa."
+);
+
+return;
+
+}
+
+
+if(!ubicado){
+
+alert(
+"Escribe dónde está ubicada la unidad."
+);
+
+return;
+
+}
+
+
+if(!destinoSeleccionado){
+
+alert(
+"Selecciona el destino."
+);
+
+return;
+
+}
+
+
+/*
+No permitimos duplicar
+una misma placa dentro
+del reporte actual.
+*/
+
+
+if(
+registros.some(
+function(registro){
+
+return registro.placa === placa;
+
+}
+)
+){
+
+alert(
+"Esa placa ya está en el reporte actual. Puedes editarla."
+);
+
+return;
+
+}
+
+
+registros.push({
+
+placa:placa,
+
+ubicado:ubicado,
+
+destino:destinoSeleccionado,
+
+hora:obtenerHora()
+
+});
+
+
+guardarDatos();
+
+
+mostrarRegistros();
+
+
+document.getElementById(
+"ubicado"
+).value =
+"";
+
+
+destinoSeleccionado =
+"";
+
+
+document
+.querySelectorAll(
+"[data-destino]"
+)
+.forEach(
+
+function(boton){
+
+boton.classList.remove(
+"selected"
+);
+
+}
+);
+
+}
+
+
+
+/* =========================
+   MOSTRAR REGISTROS
+========================= */
+
+
+function mostrarRegistros(){
+
+const contenedor =
+document.getElementById(
+"registros"
+);
+
+
+if(
+registros.length === 0
+){
+
+contenedor.innerHTML =
+'<div class="empty">Todavía no hay unidades en este reporte.</div>';
+
+generarReporte();
+
+return;
+
+}
+
+
+contenedor.innerHTML =
+"";
+
+
+registros.forEach(
+
+function(registro,index){
+
+const div =
+document.createElement(
+"div"
+);
+
+
+div.className =
+"item";
+
+
+div.innerHTML =
+
+`
+<strong>
+🚛 ${escapar(registro.placa)}
+</strong>
+
+<div class="meta">
+
+📍 Ubicado en:
+<b>
+${escapar(registro.ubicado)}
+</b>
+
+<br>
+
+🎯 Destino:
+<b>
+${escapar(registro.destino)}
+</b>
+
+<br>
+
+🕐 Hora:
+<b>
+${escapar(registro.hora)}
+</b>
+
+</div>
+
+
+<div class="item-actions">
+
+<button
+class="secondary"
+onclick="editarRegistro(${index})">
+
+Editar
+
+</button>
+
+
+<button
+class="danger"
+onclick="eliminarRegistro(${index})">
+
+Eliminar
+
+</button>
+
+</div>
+`;
+
+
+contenedor.appendChild(
+div
+);
+
+}
+
+);
+
+
+generarReporte();
+
+}
+
+
+
+/* =========================
+   EDITAR
+========================= */
+
+
+function editarRegistro(index){
+
+const registro =
+registros[index];
+
+
+document.getElementById(
+"placa"
+).value =
+registro.placa;
+
+
+document.getElementById(
+"ubicado"
+).value =
+registro.ubicado;
+
+
+destinoSeleccionado =
+registro.destino;
+
+
+document
+.querySelectorAll(
+"[data-destino]"
+)
+.forEach(
+
+function(boton){
+
+if(
+boton.dataset.destino ===
+registro.destino
+){
+
+boton.classList.add(
+"selected"
+);
+
+}else{
+
+boton.classList.remove(
+"selected"
+);
+
+}
+
+}
+);
+
+
+registros.splice(
+index,
+1
+);
+
+
+guardarDatos();
+
+
+mostrarRegistros();
+
+
+window.scrollTo({
+top:0,
+behavior:"smooth"
+});
+
+}
+
+
+
+/* =========================
+   ELIMINAR REGISTRO
+========================= */
+
+
+function eliminarRegistro(index){
+
+if(
+!confirm(
+"¿Eliminar esta unidad del reporte?"
+)
+){
+
+return;
+
+}
+
+
+registros.splice(
+index,
+1
+);
+
+
+guardarDatos();
+
+
+mostrarRegistros();
+
+}
+
+
+
+/* =========================
+   GENERAR REPORTE
+========================= */
+
+
+function generarReporte(){
+
+const caja =
+document.getElementById(
+"reporte"
+);
+
+
+if(
+registros.length === 0
+){
+
+caja.textContent =
+"Aún no hay unidades en el reporte.";
+
+return;
+
+}
+
+
+let texto =
+"📋 REPORTE DE SEGUIMIENTO\n\n";
+
+
+registros.forEach(
+
+function(registro,index){
+
+texto +=
+
+"🚛 " +
+registro.placa +
+"\n" +
+
+"📍 Ubicado en: " +
+registro.ubicado +
+"\n" +
+
+"🎯 Destino: " +
+registro.destino +
+"\n" +
+
+"🕐 Hora: " +
+registro.hora +
+"\n";
+
+
+if(
+index <
+registros.length - 1
+){
+
+texto +=
+"\n";
+
+}
+
+}
+);
+
+
+caja.textContent =
+texto;
+
+}
+
+
+
+/* =========================
+   COPIAR REPORTE
+========================= */
+
+
+function copiarReporte(){
+
+if(
+registros.length === 0
+){
+
+alert(
+"No hay unidades en el reporte."
+);
+
+return;
+
+}
+
+
+const texto =
+document.getElementById(
+"reporte"
+).textContent;
+
+
+historial.unshift({
+
+fecha:
+obtenerFecha() +
+" " +
+obtenerHora(),
+
+cantidad:
+registros.length,
+
+texto:
+texto
+
+});
+
+
+historial =
+historial.slice(
+0,
+20
+);
+
+
+guardarDatos();
+
+
+mostrarHistorial();
+
+
+navigator.clipboard
+.writeText(
+texto
+)
+.then(
+
+function(){
+
+alert(
+"Reporte copiado."
+);
+
+}
+
+)
+.catch(
+
+function(){
+
+alert(
+"No se pudo copiar automáticamente."
+);
+
+}
+
+);
+
+}
+
+
+
+/* =========================
+   LIMPIAR REPORTE
+========================= */
+
+
+function limpiarReporte(){
+
+if(
+registros.length === 0
+){
+
+return;
+
+}
+
+
+if(
+!confirm(
+"¿Limpiar el reporte actual?"
+)
+){
+
+return;
+
+}
+
+
+registros =
+[];
+
+
+guardarDatos();
+
+
+mostrarRegistros();
+
+}
+
+
+
+/* =========================
+   HISTORIAL
+========================= */
+
+
+function mostrarHistorial(){
+
+const contenedor =
+document.getElementById(
+"historial"
+);
+
+
+if(
+historial.length === 0
+){
+
+contenedor.innerHTML =
+'<div class="empty">Todavía no hay historial.</div>';
+
+return;
+
+}
+
+
+contenedor.innerHTML =
+"";
+
+
+historial
+.slice(
+0,
+20
+)
+.forEach(
+
+function(item,index){
+
+const div =
+document.createElement(
+"div"
+);
+
+
+div.className =
+"item";
+
+
+div.innerHTML =
+
+`
+<strong>
+${escapar(item.fecha)}
+</strong>
+
+<div class="meta">
+
+${item.cantidad}
+unidad(es)
+
+</div>
+
+<div
+class="report"
+style="margin-top:8px">
+
+${escapar(item.texto)}
+
+</div>
+
+
+<button
+class="secondary"
+style="width:100%;margin-top:8px"
+onclick="copiarHistorial(${index})">
+
+📲 Copiar
+
+</button>
+`;
+
+
+contenedor.appendChild(
+div
+);
+
+}
+);
+
+}
+
+
+
+/* =========================
+   COPIAR HISTORIAL
+========================= */
+
+
+function copiarHistorial(index){
+
+const texto =
+historial[index].texto;
+
+
+navigator.clipboard
+.writeText(
+texto
+)
+.then(
+
+function(){
+
+alert(
+"Reporte copiado."
+);
+
+}
+
+)
+.catch(
+
+function(){
+
+alert(
+"No se pudo copiar."
+);
+
+}
+
+);
+
+}
+
+
+
+/* =========================
+   INICIAR APP
+========================= */
+
+
+mostrarSelector();
+
+mostrarPlacas();
+
+mostrarRegistros();
+
+mostrarHistorial();
 
 </script>
 

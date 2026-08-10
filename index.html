@@ -8,9 +8,10 @@
 
 <meta name="theme-color" content="#111827">
 
-<title>Seguimiento de Unidades V5.1</title>
+<title>Seguimiento de Unidades V5.2</title>
 
 <style>
+
 *{
   box-sizing:border-box;
 }
@@ -164,10 +165,6 @@ button{
   line-height:1.6;
 }
 
-small{
-  color:#6b7280;
-}
-
 footer{
   text-align:center;
   color:#6b7280;
@@ -176,6 +173,7 @@ footer{
 }
 
 @media(max-width:500px){
+
   .container{
     padding:12px;
   }
@@ -187,169 +185,237 @@ footer{
   .unit-buttons{
     flex-direction:column;
   }
+
 }
+
 </style>
 </head>
 
 <body>
 
+
 <header>
-  <h1>Seguimiento de Unidades</h1>
-  <p>Control y monitoreo de unidades</p>
+
+  <h1>
+    Seguimiento de Unidades
+  </h1>
+
+  <p>
+    Control y monitoreo de unidades
+  </p>
+
 </header>
+
 
 <div class="container">
 
-  <!-- FORMULARIO -->
-  <div class="card">
 
-    <h2>Agregar unidad</h2>
+<!-- =========================
+     FORMULARIO
+========================= -->
 
-    <label>Unidad / Placa</label>
+<div class="card">
 
-    <select id="unidad">
-      <option value="">Seleccionar placa</option>
-      <option value="TCA2222">TCA2222</option>
-      <option value="TEA9111">TEA9111</option>
-    </select>
-
-    <label>Ubicado en</label>
-
-    <input
-      id="ubicacion"
-      type="text"
-      placeholder="Ej. Tegucigalpa">
-
-    <label>Destino</label>
-
-    <select id="destino">
-
-      <option value="">
-        Seleccionar destino
-      </option>
-
-      <option value="CD SPS">
-        CD SPS
-      </option>
-
-      <option value="CD Comayagua">
-        CD Comayagua
-      </option>
-
-      <option value="CD Juticalpa">
-        CD Juticalpa
-      </option>
-
-    </select>
-
-    <label>Estado</label>
-
-    <select id="estado">
-
-      <option value="En ruta">
-        En ruta
-      </option>
-
-      <option value="Detenida">
-        Detenida
-      </option>
-
-      <option value="Ubicado en">
-        Ubicado en
-      </option>
-
-      <option value="Llegó al CD Juticalpa">
-        Llegó al CD Juticalpa
-      </option>
-
-      <option value="Llegó al CD SPS">
-        Llegó al CD SPS
-      </option>
-
-      <option value="Llegó al CD Comayagua">
-        Llegó al CD Comayagua
-      </option>
-
-      <option value="Finalizada">
-        Finalizada
-      </option>
-
-    </select>
-
-    <button
-      class="btn-primary"
-      onclick="agregarUnidad()">
-
-      + Agregar unidad
-
-    </button>
-
-  </div>
+  <h2>
+    Agregar unidad
+  </h2>
 
 
-  <!-- UNIDADES -->
-  <div class="card">
+  <label>
+    Unidad / Placa
+  </label>
 
-    <h2>Unidades</h2>
 
-    <div id="listaUnidades">
+  <select id="unidad">
 
-      <div class="empty">
-        No hay unidades registradas.
-      </div>
+    <option value="">
+      Seleccionar placa
+    </option>
 
+    <option value="TCA2222">
+      TCA2222
+    </option>
+
+    <option value="TEA9111">
+      TEA9111
+    </option>
+
+  </select>
+
+
+  <label>
+    Ubicado en
+  </label>
+
+
+  <input
+    id="ubicacion"
+    type="text"
+    placeholder="Ej. El Nance"
+  >
+
+
+  <label>
+    Destino
+  </label>
+
+
+  <select id="destino">
+
+    <option value="">
+      Seleccionar destino
+    </option>
+
+    <option value="CD JUTICALPA">
+      CD JUTICALPA
+    </option>
+
+    <option value="CD SPS">
+      CD SPS
+    </option>
+
+    <option value="CD COMAYAGUA">
+      CD COMAYAGUA
+    </option>
+
+  </select>
+
+
+  <label>
+    Estado
+  </label>
+
+
+  <select id="estado">
+
+    <option value="En ruta">
+      En ruta
+    </option>
+
+    <option value="Detenida">
+      Detenida
+    </option>
+
+    <option value="Ubicado en">
+      Ubicado en
+    </option>
+
+    <option value="Llegó al CD JUTICALPA">
+      Llegó al CD JUTICALPA
+    </option>
+
+    <option value="Llegó al CD SPS">
+      Llegó al CD SPS
+    </option>
+
+    <option value="Llegó al CD COMAYAGUA">
+      Llegó al CD COMAYAGUA
+    </option>
+
+    <option value="Finalizada">
+      Finalizada
+    </option>
+
+  </select>
+
+
+  <button
+    class="btn-primary"
+    onclick="agregarUnidad()">
+
+    + Agregar unidad
+
+  </button>
+
+</div>
+
+
+
+<!-- =========================
+     UNIDADES
+========================= -->
+
+<div class="card">
+
+  <h2>
+    Unidades
+  </h2>
+
+
+  <div id="listaUnidades">
+
+    <div class="empty">
+      No hay unidades registradas.
     </div>
-
-  </div>
-
-
-  <!-- REPORTE -->
-  <div class="card">
-
-    <h2>Reporte</h2>
-
-    <div
-      id="reporte"
-      class="report">
-
-      Aún no hay información para generar el reporte.
-
-    </div>
-
-    <button
-      class="btn-success"
-      onclick="copiarReporte()">
-
-      Copiar reporte
-
-    </button>
-
-    <button
-      class="btn-secondary"
-      onclick="limpiarUnidades()">
-
-      Limpiar unidades
-
-    </button>
 
   </div>
 
 </div>
 
 
+
+<!-- =========================
+     REPORTE
+========================= -->
+
+<div class="card">
+
+  <h2>
+    Reporte
+  </h2>
+
+
+  <div
+    id="reporte"
+    class="report">
+
+    Aún no hay información para generar el reporte.
+
+  </div>
+
+
+  <button
+    class="btn-success"
+    onclick="copiarReporte()">
+
+    📲 Copiar reporte
+
+  </button>
+
+
+  <button
+    class="btn-secondary"
+    onclick="limpiarUnidades()">
+
+    Limpiar unidades
+
+  </button>
+
+</div>
+
+
+</div>
+
+
 <footer>
-  Seguimiento de Unidades V5.1
+
+Seguimiento de Unidades V5.2
+
 </footer>
+
 
 
 <script>
 
+
 let unidades = [];
+
 
 
 /* =========================
    CARGAR DATOS
 ========================= */
+
 
 function cargarDatos(){
 
@@ -358,11 +424,13 @@ function cargarDatos(){
       "seguimientoUnidades"
     );
 
+
   if(datos){
 
     try{
 
-      unidades = JSON.parse(datos);
+      unidades =
+        JSON.parse(datos);
 
     }catch(e){
 
@@ -372,13 +440,17 @@ function cargarDatos(){
 
   }
 
+
   mostrarUnidades();
+
 }
+
 
 
 /* =========================
    GUARDAR DATOS
 ========================= */
+
 
 function guardarDatos(){
 
@@ -390,9 +462,35 @@ function guardarDatos(){
 }
 
 
+
+/* =========================
+   HORA
+========================= */
+
+
+function obtenerHora(){
+
+  const ahora =
+    new Date();
+
+
+  return ahora.toLocaleTimeString(
+    "es-HN",
+    {
+      hour:"2-digit",
+      minute:"2-digit",
+      hour12:true
+    }
+  );
+
+}
+
+
+
 /* =========================
    AGREGAR UNIDAD
 ========================= */
+
 
 function agregarUnidad(){
 
@@ -401,15 +499,18 @@ function agregarUnidad(){
       "unidad"
     ).value;
 
+
   const ubicacion =
     document.getElementById(
       "ubicacion"
     ).value.trim();
 
+
   const destino =
     document.getElementById(
       "destino"
     ).value;
+
 
   const estado =
     document.getElementById(
@@ -459,27 +560,12 @@ function agregarUnidad(){
   if(existente){
 
     alert(
-      "Esta unidad ya está registrada. Puedes cambiar sus datos desde la unidad."
+      "Esta unidad ya está registrada."
     );
 
     return;
 
   }
-
-
-  const ahora =
-    new Date();
-
-
-  const hora =
-    ahora.toLocaleTimeString(
-      "es-HN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:false
-      }
-    );
 
 
   unidades.push({
@@ -492,7 +578,7 @@ function agregarUnidad(){
 
     estado:estado,
 
-    hora:hora
+    hora:obtenerHora()
 
   });
 
@@ -506,9 +592,11 @@ function agregarUnidad(){
 }
 
 
+
 /* =========================
    MOSTRAR UNIDADES
 ========================= */
+
 
 function mostrarUnidades(){
 
@@ -534,7 +622,8 @@ function mostrarUnidades(){
   }
 
 
-  contenedor.innerHTML = "";
+  contenedor.innerHTML =
+    "";
 
 
   unidades.forEach(
@@ -545,6 +634,7 @@ function mostrarUnidades(){
           "div"
         );
 
+
       div.className =
         "unit";
 
@@ -554,7 +644,7 @@ function mostrarUnidades(){
         <div class="unit-header">
 
           <h3>
-            ${u.unidad}
+            🚛 ${u.unidad}
           </h3>
 
           <span class="badge">
@@ -576,7 +666,7 @@ function mostrarUnidades(){
 
           <br>
 
-          🕐 <strong>Última actualización:</strong>
+          🕐 <strong>Hora:</strong>
           ${u.hora}
 
         </div>
@@ -619,9 +709,11 @@ function mostrarUnidades(){
 }
 
 
+
 /* =========================
    CAMBIAR ESTADO
 ========================= */
+
 
 function cambiarEstado(index){
 
@@ -633,11 +725,11 @@ function cambiarEstado(index){
 
     "Ubicado en",
 
-    "Llegó al CD Juticalpa",
+    "Llegó al CD JUTICALPA",
 
     "Llegó al CD SPS",
 
-    "Llegó al CD Comayagua",
+    "Llegó al CD COMAYAGUA",
 
     "Finalizada"
 
@@ -649,10 +741,10 @@ function cambiarEstado(index){
 
 
   estados.forEach(
-    (e,i)=>{
+    (estado,i)=>{
 
       mensaje +=
-        `${i + 1}. ${e}\n`;
+        `${i + 1}. ${estado}\n`;
 
     }
   );
@@ -694,19 +786,8 @@ function cambiarEstado(index){
     estados[numero - 1];
 
 
-  const ahora =
-    new Date();
-
-
   unidades[index].hora =
-    ahora.toLocaleTimeString(
-      "es-HN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:false
-      }
-    );
+    obtenerHora();
 
 
   guardarDatos();
@@ -716,9 +797,11 @@ function cambiarEstado(index){
 }
 
 
+
 /* =========================
    ELIMINAR
 ========================= */
+
 
 function eliminarUnidad(index){
 
@@ -746,9 +829,11 @@ function eliminarUnidad(index){
 }
 
 
+
 /* =========================
    GENERAR REPORTE
 ========================= */
+
 
 function generarReporte(){
 
@@ -768,48 +853,47 @@ function generarReporte(){
   }
 
 
-  const ahora =
-    new Date();
+  /*
+  FORMATO OFICIAL:
 
+  📋 REPORTE DE SEGUIMIENTO
 
-  const hora =
-    ahora.toLocaleTimeString(
-      "es-HN",
-      {
-        hour:"2-digit",
-        minute:"2-digit",
-        hour12:false
-      }
-    );
+  🚛 TCA2222
+  📍 Ubicado en: El Nance
+  🎯 Destino: CD JUTICALPA
+  🕐 Hora: 02:01 a. m.
+  */
 
 
   let texto =
-    `📋 REPORTE DE SEGUIMIENTO\n`;
-
-  texto +=
-    `🕐 Hora del reporte: ${hora}\n`;
-
-  texto +=
-    `━━━━━━━━━━━━━━━━━━━━\n\n`;
+    "📋 REPORTE DE SEGUIMIENTO\n\n";
 
 
   unidades.forEach(
     (u,index)=>{
 
       texto +=
-        `🚛 ${u.unidad}\n`;
+        "🚛 " +
+        u.unidad +
+        "\n";
+
 
       texto +=
-        `📍 Ubicado en: ${u.ubicacion}\n`;
+        "📍 Ubicado en: " +
+        u.ubicacion +
+        "\n";
+
 
       texto +=
-        `🎯 Destino: ${u.destino}\n`;
+        "🎯 Destino: " +
+        u.destino +
+        "\n";
+
 
       texto +=
-        `📌 Estado: ${u.estado}\n`;
-
-      texto +=
-        `🕐 Actualización: ${u.hora}\n`;
+        "🕐 Hora: " +
+        u.hora +
+        "\n";
 
 
       if(
@@ -818,7 +902,7 @@ function generarReporte(){
       ){
 
         texto +=
-          `\n━━━━━━━━━━━━━━━━━━━━\n\n`;
+          "\n";
 
       }
 
@@ -832,9 +916,11 @@ function generarReporte(){
 }
 
 
+
 /* =========================
    COPIAR REPORTE
 ========================= */
+
 
 function copiarReporte(){
 
@@ -852,7 +938,7 @@ function copiarReporte(){
   ){
 
     alert(
-      "No se pudo copiar automáticamente. Selecciona y copia el reporte."
+      "No se pudo copiar automáticamente."
     );
 
     return;
@@ -861,53 +947,70 @@ function copiarReporte(){
 
 
   navigator.clipboard
-    .writeText(texto)
-    .then(()=>{
+    .writeText(
+      texto
+    )
+    .then(
+      ()=>{
 
-      alert(
-        "Reporte copiado correctamente."
-      );
+        alert(
+          "Reporte copiado correctamente."
+        );
 
-    })
-    .catch(()=>{
+      }
+    )
+    .catch(
+      ()=>{
 
-      alert(
-        "No se pudo copiar el reporte."
-      );
+        alert(
+          "No se pudo copiar el reporte."
+        );
 
-    });
+      }
+    );
 
 }
+
 
 
 /* =========================
    LIMPIAR FORMULARIO
 ========================= */
 
+
 function limpiarFormulario(){
 
   document.getElementById(
     "unidad"
-  ).value = "";
+  ).value =
+    "";
+
 
   document.getElementById(
     "ubicacion"
-  ).value = "";
+  ).value =
+    "";
+
 
   document.getElementById(
     "destino"
-  ).value = "";
+  ).value =
+    "";
+
 
   document.getElementById(
     "estado"
-  ).value = "En ruta";
+  ).value =
+    "En ruta";
 
 }
+
 
 
 /* =========================
    LIMPIAR UNIDADES
 ========================= */
+
 
 function limpiarUnidades(){
 
@@ -933,6 +1036,7 @@ function limpiarUnidades(){
 
   unidades = [];
 
+
   guardarDatos();
 
   mostrarUnidades();
@@ -940,11 +1044,14 @@ function limpiarUnidades(){
 }
 
 
+
 /* =========================
    INICIO
 ========================= */
 
+
 cargarDatos();
+
 
 </script>
 

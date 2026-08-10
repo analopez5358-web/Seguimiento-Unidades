@@ -2,131 +2,615 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
 <meta name="theme-color" content="#111827">
+
 <title>Seguimiento de Unidades V4</title>
 
 <style>
 *{
-  box-sizing:border-box;
+    box-sizing:border-box;
 }
 
 body{
-  margin:0;
-  background:#f3f4f6;
-  color:#111827;
-  font-family:Arial,sans-serif;
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f3f4f6;
+    color:#111827;
 }
 
 .app{
-  width:100%;
-  max-width:650px;
-  margin:auto;
-  padding:24px 16px 40px;
+    width:100%;
+    max-width:600px;
+    margin:auto;
+    min-height:100vh;
+    background:white;
 }
 
 .header{
-  text-align:center;
-  margin-bottom:22px;
+    background:#111827;
+    color:white;
+    padding:22px 18px;
 }
 
-.icon{
-  font-size:48px;
-  margin-bottom:5px;
+.header h1{
+    margin:0;
+    font-size:24px;
 }
 
-h1{
-  margin:0;
-  font-size:30px;
+.header p{
+    margin:7px 0 0;
+    color:#cbd5e1;
+    font-size:14px;
 }
 
-.subtitle{
-  margin-top:8px;
-  color:#6b7280;
-  font-size:17px;
+.content{
+    padding:16px;
 }
 
 .card{
-  background:white;
-  border-radius:24px;
-  padding:24px;
-  margin-bottom:20px;
-  box-shadow:0 5px 20px rgba(0,0,0,.08);
-}
-
-.section-title{
-  font-size:22px;
-  font-weight:bold;
-  margin-bottom:18px;
+    background:white;
+    border-radius:14px;
+    padding:16px;
+    margin-bottom:14px;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
 
 label{
-  display:block;
-  font-size:18px;
-  font-weight:bold;
-  margin:16px 0 8px;
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
 }
 
-input,select{
-  width:100%;
-  height:58px;
-  border:1px solid #d1d5db;
-  border-radius:16px;
-  padding:0 16px;
-  font-size:17px;
-  background:white;
-  color:#111827;
+input,select,textarea{
+    width:100%;
+    padding:13px;
+    border:1px solid #d1d5db;
+    border-radius:10px;
+    font-size:16px;
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#2563eb;
 }
 
 button{
-  border:0;
-  border-radius:16px;
-  padding:16px;
-  font-size:17px;
-  font-weight:bold;
-  cursor:pointer;
+    width:100%;
+    border:0;
+    border-radius:10px;
+    padding:13px;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    margin-top:10px;
 }
 
-.add-btn{
-  background:#e5e7eb;
-  color:#111827;
-  width:auto;
-  float:right;
-  margin-top:-8px;
+.btn-primary{
+    background:#2563eb;
+    color:white;
 }
 
-.clear-btn{
-  background:#fee2e2;
-  color:#991b1b;
-  float:right;
-  margin-top:-8px;
-  padding:12px 16px;
+.btn-success{
+    background:#16a34a;
+    color:white;
 }
 
-.quick-title{
-  font-size:18px;
-  font-weight:bold;
-  margin-top:20px;
-  margin-bottom:10px;
+.btn-secondary{
+    background:#e5e7eb;
+    color:#111827;
 }
 
-.quick-grid{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
+.unit{
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:14px;
+    margin-top:12px;
 }
 
-.quick{
-  min-height:68px;
-  background:#e5e7eb;
-  color:#111827;
+.unit-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.quick:active{
-  transform:scale(.98);
+.unit-name{
+    font-weight:bold;
+    font-size:18px;
 }
 
-.generate{
-  width:100%;
-  margin-top:18px;
-  background:#111827
+.status{
+    padding:5px 9px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+    background:#dcfce7;
+    color:#166534;
+}
+
+.info{
+    margin-top:10px;
+    color:#4b5563;
+    font-size:14px;
+    line-height:1.6;
+}
+
+.actions{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:8px;
+}
+
+.actions button{
+    margin-top:8px;
+}
+
+.message{
+    background:#f9fafb;
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:12px;
+    margin-top:12px;
+    white-space:pre-line;
+    font-size:14px;
+}
+
+.empty{
+    text-align:center;
+    color:#6b7280;
+    padding:25px 10px;
+}
+
+.footer{
+    text-align:center;
+    padding:20px;
+    color:#6b7280;
+    font-size:12px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<header class="header">
+    <h1>Seguimiento de Unidades</h1>
+    <p>Control y monitoreo de unidades</p>
+</header>
+
+<main class="content">
+
+<div class="card">
+
+    <label for="unidad">Unidad</label>
+
+    <input
+        id="unidad"
+        type="text"
+        placeholder="Ej. Unidad 101"
+    >
+
+    <label for="ubicacion" style="margin-top:14px;">
+        Ubicación
+    </label>
+
+    <input
+        id="ubicacion"
+        type="text"
+        placeholder="Ej. Tegucigalpa"
+    >
+
+    <label for="estado" style="margin-top:14px;">
+        Estado
+    </label>
+
+    <select id="estado">
+        <option value="En ruta">En ruta</option>
+        <option value="Detenida">Detenida</option>
+        <option value="En cliente">En cliente</option>
+        <option value="Finalizada">Finalizada</option>
+    </select>
+
+    <button
+        class="btn-primary"
+        onclick="agregarUnidad()">
+        + Agregar unidad
+    </button>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-top:0;">
+        Unidades
+    </h2>
+
+    <div id="listaUnidades">
+        <div class="empty">
+            No hay unidades registradas.
+        </div>
+    </div>
+
+</div>
+
+
+<div class="card">
+
+    <h2 style="margin-top:0;">
+        Reporte
+    </h2>
+
+    <div id="reporte" class="message">
+        Aún no hay información para generar el reporte.
+    </div>
+
+    <button
+        class="btn-success"
+        onclick="copiarReporte()">
+        Copiar reporte
+    </button>
+
+    <button
+        class="btn-secondary"
+        onclick="limpiarTodo()">
+        Limpiar unidades
+    </button>
+
+</div>
+
+</main>
+
+<div class="footer">
+    Seguimiento de Unidades V4
+</div>
+
+</div>
+
+
+<script>
+
+let unidades =
+    JSON.parse(localStorage.getItem("unidadesV4")) || [];
+
+
+function guardar(){
+
+    localStorage.setItem(
+        "unidadesV4",
+        JSON.stringify(unidades)
+    );
+
+}
+
+
+function horaActual(){
+
+    const ahora = new Date();
+
+    return ahora.toLocaleTimeString(
+        "es-HN",
+        {
+            hour:"2-digit",
+            minute:"2-digit",
+            hour12:false
+        }
+    );
+
+}
+
+
+function agregarUnidad(){
+
+    const unidad =
+        document.getElementById("unidad").value.trim();
+
+    const ubicacion =
+        document.getElementById("ubicacion").value.trim();
+
+    const estado =
+        document.getElementById("estado").value;
+
+
+    if(!unidad){
+
+        alert("Escribe el nombre de la unidad.");
+
+        return;
+
+    }
+
+
+    const nueva = {
+
+        id:Date.now(),
+
+        unidad:unidad,
+
+        ubicacion:
+            ubicacion || "Sin ubicación",
+
+        estado:estado,
+
+        hora:horaActual()
+
+    };
+
+
+    unidades.push(nueva);
+
+    guardar();
+
+    mostrar();
+
+
+    document.getElementById("unidad").value="";
+
+    document.getElementById("ubicacion").value="";
+
+}
+
+
+function eliminarUnidad(id){
+
+    unidades =
+        unidades.filter(
+            unidad => unidad.id !== id
+        );
+
+    guardar();
+
+    mostrar();
+
+}
+
+
+function cambiarEstado(id){
+
+    const unidad =
+        unidades.find(
+            u => u.id === id
+        );
+
+    if(!unidad) return;
+
+
+    const estados = [
+        "En ruta",
+        "Detenida",
+        "En cliente",
+        "Finalizada"
+    ];
+
+
+    const actual =
+        estados.indexOf(unidad.estado);
+
+
+    unidad.estado =
+        estados[
+            (actual + 1) % estados.length
+        ];
+
+
+    unidad.hora = horaActual();
+
+    guardar();
+
+    mostrar();
+
+}
+
+
+function mostrar(){
+
+    const lista =
+        document.getElementById("listaUnidades");
+
+
+    if(unidades.length === 0){
+
+        lista.innerHTML =
+            '<div class="empty">No hay unidades registradas.</div>';
+
+        generarReporte();
+
+        return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    unidades.forEach(u => {
+
+        const div =
+            document.createElement("div");
+
+        div.className="unit";
+
+
+        div.innerHTML = `
+
+            <div class="unit-header">
+
+                <div class="unit-name">
+                    ${escapar(u.unidad)}
+                </div>
+
+                <div class="status">
+                    ${escapar(u.estado)}
+                </div>
+
+            </div>
+
+            <div class="info">
+
+                📍 ${escapar(u.ubicacion)}
+                <br>
+
+                🕐 Última actualización:
+                ${escapar(u.hora)}
+
+            </div>
+
+            <div class="actions">
+
+                <button
+                    class="btn-secondary"
+                    onclick="cambiarEstado(${u.id})">
+                    Cambiar estado
+                </button>
+
+                <button
+                    class="btn-secondary"
+                    onclick="eliminarUnidad(${u.id})">
+                    Eliminar
+                </button>
+
+            </div>
+
+        `;
+
+
+        lista.appendChild(div);
+
+    });
+
+
+    generarReporte();
+
+}
+
+
+function generarReporte(){
+
+    const reporte =
+        document.getElementById("reporte");
+
+
+    if(unidades.length === 0){
+
+        reporte.textContent =
+            "Aún no hay información para generar el reporte.";
+
+        return;
+
+    }
+
+
+    let texto =
+        "📋 REPORTE DE SEGUIMIENTO\n\n";
+
+
+    unidades.forEach((u,index) => {
+
+        texto +=
+            `${index + 1}. ${u.unidad}\n`;
+
+        texto +=
+            `📍 Ubicación: ${u.ubicacion}\n`;
+
+        texto +=
+            `🚚 Estado: ${u.estado}\n`;
+
+        texto +=
+            `🕐 Hora: ${u.hora}\n\n`;
+
+    });
+
+
+    reporte.textContent = texto;
+
+}
+
+
+function copiarReporte(){
+
+    const texto =
+        document.getElementById("reporte").textContent;
+
+
+    if(
+        !texto ||
+        texto.includes("Aún no hay")
+    ){
+
+        alert("No hay reporte para copiar.");
+
+        return;
+
+    }
+
+
+    navigator.clipboard.writeText(texto)
+
+        .then(() => {
+
+            alert("Reporte copiado correctamente.");
+
+        })
+
+        .catch(() => {
+
+            alert(
+                "No se pudo copiar automáticamente."
+            );
+
+        });
+
+}
+
+
+function limpiarTodo(){
+
+    if(unidades.length === 0) return;
+
+
+    if(
+        confirm(
+            "¿Quieres eliminar todas las unidades?"
+        )
+    ){
+
+        unidades=[];
+
+        guardar();
+
+        mostrar();
+
+    }
+
+}
+
+
+function escapar(texto){
+
+    return String(texto)
+
+        .replace(/&/g,"&amp;")
+
+        .replace(/</g,"&lt;")
+
+        .replace(/>/g,"&gt;")
+
+        .replace(/"/g,"&quot;")
+
+        .replace(/'/g,"&#039;");
+
+}
+
+
+mostrar();
+
+</script>
+
+</body>
+</html>

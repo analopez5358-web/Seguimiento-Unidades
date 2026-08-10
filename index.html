@@ -4,1555 +4,947 @@
 <meta charset="UTF-8">
 
 <meta name="viewport"
-      content="width=device-width,initial-scale=1">
+      content="width=device-width, initial-scale=1.0">
 
-<meta name="theme-color"
-      content="#111827">
+<meta name="theme-color" content="#111827">
 
-<title>Seguimiento de Unidades V5</title>
+<title>Seguimiento de Unidades V5.1</title>
 
 <style>
-
 *{
-box-sizing:border-box;
+  box-sizing:border-box;
 }
 
 body{
-margin:0;
-background:#f3f4f6;
-color:#111827;
-font-family:Arial,sans-serif;
+  margin:0;
+  background:#f3f4f6;
+  color:#111827;
+  font-family:Arial,sans-serif;
 }
 
-.app{
-max-width:650px;
-margin:auto;
-padding:16px;
+header{
+  background:#111827;
+  color:white;
+  padding:24px 20px;
 }
 
-.header{
-text-align:center;
-margin:10px 0 18px;
+header h1{
+  margin:0;
+  font-size:28px;
 }
 
-.icon{
-font-size:44px;
+header p{
+  margin:8px 0 0;
+  color:#d1d5db;
 }
 
-h1{
-font-size:26px;
-margin:4px 0;
-}
-
-.sub{
-color:#6b7280;
+.container{
+  max-width:650px;
+  margin:auto;
+  padding:20px;
 }
 
 .card{
-background:#fff;
-border-radius:18px;
-padding:18px;
-margin-bottom:16px;
-box-shadow:0 3px 12px rgba(0,0,0,.08);
+  background:white;
+  border-radius:18px;
+  padding:20px;
+  margin-bottom:18px;
+  box-shadow:0 3px 15px rgba(0,0,0,.08);
 }
 
 h2{
-font-size:19px;
-margin:0 0 14px;
+  margin-top:0;
 }
 
 label{
-display:block;
-font-weight:700;
-margin:10px 0 7px;
+  display:block;
+  font-weight:bold;
+  margin:14px 0 7px;
 }
 
-select,
-input{
-width:100%;
-padding:14px;
-border:1px solid #d1d5db;
-border-radius:11px;
-font-size:16px;
-background:#fff;
-}
-
-.row{
-display:flex;
-gap:9px;
-}
-
-.grow{
-flex:1;
+input,
+select{
+  width:100%;
+  padding:14px;
+  border:1px solid #d1d5db;
+  border-radius:10px;
+  font-size:16px;
+  background:white;
 }
 
 button{
-border:0;
-border-radius:11px;
-padding:14px;
-font-weight:700;
-font-size:15px;
-cursor:pointer;
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  font-size:16px;
+  font-weight:bold;
+  cursor:pointer;
+  margin-top:12px;
 }
 
-.primary{
-width:100%;
-background:#111827;
-color:#fff;
-margin-top:14px;
+.btn-primary{
+  background:#2563eb;
+  color:white;
 }
 
-.add{
-background:#e5e7eb;
-color:#111827;
-white-space:nowrap;
+.btn-success{
+  background:#16a34a;
+  color:white;
 }
 
-.destinos{
-display:grid;
-grid-template-columns:1fr 1fr 1fr;
-gap:8px;
+.btn-danger{
+  background:#dc2626;
+  color:white;
 }
 
-.destinos button{
-background:#e5e7eb;
-color:#111827;
-font-size:13px;
+.btn-secondary{
+  background:#e5e7eb;
+  color:#111827;
 }
 
-.destinos button.selected{
-background:#111827;
-color:#fff;
+.unit{
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:16px;
+  margin-top:14px;
 }
 
-.item{
-border:1px solid #e5e7eb;
-border-radius:12px;
-padding:13px;
-margin-top:10px;
+.unit-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
 }
 
-.item strong{
-font-size:17px;
+.unit-header h3{
+  margin:0;
+  font-size:21px;
 }
 
-.meta{
-font-size:14px;
-line-height:1.6;
-margin-top:6px;
-color:#374151;
+.badge{
+  padding:7px 10px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:bold;
+  background:#dcfce7;
+  color:#166534;
 }
 
-.item-actions{
-display:flex;
-gap:8px;
-margin-top:10px;
+.info{
+  margin-top:12px;
+  line-height:1.7;
 }
 
-.item-actions button{
-flex:1;
-padding:10px;
-font-size:13px;
+.info strong{
+  color:#374151;
 }
 
-.danger{
-background:#fee2e2;
-color:#991b1b;
+.unit-buttons{
+  display:flex;
+  gap:8px;
 }
 
-.secondary{
-background:#e5e7eb;
-color:#111827;
-}
-
-.report{
-white-space:pre-wrap;
-background:#f9fafb;
-border:1px solid #e5e7eb;
-border-radius:11px;
-padding:13px;
-line-height:1.55;
-font-size:14px;
-}
-
-.copy{
-width:100%;
-background:#16a34a;
-color:#fff;
-margin-top:10px;
+.unit-buttons button{
+  flex:1;
 }
 
 .empty{
-text-align:center;
-color:#6b7280;
-padding:14px;
+  text-align:center;
+  color:#6b7280;
+  padding:25px 10px;
 }
 
-.small{
-font-size:13px;
-color:#6b7280;
-margin-top:7px;
+.report{
+  background:#f9fafb;
+  border:1px solid #e5e7eb;
+  border-radius:12px;
+  padding:15px;
+  white-space:pre-line;
+  line-height:1.6;
 }
 
-@media(max-width:430px){
-
-.destinos{
-grid-template-columns:1fr;
+small{
+  color:#6b7280;
 }
 
-.row{
-align-items:stretch;
+footer{
+  text-align:center;
+  color:#6b7280;
+  padding:25px;
+  font-size:13px;
 }
 
-}
+@media(max-width:500px){
+  .container{
+    padding:12px;
+  }
 
+  header h1{
+    font-size:24px;
+  }
+
+  .unit-buttons{
+    flex-direction:column;
+  }
+}
 </style>
-
 </head>
 
 <body>
 
-<div class="app">
+<header>
+  <h1>Seguimiento de Unidades</h1>
+  <p>Control y monitoreo de unidades</p>
+</header>
 
+<div class="container">
 
-<div class="header">
+  <!-- FORMULARIO -->
+  <div class="card">
 
-<div class="icon">
-📋
-</div>
+    <h2>Agregar unidad</h2>
 
-<h1>
-Seguimiento de Unidades
-</h1>
+    <label>Unidad / Placa</label>
 
-<div class="sub">
-Reporte consolidado para WhatsApp
-</div>
+    <select id="unidad">
+      <option value="">Seleccionar placa</option>
+      <option value="TCA2222">TCA2222</option>
+      <option value="TEA9111">TEA9111</option>
+    </select>
 
-</div>
+    <label>Ubicado en</label>
 
+    <input
+      id="ubicacion"
+      type="text"
+      placeholder="Ej. Tegucigalpa">
 
-<!-- REGISTRO -->
+    <label>Destino</label>
 
-<section class="card">
+    <select id="destino">
 
-<h2>
-Registrar seguimiento
-</h2>
+      <option value="">
+        Seleccionar destino
+      </option>
 
+      <option value="CD SPS">
+        CD SPS
+      </option>
 
-<label>
-Placa
-</label>
+      <option value="CD Comayagua">
+        CD Comayagua
+      </option>
 
+      <option value="CD Juticalpa">
+        CD Juticalpa
+      </option>
 
-<div class="row">
+    </select>
 
-<div class="grow">
+    <label>Estado</label>
 
-<select id="placa">
+    <select id="estado">
 
-<option value="">
-Seleccione una placa
-</option>
+      <option value="En ruta">
+        En ruta
+      </option>
 
-</select>
+      <option value="Detenida">
+        Detenida
+      </option>
 
-</div>
+      <option value="Ubicado en">
+        Ubicado en
+      </option>
 
+      <option value="Llegó al CD Juticalpa">
+        Llegó al CD Juticalpa
+      </option>
 
-<button
-class="add"
-onclick="agregarPlaca()">
+      <option value="Llegó al CD SPS">
+        Llegó al CD SPS
+      </option>
 
-＋ Placa
+      <option value="Llegó al CD Comayagua">
+        Llegó al CD Comayagua
+      </option>
 
-</button>
+      <option value="Finalizada">
+        Finalizada
+      </option>
 
-</div>
+    </select>
 
+    <button
+      class="btn-primary"
+      onclick="agregarUnidad()">
 
-<label>
-Ubicado en
-</label>
+      + Agregar unidad
 
+    </button>
 
-<input
-id="ubicado"
-type="text"
-placeholder="Ej. Siguatepeque"
-autocomplete="off"
->
+  </div>
 
 
-<label>
-Destino
-</label>
+  <!-- UNIDADES -->
+  <div class="card">
 
+    <h2>Unidades</h2>
 
-<div class="destinos">
+    <div id="listaUnidades">
 
-<button
-data-destino="CD SPS">
+      <div class="empty">
+        No hay unidades registradas.
+      </div>
 
-CD SPS
+    </div>
 
-</button>
+  </div>
 
 
-<button
-data-destino="CD COMAYAGUA">
+  <!-- REPORTE -->
+  <div class="card">
 
-CD COMAYAGUA
+    <h2>Reporte</h2>
 
-</button>
+    <div
+      id="reporte"
+      class="report">
 
+      Aún no hay información para generar el reporte.
 
-<button
-data-destino="CD JUTICALPA">
+    </div>
 
-CD JUTICALPA
+    <button
+      class="btn-success"
+      onclick="copiarReporte()">
 
-</button>
+      Copiar reporte
 
-</div>
+    </button>
 
+    <button
+      class="btn-secondary"
+      onclick="limpiarUnidades()">
 
-<button
-class="primary"
-onclick="registrar()">
+      Limpiar unidades
 
-AGREGAR AL REPORTE
+    </button>
 
-</button>
-
-
-<div class="small">
-
-La hora se registra automáticamente.
-
-</div>
-
-</section>
-
-
-
-<!-- UNIDADES -->
-
-<section class="card">
-
-<h2>
-Unidades del reporte
-</h2>
-
-<div id="registros"></div>
-
-</section>
-
-
-
-<!-- REPORTE -->
-
-<section class="card">
-
-<h2>
-Reporte consolidado
-</h2>
-
-
-<div
-id="reporte"
-class="report">
-
-Aún no hay unidades en el reporte.
+  </div>
 
 </div>
 
 
-<button
-class="copy"
-onclick="copiarReporte()">
-
-📲 COPIAR PARA WHATSAPP
-
-</button>
-
-
-<button
-class="secondary"
-style="width:100%;margin-top:9px"
-onclick="limpiarReporte()">
-
-Limpiar reporte actual
-
-</button>
-
-</section>
-
-
-
-<!-- PLACAS -->
-
-<section class="card">
-
-<h2>
-Placas guardadas
-</h2>
-
-<div id="placas"></div>
-
-</section>
-
-
-
-<!-- HISTORIAL -->
-
-<section class="card">
-
-<h2>
-Historial
-</h2>
-
-<div id="historial"></div>
-
-</section>
-
-
-</div>
-
+<footer>
+  Seguimiento de Unidades V5.1
+</footer>
 
 
 <script>
 
-
-const CLAVE_PLACAS =
-"seguimiento_placas_v5";
-
-
-const CLAVE_REPORTE =
-"seguimiento_reporte_v5";
-
-
-const CLAVE_HISTORIAL =
-"seguimiento_historial_v5";
-
-
-let placas =
-JSON.parse(
-localStorage.getItem(
-CLAVE_PLACAS
-)
-||
-'["TCA2222","TEA9111"]'
-);
-
-
-let registros =
-JSON.parse(
-localStorage.getItem(
-CLAVE_REPORTE
-)
-||
-"[]"
-);
-
-
-let historial =
-JSON.parse(
-localStorage.getItem(
-CLAVE_HISTORIAL
-)
-||
-"[]"
-);
-
-
-let destinoSeleccionado =
-"";
-
+let unidades = [];
 
 
 /* =========================
-   HORA
+   CARGAR DATOS
 ========================= */
 
+function cargarDatos(){
 
-function obtenerHora(){
+  const datos =
+    localStorage.getItem(
+      "seguimientoUnidades"
+    );
 
-return new Intl.DateTimeFormat(
-"es-HN",
-{
-hour:"2-digit",
-minute:"2-digit",
-hour12:true
+  if(datos){
+
+    try{
+
+      unidades = JSON.parse(datos);
+
+    }catch(e){
+
+      unidades = [];
+
+    }
+
+  }
+
+  mostrarUnidades();
 }
-).format(
-new Date()
-);
-
-}
-
 
 
 /* =========================
-   FECHA
+   GUARDAR DATOS
 ========================= */
-
-
-function obtenerFecha(){
-
-return new Intl.DateTimeFormat(
-"es-HN",
-{
-day:"2-digit",
-month:"2-digit",
-year:"numeric"
-}
-).format(
-new Date()
-);
-
-}
-
-
-
-/* =========================
-   SEGURIDAD
-========================= */
-
-
-function escapar(texto){
-
-return String(texto)
-
-.replace(
-/[&<>"']/g,
-
-function(c){
-
-return {
-
-"&":"&amp;",
-"<":"&lt;",
-">":"&gt;",
-'"':"&quot;",
-"'":"&#039;"
-
-}[c];
-
-}
-
-);
-
-}
-
-
-
-/* =========================
-   GUARDAR
-========================= */
-
 
 function guardarDatos(){
 
-localStorage.setItem(
-CLAVE_PLACAS,
-JSON.stringify(placas)
-);
-
-
-localStorage.setItem(
-CLAVE_REPORTE,
-JSON.stringify(registros)
-);
-
-
-localStorage.setItem(
-CLAVE_HISTORIAL,
-JSON.stringify(historial)
-);
+  localStorage.setItem(
+    "seguimientoUnidades",
+    JSON.stringify(unidades)
+  );
 
 }
-
 
 
 /* =========================
-   SELECTOR DE PLACAS
+   AGREGAR UNIDAD
 ========================= */
 
+function agregarUnidad(){
 
-function mostrarSelector(){
+  const unidad =
+    document.getElementById(
+      "unidad"
+    ).value;
 
-const selector =
-document.getElementById(
-"placa"
-);
+  const ubicacion =
+    document.getElementById(
+      "ubicacion"
+    ).value.trim();
+
+  const destino =
+    document.getElementById(
+      "destino"
+    ).value;
+
+  const estado =
+    document.getElementById(
+      "estado"
+    ).value;
 
 
-selector.innerHTML =
-'<option value="">Seleccione una placa</option>';
+  if(!unidad){
+
+    alert(
+      "Selecciona la placa de la unidad."
+    );
+
+    return;
+
+  }
 
 
-placas.forEach(
+  if(!ubicacion){
 
-function(placa){
+    alert(
+      "Escribe dónde está ubicada la unidad."
+    );
 
-const opcion =
-document.createElement(
-"option"
-);
+    return;
 
-opcion.value =
-placa;
+  }
 
-opcion.textContent =
-placa;
 
-selector.appendChild(
-opcion
-);
+  if(!destino){
+
+    alert(
+      "Selecciona el destino."
+    );
+
+    return;
+
+  }
+
+
+  const existente =
+    unidades.find(
+      u => u.unidad === unidad
+    );
+
+
+  if(existente){
+
+    alert(
+      "Esta unidad ya está registrada. Puedes cambiar sus datos desde la unidad."
+    );
+
+    return;
+
+  }
+
+
+  const ahora =
+    new Date();
+
+
+  const hora =
+    ahora.toLocaleTimeString(
+      "es-HN",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:false
+      }
+    );
+
+
+  unidades.push({
+
+    unidad:unidad,
+
+    ubicacion:ubicacion,
+
+    destino:destino,
+
+    estado:estado,
+
+    hora:hora
+
+  });
+
+
+  guardarDatos();
+
+  mostrarUnidades();
+
+  limpiarFormulario();
 
 }
-
-);
-
-}
-
 
 
 /* =========================
-   AGREGAR PLACA
+   MOSTRAR UNIDADES
 ========================= */
 
+function mostrarUnidades(){
 
-function agregarPlaca(){
-
-const nueva =
-prompt(
-"Escribe la nueva placa:"
-);
+  const contenedor =
+    document.getElementById(
+      "listaUnidades"
+    );
 
 
-if(!nueva){
+  if(unidades.length === 0){
 
-return;
+    contenedor.innerHTML =
+      `
+      <div class="empty">
+        No hay unidades registradas.
+      </div>
+      `;
+
+    generarReporte();
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML = "";
+
+
+  unidades.forEach(
+    (u,index)=>{
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+      div.className =
+        "unit";
+
+
+      div.innerHTML = `
+
+        <div class="unit-header">
+
+          <h3>
+            ${u.unidad}
+          </h3>
+
+          <span class="badge">
+            ${u.estado}
+          </span>
+
+        </div>
+
+
+        <div class="info">
+
+          📍 <strong>Ubicado en:</strong>
+          ${u.ubicacion}
+
+          <br>
+
+          🎯 <strong>Destino:</strong>
+          ${u.destino}
+
+          <br>
+
+          🕐 <strong>Última actualización:</strong>
+          ${u.hora}
+
+        </div>
+
+
+        <div class="unit-buttons">
+
+          <button
+            class="btn-primary"
+            onclick="cambiarEstado(${index})">
+
+            Cambiar estado
+
+          </button>
+
+
+          <button
+            class="btn-danger"
+            onclick="eliminarUnidad(${index})">
+
+            Eliminar
+
+          </button>
+
+        </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        div
+      );
+
+    }
+  );
+
+
+  generarReporte();
 
 }
-
-
-const placa =
-nueva
-.trim()
-.toUpperCase();
-
-
-if(!placa){
-
-return;
-
-}
-
-
-if(
-placas.includes(
-placa
-)
-){
-
-alert(
-"Esa placa ya está guardada."
-);
-
-return;
-
-}
-
-
-placas.push(
-placa
-);
-
-
-placas.sort();
-
-
-guardarDatos();
-
-
-mostrarSelector();
-
-mostrarPlacas();
-
-
-document.getElementById(
-"placa"
-).value =
-placa;
-
-}
-
 
 
 /* =========================
-   MOSTRAR PLACAS
+   CAMBIAR ESTADO
 ========================= */
 
+function cambiarEstado(index){
 
-function mostrarPlacas(){
+  const estados = [
 
-const contenedor =
-document.getElementById(
-"placas"
-);
+    "En ruta",
+
+    "Detenida",
+
+    "Ubicado en",
+
+    "Llegó al CD Juticalpa",
+
+    "Llegó al CD SPS",
+
+    "Llegó al CD Comayagua",
+
+    "Finalizada"
+
+  ];
 
 
-if(
-placas.length === 0
-){
+  let mensaje =
+    "Selecciona el nuevo estado:\n\n";
 
-contenedor.innerHTML =
-'<div class="empty">No hay placas guardadas.</div>';
 
-return;
+  estados.forEach(
+    (e,i)=>{
+
+      mensaje +=
+        `${i + 1}. ${e}\n`;
+
+    }
+  );
+
+
+  const opcion =
+    prompt(
+      mensaje
+    );
+
+
+  if(opcion === null){
+
+    return;
+
+  }
+
+
+  const numero =
+    parseInt(opcion);
+
+
+  if(
+    isNaN(numero) ||
+    numero < 1 ||
+    numero > estados.length
+  ){
+
+    alert(
+      "Opción no válida."
+    );
+
+    return;
+
+  }
+
+
+  unidades[index].estado =
+    estados[numero - 1];
+
+
+  const ahora =
+    new Date();
+
+
+  unidades[index].hora =
+    ahora.toLocaleTimeString(
+      "es-HN",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:false
+      }
+    );
+
+
+  guardarDatos();
+
+  mostrarUnidades();
 
 }
-
-
-contenedor.innerHTML =
-"";
-
-
-placas.forEach(
-
-function(placa,index){
-
-const div =
-document.createElement(
-"div"
-);
-
-
-div.className =
-"item";
-
-
-div.innerHTML =
-
-`
-<strong>
-🚛 ${escapar(placa)}
-</strong>
-
-<div class="item-actions">
-
-<button
-class="danger"
-onclick="eliminarPlaca(${index})">
-
-Eliminar
-
-</button>
-
-</div>
-`;
-
-
-contenedor.appendChild(
-div
-);
-
-}
-
-);
-
-}
-
 
 
 /* =========================
-   ELIMINAR PLACA
+   ELIMINAR
 ========================= */
 
+function eliminarUnidad(index){
 
-function eliminarPlaca(index){
+  if(
+    !confirm(
+      "¿Deseas eliminar esta unidad?"
+    )
+  ){
 
-const placa =
-placas[index];
+    return;
 
-
-if(
-!confirm(
-"¿Eliminar la placa " +
-placa +
-"?"
-)
-){
-
-return;
-
-}
+  }
 
 
-placas.splice(
-index,
-1
-);
+  unidades.splice(
+    index,
+    1
+  );
 
 
-guardarDatos();
+  guardarDatos();
 
-
-mostrarSelector();
-
-mostrarPlacas();
+  mostrarUnidades();
 
 }
-
-
-
-/* =========================
-   DESTINO
-========================= */
-
-
-document
-.querySelectorAll(
-"[data-destino]"
-)
-.forEach(
-
-function(boton){
-
-boton.onclick =
-function(){
-
-destinoSeleccionado =
-boton.dataset.destino;
-
-
-document
-.querySelectorAll(
-"[data-destino]"
-)
-.forEach(
-
-function(b){
-
-b.classList.remove(
-"selected"
-);
-
-}
-);
-
-
-boton.classList.add(
-"selected"
-);
-
-};
-
-}
-);
-
-
-
-/* =========================
-   REGISTRAR
-========================= */
-
-
-function registrar(){
-
-const placa =
-document.getElementById(
-"placa"
-).value;
-
-
-const ubicado =
-document.getElementById(
-"ubicado"
-).value.trim();
-
-
-if(!placa){
-
-alert(
-"Selecciona una placa."
-);
-
-return;
-
-}
-
-
-if(!ubicado){
-
-alert(
-"Escribe dónde está ubicada la unidad."
-);
-
-return;
-
-}
-
-
-if(!destinoSeleccionado){
-
-alert(
-"Selecciona el destino."
-);
-
-return;
-
-}
-
-
-/*
-No permitimos duplicar
-una misma placa dentro
-del reporte actual.
-*/
-
-
-if(
-registros.some(
-function(registro){
-
-return registro.placa === placa;
-
-}
-)
-){
-
-alert(
-"Esa placa ya está en el reporte actual. Puedes editarla."
-);
-
-return;
-
-}
-
-
-registros.push({
-
-placa:placa,
-
-ubicado:ubicado,
-
-destino:destinoSeleccionado,
-
-hora:obtenerHora()
-
-});
-
-
-guardarDatos();
-
-
-mostrarRegistros();
-
-
-document.getElementById(
-"ubicado"
-).value =
-"";
-
-
-destinoSeleccionado =
-"";
-
-
-document
-.querySelectorAll(
-"[data-destino]"
-)
-.forEach(
-
-function(boton){
-
-boton.classList.remove(
-"selected"
-);
-
-}
-);
-
-}
-
-
-
-/* =========================
-   MOSTRAR REGISTROS
-========================= */
-
-
-function mostrarRegistros(){
-
-const contenedor =
-document.getElementById(
-"registros"
-);
-
-
-if(
-registros.length === 0
-){
-
-contenedor.innerHTML =
-'<div class="empty">Todavía no hay unidades en este reporte.</div>';
-
-generarReporte();
-
-return;
-
-}
-
-
-contenedor.innerHTML =
-"";
-
-
-registros.forEach(
-
-function(registro,index){
-
-const div =
-document.createElement(
-"div"
-);
-
-
-div.className =
-"item";
-
-
-div.innerHTML =
-
-`
-<strong>
-🚛 ${escapar(registro.placa)}
-</strong>
-
-<div class="meta">
-
-📍 Ubicado en:
-<b>
-${escapar(registro.ubicado)}
-</b>
-
-<br>
-
-🎯 Destino:
-<b>
-${escapar(registro.destino)}
-</b>
-
-<br>
-
-🕐 Hora:
-<b>
-${escapar(registro.hora)}
-</b>
-
-</div>
-
-
-<div class="item-actions">
-
-<button
-class="secondary"
-onclick="editarRegistro(${index})">
-
-Editar
-
-</button>
-
-
-<button
-class="danger"
-onclick="eliminarRegistro(${index})">
-
-Eliminar
-
-</button>
-
-</div>
-`;
-
-
-contenedor.appendChild(
-div
-);
-
-}
-
-);
-
-
-generarReporte();
-
-}
-
-
-
-/* =========================
-   EDITAR
-========================= */
-
-
-function editarRegistro(index){
-
-const registro =
-registros[index];
-
-
-document.getElementById(
-"placa"
-).value =
-registro.placa;
-
-
-document.getElementById(
-"ubicado"
-).value =
-registro.ubicado;
-
-
-destinoSeleccionado =
-registro.destino;
-
-
-document
-.querySelectorAll(
-"[data-destino]"
-)
-.forEach(
-
-function(boton){
-
-if(
-boton.dataset.destino ===
-registro.destino
-){
-
-boton.classList.add(
-"selected"
-);
-
-}else{
-
-boton.classList.remove(
-"selected"
-);
-
-}
-
-}
-);
-
-
-registros.splice(
-index,
-1
-);
-
-
-guardarDatos();
-
-
-mostrarRegistros();
-
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-
-
-/* =========================
-   ELIMINAR REGISTRO
-========================= */
-
-
-function eliminarRegistro(index){
-
-if(
-!confirm(
-"¿Eliminar esta unidad del reporte?"
-)
-){
-
-return;
-
-}
-
-
-registros.splice(
-index,
-1
-);
-
-
-guardarDatos();
-
-
-mostrarRegistros();
-
-}
-
 
 
 /* =========================
    GENERAR REPORTE
 ========================= */
 
-
 function generarReporte(){
 
-const caja =
-document.getElementById(
-"reporte"
-);
+  const reporte =
+    document.getElementById(
+      "reporte"
+    );
 
 
-if(
-registros.length === 0
-){
+  if(unidades.length === 0){
 
-caja.textContent =
-"Aún no hay unidades en el reporte.";
+    reporte.textContent =
+      "Aún no hay información para generar el reporte.";
 
-return;
+    return;
+
+  }
+
+
+  const ahora =
+    new Date();
+
+
+  const hora =
+    ahora.toLocaleTimeString(
+      "es-HN",
+      {
+        hour:"2-digit",
+        minute:"2-digit",
+        hour12:false
+      }
+    );
+
+
+  let texto =
+    `📋 REPORTE DE SEGUIMIENTO\n`;
+
+  texto +=
+    `🕐 Hora del reporte: ${hora}\n`;
+
+  texto +=
+    `━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+
+  unidades.forEach(
+    (u,index)=>{
+
+      texto +=
+        `🚛 ${u.unidad}\n`;
+
+      texto +=
+        `📍 Ubicado en: ${u.ubicacion}\n`;
+
+      texto +=
+        `🎯 Destino: ${u.destino}\n`;
+
+      texto +=
+        `📌 Estado: ${u.estado}\n`;
+
+      texto +=
+        `🕐 Actualización: ${u.hora}\n`;
+
+
+      if(
+        index <
+        unidades.length - 1
+      ){
+
+        texto +=
+          `\n━━━━━━━━━━━━━━━━━━━━\n\n`;
+
+      }
+
+    }
+  );
+
+
+  reporte.textContent =
+    texto;
 
 }
-
-
-let texto =
-"📋 REPORTE DE SEGUIMIENTO\n\n";
-
-
-registros.forEach(
-
-function(registro,index){
-
-texto +=
-
-"🚛 " +
-registro.placa +
-"\n" +
-
-"📍 Ubicado en: " +
-registro.ubicado +
-"\n" +
-
-"🎯 Destino: " +
-registro.destino +
-"\n" +
-
-"🕐 Hora: " +
-registro.hora +
-"\n";
-
-
-if(
-index <
-registros.length - 1
-){
-
-texto +=
-"\n";
-
-}
-
-}
-);
-
-
-caja.textContent =
-texto;
-
-}
-
 
 
 /* =========================
    COPIAR REPORTE
 ========================= */
 
-
 function copiarReporte(){
 
-if(
-registros.length === 0
-){
-
-alert(
-"No hay unidades en el reporte."
-);
-
-return;
-
-}
+  generarReporte();
 
 
-const texto =
-document.getElementById(
-"reporte"
-).textContent;
+  const texto =
+    document.getElementById(
+      "reporte"
+    ).textContent;
 
 
-historial.unshift({
+  if(
+    !navigator.clipboard
+  ){
 
-fecha:
-obtenerFecha() +
-" " +
-obtenerHora(),
+    alert(
+      "No se pudo copiar automáticamente. Selecciona y copia el reporte."
+    );
 
-cantidad:
-registros.length,
+    return;
 
-texto:
-texto
-
-});
+  }
 
 
-historial =
-historial.slice(
-0,
-20
-);
+  navigator.clipboard
+    .writeText(texto)
+    .then(()=>{
 
+      alert(
+        "Reporte copiado correctamente."
+      );
 
-guardarDatos();
+    })
+    .catch(()=>{
 
+      alert(
+        "No se pudo copiar el reporte."
+      );
 
-mostrarHistorial();
-
-
-navigator.clipboard
-.writeText(
-texto
-)
-.then(
-
-function(){
-
-alert(
-"Reporte copiado."
-);
+    });
 
 }
-
-)
-.catch(
-
-function(){
-
-alert(
-"No se pudo copiar automáticamente."
-);
-
-}
-
-);
-
-}
-
 
 
 /* =========================
-   LIMPIAR REPORTE
+   LIMPIAR FORMULARIO
 ========================= */
 
+function limpiarFormulario(){
 
-function limpiarReporte(){
+  document.getElementById(
+    "unidad"
+  ).value = "";
 
-if(
-registros.length === 0
-){
+  document.getElementById(
+    "ubicacion"
+  ).value = "";
 
-return;
+  document.getElementById(
+    "destino"
+  ).value = "";
 
-}
-
-
-if(
-!confirm(
-"¿Limpiar el reporte actual?"
-)
-){
-
-return;
+  document.getElementById(
+    "estado"
+  ).value = "En ruta";
 
 }
-
-
-registros =
-[];
-
-
-guardarDatos();
-
-
-mostrarRegistros();
-
-}
-
 
 
 /* =========================
-   HISTORIAL
+   LIMPIAR UNIDADES
 ========================= */
 
+function limpiarUnidades(){
 
-function mostrarHistorial(){
+  if(
+    unidades.length === 0
+  ){
 
-const contenedor =
-document.getElementById(
-"historial"
-);
+    return;
 
-
-if(
-historial.length === 0
-){
-
-contenedor.innerHTML =
-'<div class="empty">Todavía no hay historial.</div>';
-
-return;
-
-}
+  }
 
 
-contenedor.innerHTML =
-"";
+  if(
+    !confirm(
+      "¿Seguro que deseas eliminar todas las unidades?"
+    )
+  ){
+
+    return;
+
+  }
 
 
-historial
-.slice(
-0,
-20
-)
-.forEach(
+  unidades = [];
 
-function(item,index){
+  guardarDatos();
 
-const div =
-document.createElement(
-"div"
-);
-
-
-div.className =
-"item";
-
-
-div.innerHTML =
-
-`
-<strong>
-${escapar(item.fecha)}
-</strong>
-
-<div class="meta">
-
-${item.cantidad}
-unidad(es)
-
-</div>
-
-<div
-class="report"
-style="margin-top:8px">
-
-${escapar(item.texto)}
-
-</div>
-
-
-<button
-class="secondary"
-style="width:100%;margin-top:8px"
-onclick="copiarHistorial(${index})">
-
-📲 Copiar
-
-</button>
-`;
-
-
-contenedor.appendChild(
-div
-);
+  mostrarUnidades();
 
 }
-);
-
-}
-
 
 
 /* =========================
-   COPIAR HISTORIAL
+   INICIO
 ========================= */
 
-
-function copiarHistorial(index){
-
-const texto =
-historial[index].texto;
-
-
-navigator.clipboard
-.writeText(
-texto
-)
-.then(
-
-function(){
-
-alert(
-"Reporte copiado."
-);
-
-}
-
-)
-.catch(
-
-function(){
-
-alert(
-"No se pudo copiar."
-);
-
-}
-
-);
-
-}
-
-
-
-/* =========================
-   INICIAR APP
-========================= */
-
-
-mostrarSelector();
-
-mostrarPlacas();
-
-mostrarRegistros();
-
-mostrarHistorial();
+cargarDatos();
 
 </script>
 

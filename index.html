@@ -8,7 +8,7 @@
 
 <meta name="theme-color" content="#111827">
 
-<title>Seguimiento de Unidades V5.2</title>
+<title>Seguimiento de Unidades V5.3</title>
 
 <style>
 
@@ -104,6 +104,28 @@ button{
   color:#111827;
 }
 
+.btn-add{
+  background:#111827;
+  color:white;
+}
+
+.placa-row{
+  display:flex;
+  gap:8px;
+  align-items:stretch;
+}
+
+.placa-row select{
+  flex:1;
+}
+
+.placa-row button{
+  width:auto;
+  margin-top:0;
+  white-space:nowrap;
+  padding:12px 15px;
+}
+
 .unit{
   border:1px solid #e5e7eb;
   border-radius:14px;
@@ -165,6 +187,34 @@ button{
   line-height:1.6;
 }
 
+.small{
+  color:#6b7280;
+  font-size:13px;
+  margin-top:7px;
+}
+
+.placas-lista{
+  margin-top:12px;
+}
+
+.placa-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:11px 12px;
+  background:#f9fafb;
+  border-radius:10px;
+  margin-top:8px;
+  font-weight:bold;
+}
+
+.placa-item button{
+  width:auto;
+  margin:0;
+  padding:8px 12px;
+  font-size:13px;
+}
+
 footer{
   text-align:center;
   color:#6b7280;
@@ -184,6 +234,10 @@ footer{
 
   .unit-buttons{
     flex-direction:column;
+  }
+
+  .placa-row button{
+    font-size:14px;
   }
 
 }
@@ -210,9 +264,9 @@ footer{
 <div class="container">
 
 
-<!-- =========================
-     FORMULARIO
-========================= -->
+<!-- =================================
+     REGISTRAR UNIDAD
+================================= -->
 
 <div class="card">
 
@@ -226,21 +280,26 @@ footer{
   </label>
 
 
-  <select id="unidad">
+  <div class="placa-row">
 
-    <option value="">
-      Seleccionar placa
-    </option>
+    <select id="unidad">
 
-    <option value="TCA2222">
-      TCA2222
-    </option>
+      <option value="">
+        Seleccionar placa
+      </option>
 
-    <option value="TEA9111">
-      TEA9111
-    </option>
+    </select>
 
-  </select>
+
+    <button
+      class="btn-add"
+      onclick="agregarPlaca()">
+
+      ＋ Agregar placa
+
+    </button>
+
+  </div>
 
 
   <label>
@@ -252,6 +311,7 @@ footer{
     id="ubicacion"
     type="text"
     placeholder="Ej. El Nance"
+    autocomplete="off"
   >
 
 
@@ -327,13 +387,20 @@ footer{
 
   </button>
 
+
+  <div class="small">
+
+    La hora se registra automáticamente.
+
+  </div>
+
 </div>
 
 
 
-<!-- =========================
+<!-- =================================
      UNIDADES
-========================= -->
+================================= -->
 
 <div class="card">
 
@@ -354,9 +421,9 @@ footer{
 
 
 
-<!-- =========================
+<!-- =================================
      REPORTE
-========================= -->
+================================= -->
 
 <div class="card">
 
@@ -394,12 +461,33 @@ footer{
 </div>
 
 
+
+<!-- =================================
+     PLACAS GUARDADAS
+================================= -->
+
+<div class="card">
+
+  <h2>
+    Placas guardadas
+  </h2>
+
+
+  <div
+    id="listaPlacas"
+    class="placas-lista">
+
+  </div>
+
+</div>
+
+
 </div>
 
 
 <footer>
 
-Seguimiento de Unidades V5.2
+  Seguimiento de Unidades V5.3
 
 </footer>
 
@@ -408,54 +496,98 @@ Seguimiento de Unidades V5.2
 <script>
 
 
-let unidades = [];
+/* =================================
+   CLAVES DE ALMACENAMIENTO
+================================= */
+
+const CLAVE_PLACAS =
+  "placasSeguimientoV53";
+
+
+const CLAVE_UNIDADES =
+  "seguimientoUnidadesV53";
 
 
 
-/* =========================
-   CARGAR DATOS
-========================= */
+/* =================================
+   PLACAS INICIALES
+================================= */
 
-
-function cargarDatos(){
-
-  const datos =
+let placas =
+  JSON.parse(
     localStorage.getItem(
-      "seguimientoUnidades"
-    );
+      CLAVE_PLACAS
+    )
+  );
 
 
-  if(datos){
+/*
+   Si es la primera vez que se abre
+   esta versión, se crean las dos
+   placas que ya teníamos.
+*/
 
-    try{
+if(
+  !Array.isArray(placas) ||
+  placas.length === 0
+){
 
-      unidades =
-        JSON.parse(datos);
+  placas = [
+    "TCA2222",
+    "TEA9111"
+  ];
 
-    }catch(e){
-
-      unidades = [];
-
-    }
-
-  }
-
-
-  mostrarUnidades();
+  guardarPlacas();
 
 }
 
 
 
-/* =========================
-   GUARDAR DATOS
-========================= */
+/* =================================
+   UNIDADES DEL REPORTE
+================================= */
+
+let unidades =
+  JSON.parse(
+    localStorage.getItem(
+      CLAVE_UNIDADES
+    )
+  );
 
 
-function guardarDatos(){
+if(
+  !Array.isArray(unidades)
+){
+
+  unidades = [];
+
+}
+
+
+
+/* =================================
+   GUARDAR PLACAS
+================================= */
+
+function guardarPlacas(){
 
   localStorage.setItem(
-    "seguimientoUnidades",
+    CLAVE_PLACAS,
+    JSON.stringify(placas)
+  );
+
+}
+
+
+
+/* =================================
+   GUARDAR UNIDADES
+================================= */
+
+function guardarUnidades(){
+
+  localStorage.setItem(
+    CLAVE_UNIDADES,
     JSON.stringify(unidades)
   );
 
@@ -463,10 +595,312 @@ function guardarDatos(){
 
 
 
-/* =========================
-   HORA
-========================= */
+/* =================================
+   MOSTRAR PLACAS EN SELECTOR
+================================= */
 
+function mostrarPlacas(){
+
+  const selector =
+    document.getElementById(
+      "unidad"
+    );
+
+
+  selector.innerHTML =
+    "";
+
+
+  const primeraOpcion =
+    document.createElement(
+      "option"
+    );
+
+
+  primeraOpcion.value =
+    "";
+
+
+  primeraOpcion.textContent =
+    "Seleccionar placa";
+
+
+  selector.appendChild(
+    primeraOpcion
+  );
+
+
+  placas.forEach(
+
+    function(placa){
+
+      const opcion =
+        document.createElement(
+          "option"
+        );
+
+
+      opcion.value =
+        placa;
+
+
+      opcion.textContent =
+        placa;
+
+
+      selector.appendChild(
+        opcion
+      );
+
+    }
+
+  );
+
+
+  mostrarListaPlacas();
+
+}
+
+
+
+/* =================================
+   AGREGAR NUEVA PLACA
+================================= */
+
+function agregarPlaca(){
+
+  const nuevaPlaca =
+    prompt(
+      "Escribe la nueva placa:"
+    );
+
+
+  if(
+    nuevaPlaca === null
+  ){
+
+    return;
+
+  }
+
+
+  const placa =
+    nuevaPlaca
+      .trim()
+      .toUpperCase();
+
+
+  if(
+    placa === ""
+  ){
+
+    alert(
+      "Debes escribir una placa."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    placas.includes(
+      placa
+    )
+  ){
+
+    alert(
+      "Esa placa ya está registrada."
+    );
+
+    return;
+
+  }
+
+
+  placas.push(
+    placa
+  );
+
+
+  placas.sort();
+
+
+  guardarPlacas();
+
+
+  mostrarPlacas();
+
+
+  /*
+     Seleccionar automáticamente
+     la nueva placa.
+  */
+
+  document.getElementById(
+    "unidad"
+  ).value =
+    placa;
+
+
+  alert(
+    "Placa " +
+    placa +
+    " agregada correctamente."
+  );
+
+}
+
+
+
+/* =================================
+   MOSTRAR LISTA DE PLACAS
+================================= */
+
+function mostrarListaPlacas(){
+
+  const contenedor =
+    document.getElementById(
+      "listaPlacas"
+    );
+
+
+  if(
+    placas.length === 0
+  ){
+
+    contenedor.innerHTML =
+      `
+      <div class="empty">
+        No hay placas guardadas.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+    "";
+
+
+  placas.forEach(
+
+    function(placa,index){
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "placa-item";
+
+
+      div.innerHTML =
+
+      `
+        <span>
+          🚛 ${placa}
+        </span>
+
+        <button
+          class="btn-danger"
+          onclick="eliminarPlaca(${index})">
+
+          Eliminar
+
+        </button>
+      `;
+
+
+      contenedor.appendChild(
+        div
+      );
+
+    }
+
+  );
+
+}
+
+
+
+/* =================================
+   ELIMINAR PLACA
+================================= */
+
+function eliminarPlaca(index){
+
+  const placa =
+    placas[index];
+
+
+  /*
+     Evitar eliminar una placa
+     que actualmente está siendo
+     utilizada en el reporte.
+  */
+
+  const estaEnUso =
+    unidades.some(
+
+      function(unidad){
+
+        return
+          unidad.unidad === placa;
+
+      }
+
+    );
+
+
+  if(
+    estaEnUso
+  ){
+
+    alert(
+      "No puedes eliminar esta placa porque está en el reporte actual."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    !confirm(
+      "¿Quieres eliminar la placa " +
+      placa +
+      "?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  placas.splice(
+    index,
+    1
+  );
+
+
+  guardarPlacas();
+
+
+  mostrarPlacas();
+
+}
+
+
+
+/* =================================
+   HORA ACTUAL
+================================= */
 
 function obtenerHora(){
 
@@ -475,22 +909,24 @@ function obtenerHora(){
 
 
   return ahora.toLocaleTimeString(
+
     "es-HN",
+
     {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true
     }
+
   );
 
 }
 
 
 
-/* =========================
-   AGREGAR UNIDAD
-========================= */
-
+/* =================================
+   AGREGAR UNIDAD AL REPORTE
+================================= */
 
 function agregarUnidad(){
 
@@ -518,10 +954,12 @@ function agregarUnidad(){
     ).value;
 
 
-  if(!unidad){
+  if(
+    unidad === ""
+  ){
 
     alert(
-      "Selecciona la placa de la unidad."
+      "Selecciona una placa."
     );
 
     return;
@@ -529,7 +967,9 @@ function agregarUnidad(){
   }
 
 
-  if(!ubicacion){
+  if(
+    ubicacion === ""
+  ){
 
     alert(
       "Escribe dónde está ubicada la unidad."
@@ -540,7 +980,9 @@ function agregarUnidad(){
   }
 
 
-  if(!destino){
+  if(
+    destino === ""
+  ){
 
     alert(
       "Selecciona el destino."
@@ -551,16 +993,30 @@ function agregarUnidad(){
   }
 
 
-  const existente =
-    unidades.find(
-      u => u.unidad === unidad
+  /*
+     No permitir la misma placa
+     dos veces en el reporte.
+  */
+
+  const existe =
+    unidades.some(
+
+      function(item){
+
+        return
+          item.unidad === unidad;
+
+      }
+
     );
 
 
-  if(existente){
+  if(
+    existe
+  ){
 
     alert(
-      "Esta unidad ya está registrada."
+      "Esta unidad ya está en el reporte actual."
     );
 
     return;
@@ -568,24 +1024,36 @@ function agregarUnidad(){
   }
 
 
-  unidades.push({
+  const nuevaUnidad = {
 
-    unidad:unidad,
+    unidad:
+      unidad,
 
-    ubicacion:ubicacion,
+    ubicacion:
+      ubicacion,
 
-    destino:destino,
+    destino:
+      destino,
 
-    estado:estado,
+    estado:
+      estado,
 
-    hora:obtenerHora()
+    hora:
+      obtenerHora()
 
-  });
+  };
 
 
-  guardarDatos();
+  unidades.push(
+    nuevaUnidad
+  );
+
+
+  guardarUnidades();
+
 
   mostrarUnidades();
+
 
   limpiarFormulario();
 
@@ -593,10 +1061,9 @@ function agregarUnidad(){
 
 
 
-/* =========================
+/* =================================
    MOSTRAR UNIDADES
-========================= */
-
+================================= */
 
 function mostrarUnidades(){
 
@@ -606,7 +1073,9 @@ function mostrarUnidades(){
     );
 
 
-  if(unidades.length === 0){
+  if(
+    unidades.length === 0
+  ){
 
     contenedor.innerHTML =
       `
@@ -627,7 +1096,8 @@ function mostrarUnidades(){
 
 
   unidades.forEach(
-    (u,index)=>{
+
+    function(unidad,index){
 
       const div =
         document.createElement(
@@ -639,60 +1109,60 @@ function mostrarUnidades(){
         "unit";
 
 
-      div.innerHTML = `
+      div.innerHTML =
 
-        <div class="unit-header">
+      `
+      <div class="unit-header">
 
-          <h3>
-            🚛 ${u.unidad}
-          </h3>
+        <h3>
+          🚛 ${unidad.unidad}
+        </h3>
 
-          <span class="badge">
-            ${u.estado}
-          </span>
+        <span class="badge">
+          ${unidad.estado}
+        </span>
 
-        </div>
-
-
-        <div class="info">
-
-          📍 <strong>Ubicado en:</strong>
-          ${u.ubicacion}
-
-          <br>
-
-          🎯 <strong>Destino:</strong>
-          ${u.destino}
-
-          <br>
-
-          🕐 <strong>Hora:</strong>
-          ${u.hora}
-
-        </div>
+      </div>
 
 
-        <div class="unit-buttons">
+      <div class="info">
 
-          <button
-            class="btn-primary"
-            onclick="cambiarEstado(${index})">
+        📍 <strong>Ubicado en:</strong>
+        ${unidad.ubicacion}
 
-            Cambiar estado
+        <br>
 
-          </button>
+        🎯 <strong>Destino:</strong>
+        ${unidad.destino}
+
+        <br>
+
+        🕐 <strong>Hora:</strong>
+        ${unidad.hora}
+
+      </div>
 
 
-          <button
-            class="btn-danger"
-            onclick="eliminarUnidad(${index})">
+      <div class="unit-buttons">
 
-            Eliminar
+        <button
+          class="btn-primary"
+          onclick="cambiarEstado(${index})">
 
-          </button>
+          Cambiar estado
 
-        </div>
+        </button>
 
+
+        <button
+          class="btn-danger"
+          onclick="eliminarUnidad(${index})">
+
+          Eliminar
+
+        </button>
+
+      </div>
       `;
 
 
@@ -701,6 +1171,7 @@ function mostrarUnidades(){
       );
 
     }
+
   );
 
 
@@ -710,10 +1181,9 @@ function mostrarUnidades(){
 
 
 
-/* =========================
+/* =================================
    CAMBIAR ESTADO
-========================= */
-
+================================= */
 
 function cambiarEstado(index){
 
@@ -741,12 +1211,17 @@ function cambiarEstado(index){
 
 
   estados.forEach(
-    (estado,i)=>{
+
+    function(estado,i){
 
       mensaje +=
-        `${i + 1}. ${estado}\n`;
+        (i + 1) +
+        ". " +
+        estado +
+        "\n";
 
     }
+
   );
 
 
@@ -756,7 +1231,9 @@ function cambiarEstado(index){
     );
 
 
-  if(opcion === null){
+  if(
+    opcion === null
+  ){
 
     return;
 
@@ -764,7 +1241,9 @@ function cambiarEstado(index){
 
 
   const numero =
-    parseInt(opcion);
+    parseInt(
+      opcion
+    );
 
 
   if(
@@ -783,14 +1262,17 @@ function cambiarEstado(index){
 
 
   unidades[index].estado =
-    estados[numero - 1];
+    estados[
+      numero - 1
+    ];
 
 
   unidades[index].hora =
     obtenerHora();
 
 
-  guardarDatos();
+  guardarUnidades();
+
 
   mostrarUnidades();
 
@@ -798,16 +1280,15 @@ function cambiarEstado(index){
 
 
 
-/* =========================
-   ELIMINAR
-========================= */
-
+/* =================================
+   ELIMINAR UNIDAD
+================================= */
 
 function eliminarUnidad(index){
 
   if(
     !confirm(
-      "¿Deseas eliminar esta unidad?"
+      "¿Deseas eliminar esta unidad del reporte?"
     )
   ){
 
@@ -822,7 +1303,8 @@ function eliminarUnidad(index){
   );
 
 
-  guardarDatos();
+  guardarUnidades();
+
 
   mostrarUnidades();
 
@@ -830,22 +1312,23 @@ function eliminarUnidad(index){
 
 
 
-/* =========================
+/* =================================
    GENERAR REPORTE
-========================= */
-
+================================= */
 
 function generarReporte(){
 
-  const reporte =
+  const caja =
     document.getElementById(
       "reporte"
     );
 
 
-  if(unidades.length === 0){
+  if(
+    unidades.length === 0
+  ){
 
-    reporte.textContent =
+    caja.textContent =
       "Aún no hay información para generar el reporte.";
 
     return;
@@ -854,14 +1337,14 @@ function generarReporte(){
 
 
   /*
-  FORMATO OFICIAL:
+     FORMATO OFICIAL:
 
-  📋 REPORTE DE SEGUIMIENTO
+     📋 REPORTE DE SEGUIMIENTO
 
-  🚛 TCA2222
-  📍 Ubicado en: El Nance
-  🎯 Destino: CD JUTICALPA
-  🕐 Hora: 02:01 a. m.
+     🚛 TCA2222
+     📍 Ubicado en: El Nance
+     🎯 Destino: CD JUTICALPA
+     🕐 Hora: 02:01 a. m.
   */
 
 
@@ -870,29 +1353,30 @@ function generarReporte(){
 
 
   unidades.forEach(
-    (u,index)=>{
+
+    function(unidad,index){
 
       texto +=
         "🚛 " +
-        u.unidad +
+        unidad.unidad +
         "\n";
 
 
       texto +=
         "📍 Ubicado en: " +
-        u.ubicacion +
+        unidad.ubicacion +
         "\n";
 
 
       texto +=
         "🎯 Destino: " +
-        u.destino +
+        unidad.destino +
         "\n";
 
 
       texto +=
         "🕐 Hora: " +
-        u.hora +
+        unidad.hora +
         "\n";
 
 
@@ -907,20 +1391,20 @@ function generarReporte(){
       }
 
     }
+
   );
 
 
-  reporte.textContent =
+  caja.textContent =
     texto;
 
 }
 
 
 
-/* =========================
+/* =================================
    COPIAR REPORTE
-========================= */
-
+================================= */
 
 function copiarReporte(){
 
@@ -934,11 +1418,13 @@ function copiarReporte(){
 
 
   if(
-    !navigator.clipboard
+    texto.includes(
+      "Aún no hay"
+    )
   ){
 
     alert(
-      "No se pudo copiar automáticamente."
+      "No hay unidades en el reporte."
     );
 
     return;
@@ -950,33 +1436,38 @@ function copiarReporte(){
     .writeText(
       texto
     )
+
     .then(
-      ()=>{
+
+      function(){
 
         alert(
           "Reporte copiado correctamente."
         );
 
       }
+
     )
+
     .catch(
-      ()=>{
+
+      function(){
 
         alert(
-          "No se pudo copiar el reporte."
+          "No se pudo copiar automáticamente."
         );
 
       }
+
     );
 
 }
 
 
 
-/* =========================
+/* =================================
    LIMPIAR FORMULARIO
-========================= */
-
+================================= */
 
 function limpiarFormulario(){
 
@@ -1007,10 +1498,9 @@ function limpiarFormulario(){
 
 
 
-/* =========================
-   LIMPIAR UNIDADES
-========================= */
-
+/* =================================
+   LIMPIAR REPORTE
+================================= */
 
 function limpiarUnidades(){
 
@@ -1025,7 +1515,7 @@ function limpiarUnidades(){
 
   if(
     !confirm(
-      "¿Seguro que deseas eliminar todas las unidades?"
+      "¿Seguro que deseas eliminar todas las unidades del reporte?"
     )
   ){
 
@@ -1034,10 +1524,12 @@ function limpiarUnidades(){
   }
 
 
-  unidades = [];
+  unidades =
+    [];
 
 
-  guardarDatos();
+  guardarUnidades();
+
 
   mostrarUnidades();
 
@@ -1045,13 +1537,13 @@ function limpiarUnidades(){
 
 
 
-/* =========================
-   INICIO
-========================= */
+/* =================================
+   INICIAR APP
+================================= */
 
+mostrarPlacas();
 
-cargarDatos();
-
+mostrarUnidades();
 
 </script>
 

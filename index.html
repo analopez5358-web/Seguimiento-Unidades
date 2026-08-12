@@ -8,7 +8,7 @@
 
 <meta name="theme-color" content="#111827">
 
-<title>Seguimiento de Unidades V5.3</title>
+<title>Seguimiento de Unidades V6</title>
 
 <style>
 
@@ -31,36 +31,37 @@ header{
 
 header h1{
   margin:0;
-  font-size:28px;
+  font-size:27px;
 }
 
 header p{
-  margin:8px 0 0;
+  margin:7px 0 0;
   color:#d1d5db;
 }
 
 .container{
-  max-width:650px;
+  max-width:700px;
   margin:auto;
-  padding:20px;
+  padding:15px;
 }
 
 .card{
   background:white;
   border-radius:18px;
-  padding:20px;
-  margin-bottom:18px;
-  box-shadow:0 3px 15px rgba(0,0,0,.08);
+  padding:18px;
+  margin-bottom:16px;
+  box-shadow:0 3px 14px rgba(0,0,0,.08);
 }
 
 h2{
   margin-top:0;
+  font-size:20px;
 }
 
 label{
   display:block;
   font-weight:bold;
-  margin:14px 0 7px;
+  margin:13px 0 7px;
 }
 
 input,
@@ -74,29 +75,25 @@ select{
 }
 
 button{
-  width:100%;
-  padding:14px;
   border:0;
   border-radius:10px;
-  font-size:16px;
+  padding:13px;
+  font-size:15px;
   font-weight:bold;
   cursor:pointer;
-  margin-top:12px;
 }
 
 .btn-primary{
   background:#2563eb;
   color:white;
+  width:100%;
+  margin-top:14px;
 }
 
 .btn-success{
   background:#16a34a;
   color:white;
-}
-
-.btn-danger{
-  background:#dc2626;
-  color:white;
+  width:100%;
 }
 
 .btn-secondary{
@@ -104,78 +101,84 @@ button{
   color:#111827;
 }
 
-.btn-add{
+.btn-danger{
+  background:#dc2626;
+  color:white;
+}
+
+.btn-dark{
   background:#111827;
   color:white;
 }
 
-.placa-row{
+.row{
   display:flex;
   gap:8px;
-  align-items:stretch;
 }
 
-.placa-row select{
+.row .grow{
   flex:1;
 }
 
-.placa-row button{
-  width:auto;
-  margin-top:0;
-  white-space:nowrap;
-  padding:12px 15px;
-}
-
-.unit{
+.programada{
   border:1px solid #e5e7eb;
   border-radius:14px;
-  padding:16px;
-  margin-top:14px;
+  padding:15px;
+  margin-top:12px;
 }
 
-.unit-header{
+.programada-header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  gap:10px;
-}
-
-.unit-header h3{
-  margin:0;
-  font-size:21px;
-}
-
-.badge{
-  padding:7px 10px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:bold;
-  background:#dcfce7;
-  color:#166534;
-}
-
-.info{
-  margin-top:12px;
-  line-height:1.7;
-}
-
-.info strong{
-  color:#374151;
-}
-
-.unit-buttons{
-  display:flex;
   gap:8px;
 }
 
-.unit-buttons button{
-  flex:1;
+.programada-header h3{
+  margin:0;
+  font-size:20px;
 }
 
-.empty{
-  text-align:center;
-  color:#6b7280;
-  padding:25px 10px;
+.badge{
+  background:#dcfce7;
+  color:#166534;
+  border-radius:20px;
+  padding:6px 9px;
+  font-size:12px;
+  font-weight:bold;
+}
+
+.info{
+  margin-top:10px;
+  line-height:1.65;
+  font-size:14px;
+}
+
+.actualizar{
+  margin-top:12px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+}
+
+.actualizar input{
+  margin:0;
+}
+
+.actualizar button{
+  background:#2563eb;
+  color:white;
+  white-space:nowrap;
+}
+
+.acciones{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.acciones button{
+  flex:1;
 }
 
 .report{
@@ -185,34 +188,19 @@ button{
   padding:15px;
   white-space:pre-line;
   line-height:1.6;
+  font-size:14px;
+}
+
+.empty{
+  text-align:center;
+  color:#6b7280;
+  padding:20px 5px;
 }
 
 .small{
   color:#6b7280;
   font-size:13px;
   margin-top:7px;
-}
-
-.placas-lista{
-  margin-top:12px;
-}
-
-.placa-item{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:11px 12px;
-  background:#f9fafb;
-  border-radius:10px;
-  margin-top:8px;
-  font-weight:bold;
-}
-
-.placa-item button{
-  width:auto;
-  margin:0;
-  padding:8px 12px;
-  font-size:13px;
 }
 
 footer{
@@ -225,25 +213,30 @@ footer{
 @media(max-width:500px){
 
   .container{
-    padding:12px;
+    padding:10px;
   }
 
-  header h1{
-    font-size:24px;
-  }
-
-  .unit-buttons{
+  .row{
     flex-direction:column;
   }
 
-  .placa-row button{
-    font-size:14px;
+  .actualizar{
+    grid-template-columns:1fr;
+  }
+
+  .actualizar button{
+    width:100%;
+  }
+
+  .acciones{
+    flex-direction:column;
   }
 
 }
 
 </style>
 </head>
+
 
 <body>
 
@@ -255,7 +248,7 @@ footer{
   </h1>
 
   <p>
-    Control y monitoreo de unidades
+    Programación y actualización de unidades
   </p>
 
 </header>
@@ -265,54 +258,40 @@ footer{
 
 
 <!-- =================================
-     REGISTRAR UNIDAD
+     PROGRAMAR UNIDAD
 ================================= -->
 
 <div class="card">
 
   <h2>
-    Agregar unidad
+    🚛 Programar unidad
   </h2>
 
+  <p class="small">
+    Programa la placa y el destino una sola vez.
+    Después solo tendrás que actualizar su ubicación.
+  </p>
+
 
   <label>
-    Unidad / Placa
+    Placa
   </label>
 
 
-  <div class="placa-row">
+  <div class="row">
 
-    <select id="unidad">
+    <div class="grow">
 
-      <option value="">
-        Seleccionar placa
-      </option>
+      <input
+        id="nuevaPlaca"
+        type="text"
+        placeholder="Ej. TCA2222"
+        autocomplete="off"
+      >
 
-    </select>
-
-
-    <button
-      class="btn-add"
-      onclick="agregarPlaca()">
-
-      ＋ Agregar placa
-
-    </button>
+    </div>
 
   </div>
-
-
-  <label>
-    Ubicado en
-  </label>
-
-
-  <input
-    id="ubicacion"
-    type="text"
-    placeholder="Ej. El Nance"
-    autocomplete="off"
-  >
 
 
   <label>
@@ -320,7 +299,7 @@ footer{
   </label>
 
 
-  <select id="destino">
+  <select id="nuevoDestino">
 
     <option value="">
       Seleccionar destino
@@ -341,78 +320,33 @@ footer{
   </select>
 
 
-  <label>
-    Estado
-  </label>
-
-
-  <select id="estado">
-
-    <option value="En ruta">
-      En ruta
-    </option>
-
-    <option value="Detenida">
-      Detenida
-    </option>
-
-    <option value="Ubicado en">
-      Ubicado en
-    </option>
-
-    <option value="Llegó al CD JUTICALPA">
-      Llegó al CD JUTICALPA
-    </option>
-
-    <option value="Llegó al CD SPS">
-      Llegó al CD SPS
-    </option>
-
-    <option value="Llegó al CD COMAYAGUA">
-      Llegó al CD COMAYAGUA
-    </option>
-
-    <option value="Finalizada">
-      Finalizada
-    </option>
-
-  </select>
-
-
   <button
     class="btn-primary"
-    onclick="agregarUnidad()">
+    onclick="programarUnidad()">
 
-    + Agregar unidad
+    ＋ PROGRAMAR UNIDAD
 
   </button>
-
-
-  <div class="small">
-
-    La hora se registra automáticamente.
-
-  </div>
 
 </div>
 
 
 
 <!-- =================================
-     UNIDADES
+     UNIDADES PROGRAMADAS
 ================================= -->
 
 <div class="card">
 
   <h2>
-    Unidades
+    📋 Unidades programadas
   </h2>
 
 
-  <div id="listaUnidades">
+  <div id="listaProgramadas">
 
     <div class="empty">
-      No hay unidades registradas.
+      No hay unidades programadas.
     </div>
 
   </div>
@@ -428,7 +362,7 @@ footer{
 <div class="card">
 
   <h2>
-    Reporte
+    📄 Reporte
   </h2>
 
 
@@ -436,25 +370,27 @@ footer{
     id="reporte"
     class="report">
 
-    Aún no hay información para generar el reporte.
+    Aún no hay unidades actualizadas.
 
   </div>
 
 
   <button
     class="btn-success"
+    style="margin-top:12px"
     onclick="copiarReporte()">
 
-    📲 Copiar reporte
+    📲 COPIAR REPORTE
 
   </button>
 
 
   <button
     class="btn-secondary"
-    onclick="limpiarUnidades()">
+    style="width:100%;margin-top:9px"
+    onclick="limpiarActualizaciones()">
 
-    Limpiar unidades
+    Limpiar actualizaciones
 
   </button>
 
@@ -463,19 +399,21 @@ footer{
 
 
 <!-- =================================
-     PLACAS GUARDADAS
+     FINALIZADAS
 ================================= -->
 
 <div class="card">
 
   <h2>
-    Placas guardadas
+    ✅ Unidades finalizadas
   </h2>
 
 
-  <div
-    id="listaPlacas"
-    class="placas-lista">
+  <div id="listaFinalizadas">
+
+    <div class="empty">
+      No hay unidades finalizadas.
+    </div>
 
   </div>
 
@@ -487,7 +425,7 @@ footer{
 
 <footer>
 
-  Seguimiento de Unidades V5.3
+  Seguimiento de Unidades V6
 
 </footer>
 
@@ -497,98 +435,72 @@ footer{
 
 
 /* =================================
-   CLAVES DE ALMACENAMIENTO
+   ALMACENAMIENTO
 ================================= */
 
-const CLAVE_PLACAS =
-  "placasSeguimientoV53";
+const CLAVE_PROGRAMADAS =
+  "unidadesProgramadasV6";
 
 
-const CLAVE_UNIDADES =
-  "seguimientoUnidadesV53";
+const CLAVE_FINALIZADAS =
+  "unidadesFinalizadasV6";
 
 
 
 /* =================================
-   PLACAS INICIALES
+   CARGAR DATOS
 ================================= */
 
-let placas =
+let programadas =
   JSON.parse(
     localStorage.getItem(
-      CLAVE_PLACAS
+      CLAVE_PROGRAMADAS
     )
   );
 
 
-/*
-   Si es la primera vez que se abre
-   esta versión, se crean las dos
-   placas que ya teníamos.
-*/
-
-if(
-  !Array.isArray(placas) ||
-  placas.length === 0
-){
-
-  placas = [
-    "TCA2222",
-    "TEA9111"
-  ];
-
-  guardarPlacas();
-
-}
-
-
-
-/* =================================
-   UNIDADES DEL REPORTE
-================================= */
-
-let unidades =
+let finalizadas =
   JSON.parse(
     localStorage.getItem(
-      CLAVE_UNIDADES
+      CLAVE_FINALIZADAS
     )
   );
 
 
 if(
-  !Array.isArray(unidades)
+  !Array.isArray(programadas)
 ){
 
-  unidades = [];
+  programadas = [];
+
+}
+
+
+if(
+  !Array.isArray(finalizadas)
+){
+
+  finalizadas = [];
 
 }
 
 
 
 /* =================================
-   GUARDAR PLACAS
+   GUARDAR
 ================================= */
 
-function guardarPlacas(){
+function guardar(){
 
   localStorage.setItem(
-    CLAVE_PLACAS,
-    JSON.stringify(placas)
+    CLAVE_PROGRAMADAS,
+    JSON.stringify(programadas)
   );
 
-}
-
-
-
-/* =================================
-   GUARDAR UNIDADES
-================================= */
-
-function guardarUnidades(){
 
   localStorage.setItem(
-    CLAVE_UNIDADES,
-    JSON.stringify(unidades)
+    CLAVE_FINALIZADAS,
+    JSON.stringify(finalizadas)
   );
 
 }
@@ -596,310 +508,7 @@ function guardarUnidades(){
 
 
 /* =================================
-   MOSTRAR PLACAS EN SELECTOR
-================================= */
-
-function mostrarPlacas(){
-
-  const selector =
-    document.getElementById(
-      "unidad"
-    );
-
-
-  selector.innerHTML =
-    "";
-
-
-  const primeraOpcion =
-    document.createElement(
-      "option"
-    );
-
-
-  primeraOpcion.value =
-    "";
-
-
-  primeraOpcion.textContent =
-    "Seleccionar placa";
-
-
-  selector.appendChild(
-    primeraOpcion
-  );
-
-
-  placas.forEach(
-
-    function(placa){
-
-      const opcion =
-        document.createElement(
-          "option"
-        );
-
-
-      opcion.value =
-        placa;
-
-
-      opcion.textContent =
-        placa;
-
-
-      selector.appendChild(
-        opcion
-      );
-
-    }
-
-  );
-
-
-  mostrarListaPlacas();
-
-}
-
-
-
-/* =================================
-   AGREGAR NUEVA PLACA
-================================= */
-
-function agregarPlaca(){
-
-  const nuevaPlaca =
-    prompt(
-      "Escribe la nueva placa:"
-    );
-
-
-  if(
-    nuevaPlaca === null
-  ){
-
-    return;
-
-  }
-
-
-  const placa =
-    nuevaPlaca
-      .trim()
-      .toUpperCase();
-
-
-  if(
-    placa === ""
-  ){
-
-    alert(
-      "Debes escribir una placa."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    placas.includes(
-      placa
-    )
-  ){
-
-    alert(
-      "Esa placa ya está registrada."
-    );
-
-    return;
-
-  }
-
-
-  placas.push(
-    placa
-  );
-
-
-  placas.sort();
-
-
-  guardarPlacas();
-
-
-  mostrarPlacas();
-
-
-  /*
-     Seleccionar automáticamente
-     la nueva placa.
-  */
-
-  document.getElementById(
-    "unidad"
-  ).value =
-    placa;
-
-
-  alert(
-    "Placa " +
-    placa +
-    " agregada correctamente."
-  );
-
-}
-
-
-
-/* =================================
-   MOSTRAR LISTA DE PLACAS
-================================= */
-
-function mostrarListaPlacas(){
-
-  const contenedor =
-    document.getElementById(
-      "listaPlacas"
-    );
-
-
-  if(
-    placas.length === 0
-  ){
-
-    contenedor.innerHTML =
-      `
-      <div class="empty">
-        No hay placas guardadas.
-      </div>
-      `;
-
-    return;
-
-  }
-
-
-  contenedor.innerHTML =
-    "";
-
-
-  placas.forEach(
-
-    function(placa,index){
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "placa-item";
-
-
-      div.innerHTML =
-
-      `
-        <span>
-          🚛 ${placa}
-        </span>
-
-        <button
-          class="btn-danger"
-          onclick="eliminarPlaca(${index})">
-
-          Eliminar
-
-        </button>
-      `;
-
-
-      contenedor.appendChild(
-        div
-      );
-
-    }
-
-  );
-
-}
-
-
-
-/* =================================
-   ELIMINAR PLACA
-================================= */
-
-function eliminarPlaca(index){
-
-  const placa =
-    placas[index];
-
-
-  /*
-     Evitar eliminar una placa
-     que actualmente está siendo
-     utilizada en el reporte.
-  */
-
-  const estaEnUso =
-    unidades.some(
-
-      function(unidad){
-
-        return
-          unidad.unidad === placa;
-
-      }
-
-    );
-
-
-  if(
-    estaEnUso
-  ){
-
-    alert(
-      "No puedes eliminar esta placa porque está en el reporte actual."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    !confirm(
-      "¿Quieres eliminar la placa " +
-      placa +
-      "?"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  placas.splice(
-    index,
-    1
-  );
-
-
-  guardarPlacas();
-
-
-  mostrarPlacas();
-
-}
-
-
-
-/* =================================
-   HORA ACTUAL
+   HORA
 ================================= */
 
 function obtenerHora(){
@@ -909,15 +518,12 @@ function obtenerHora(){
 
 
   return ahora.toLocaleTimeString(
-
     "es-HN",
-
     {
       hour:"2-digit",
       minute:"2-digit",
       hour12:true
     }
-
   );
 
 }
@@ -925,54 +531,31 @@ function obtenerHora(){
 
 
 /* =================================
-   AGREGAR UNIDAD AL REPORTE
+   PROGRAMAR UNIDAD
 ================================= */
 
-function agregarUnidad(){
+function programarUnidad(){
 
-  const unidad =
+  const placa =
     document.getElementById(
-      "unidad"
-    ).value;
-
-
-  const ubicacion =
-    document.getElementById(
-      "ubicacion"
-    ).value.trim();
+      "nuevaPlaca"
+    ).value
+    .trim()
+    .toUpperCase();
 
 
   const destino =
     document.getElementById(
-      "destino"
-    ).value;
-
-
-  const estado =
-    document.getElementById(
-      "estado"
+      "nuevoDestino"
     ).value;
 
 
   if(
-    unidad === ""
+    placa === ""
   ){
 
     alert(
-      "Selecciona una placa."
-    );
-
-    return;
-
-  }
-
-
-  if(
-    ubicacion === ""
-  ){
-
-    alert(
-      "Escribe dónde está ubicada la unidad."
+      "Escribe la placa."
     );
 
     return;
@@ -993,18 +576,13 @@ function agregarUnidad(){
   }
 
 
-  /*
-     No permitir la misma placa
-     dos veces en el reporte.
-  */
-
   const existe =
-    unidades.some(
+    programadas.some(
 
-      function(item){
+      function(unidad){
 
         return
-          item.unidad === unidad;
+          unidad.placa === placa;
 
       }
 
@@ -1016,7 +594,7 @@ function agregarUnidad(){
   ){
 
     alert(
-      "Esta unidad ya está en el reporte actual."
+      "Esta placa ya está programada."
     );
 
     return;
@@ -1024,155 +602,106 @@ function agregarUnidad(){
   }
 
 
-  const nuevaUnidad = {
+  programadas.push({
 
-    unidad:
-      unidad,
-
-    ubicacion:
-      ubicacion,
+    placa:
+      placa,
 
     destino:
       destino,
 
-    estado:
-      estado,
+    ubicacion:
+      "",
 
     hora:
-      obtenerHora()
+      "",
 
-  };
+    estado:
+      "En ruta"
+
+  });
 
 
-  unidades.push(
-    nuevaUnidad
+  guardar();
+
+
+  document.getElementById(
+    "nuevaPlaca"
+  ).value =
+    "";
+
+
+  document.getElementById(
+    "nuevoDestino"
+  ).value =
+    "";
+
+
+  mostrarProgramadas();
+
+
+  alert(
+    "Unidad programada correctamente."
   );
-
-
-  guardarUnidades();
-
-
-  mostrarUnidades();
-
-
-  limpiarFormulario();
 
 }
 
 
 
 /* =================================
-   MOSTRAR UNIDADES
+   ACTUALIZAR UBICACIÓN
 ================================= */
 
-function mostrarUnidades(){
+function actualizarUnidad(index){
 
-  const contenedor =
+  const unidad =
+    programadas[index];
+
+
+  const input =
     document.getElementById(
-      "listaUnidades"
+      "ubicacion-" + index
     );
 
 
+  const ubicacion =
+    input.value.trim();
+
+
   if(
-    unidades.length === 0
+    ubicacion === ""
   ){
 
-    contenedor.innerHTML =
-      `
-      <div class="empty">
-        No hay unidades registradas.
-      </div>
-      `;
-
-    generarReporte();
+    alert(
+      "Escribe la ubicación actual."
+    );
 
     return;
 
   }
 
 
-  contenedor.innerHTML =
-    "";
+  unidad.ubicacion =
+    ubicacion;
 
 
-  unidades.forEach(
-
-    function(unidad,index){
-
-      const div =
-        document.createElement(
-          "div"
-        );
+  unidad.hora =
+    obtenerHora();
 
 
-      div.className =
-        "unit";
+  /*
+     Cada actualización vuelve
+     a dejar la unidad activa.
+  */
+
+  unidad.estado =
+    "En ruta";
 
 
-      div.innerHTML =
-
-      `
-      <div class="unit-header">
-
-        <h3>
-          🚛 ${unidad.unidad}
-        </h3>
-
-        <span class="badge">
-          ${unidad.estado}
-        </span>
-
-      </div>
+  guardar();
 
 
-      <div class="info">
-
-        📍 <strong>Ubicado en:</strong>
-        ${unidad.ubicacion}
-
-        <br>
-
-        🎯 <strong>Destino:</strong>
-        ${unidad.destino}
-
-        <br>
-
-        🕐 <strong>Hora:</strong>
-        ${unidad.hora}
-
-      </div>
-
-
-      <div class="unit-buttons">
-
-        <button
-          class="btn-primary"
-          onclick="cambiarEstado(${index})">
-
-          Cambiar estado
-
-        </button>
-
-
-        <button
-          class="btn-danger"
-          onclick="eliminarUnidad(${index})">
-
-          Eliminar
-
-        </button>
-
-      </div>
-      `;
-
-
-      contenedor.appendChild(
-        div
-      );
-
-    }
-
-  );
+  mostrarProgramadas();
 
 
   generarReporte();
@@ -1193,21 +722,17 @@ function cambiarEstado(index){
 
     "Detenida",
 
-    "Ubicado en",
-
     "Llegó al CD JUTICALPA",
 
     "Llegó al CD SPS",
 
-    "Llegó al CD COMAYAGUA",
-
-    "Finalizada"
+    "Llegó al CD COMAYAGUA"
 
   ];
 
 
   let mensaje =
-    "Selecciona el nuevo estado:\n\n";
+    "Selecciona el estado:\n\n";
 
 
   estados.forEach(
@@ -1253,7 +778,7 @@ function cambiarEstado(index){
   ){
 
     alert(
-      "Opción no válida."
+      "Opción inválida."
     );
 
     return;
@@ -1261,34 +786,53 @@ function cambiarEstado(index){
   }
 
 
-  unidades[index].estado =
+  unidadEstado =
     estados[
       numero - 1
     ];
 
 
-  unidades[index].hora =
+  programadas[index].estado =
+    unidadEstado;
+
+
+  programadas[index].hora =
     obtenerHora();
 
 
-  guardarUnidades();
+  /*
+     Si llega al CD, se conserva
+     la ubicación que ya tenía.
+  */
 
 
-  mostrarUnidades();
+  guardar();
+
+
+  mostrarProgramadas();
+
+
+  generarReporte();
 
 }
 
 
 
 /* =================================
-   ELIMINAR UNIDAD
+   FINALIZAR UNIDAD
 ================================= */
 
-function eliminarUnidad(index){
+function finalizarUnidad(index){
+
+  const unidad =
+    programadas[index];
+
 
   if(
     !confirm(
-      "¿Deseas eliminar esta unidad del reporte?"
+      "¿Marcar " +
+      unidad.placa +
+      " como finalizada?"
     )
   ){
 
@@ -1297,68 +841,373 @@ function eliminarUnidad(index){
   }
 
 
-  unidades.splice(
+  unidad.estado =
+    "Finalizada";
+
+
+  unidad.hora =
+    obtenerHora();
+
+
+  finalizadas.push(
+    unidad
+  );
+
+
+  programadas.splice(
     index,
     1
   );
 
 
-  guardarUnidades();
+  guardar();
 
 
-  mostrarUnidades();
+  mostrarProgramadas();
+
+  mostrarFinalizadas();
+
+  generarReporte();
 
 }
 
 
 
 /* =================================
-   GENERAR REPORTE
+   EDITAR DESTINO
 ================================= */
 
-function generarReporte(){
+function editarDestino(index){
 
-  const caja =
-    document.getElementById(
-      "reporte"
+  const unidad =
+    programadas[index];
+
+
+  const nuevoDestino =
+    prompt(
+
+      "Destino actual:\n" +
+      unidad.destino +
+      "\n\n" +
+      "Escribe el nuevo destino:\n" +
+      "CD JUTICALPA\n" +
+      "CD SPS\n" +
+      "CD COMAYAGUA"
+
     );
 
 
   if(
-    unidades.length === 0
+    nuevoDestino === null
   ){
-
-    caja.textContent =
-      "Aún no hay información para generar el reporte.";
 
     return;
 
   }
 
 
-  /*
-     FORMATO OFICIAL:
+  const destino =
+    nuevoDestino
+      .trim()
+      .toUpperCase();
 
-     📋 REPORTE DE SEGUIMIENTO
 
-     🚛 TCA2222
-     📍 Ubicado en: El Nance
-     🎯 Destino: CD JUTICALPA
-     🕐 Hora: 02:01 a. m.
-  */
+  if(
+    destino !==
+      "CD JUTICALPA" &&
+
+    destino !==
+      "CD SPS" &&
+
+    destino !==
+      "CD COMAYAGUA"
+  ){
+
+    alert(
+      "Destino no válido."
+    );
+
+    return;
+
+  }
+
+
+  unidad.destino =
+    destino;
+
+
+  guardar();
+
+
+  mostrarProgramadas();
+
+
+  generarReporte();
+
+}
+
+
+
+/* =================================
+   ELIMINAR PROGRAMACIÓN
+================================= */
+
+function eliminarProgramada(index){
+
+  const unidad =
+    programadas[index];
+
+
+  if(
+    !confirm(
+      "¿Eliminar la programación de " +
+      unidad.placa +
+      "?"
+    )
+  ){
+
+    return;
+
+  }
+
+
+  programadas.splice(
+    index,
+    1
+  );
+
+
+  guardar();
+
+
+  mostrarProgramadas();
+
+
+  generarReporte();
+
+}
+
+
+
+/* =================================
+   MOSTRAR PROGRAMADAS
+================================= */
+
+function mostrarProgramadas(){
+
+  const contenedor =
+    document.getElementById(
+      "listaProgramadas"
+    );
+
+
+  if(
+    programadas.length === 0
+  ){
+
+    contenedor.innerHTML =
+      `
+      <div class="empty">
+        No hay unidades programadas.
+      </div>
+      `;
+
+    generarReporte();
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+    "";
+
+
+  programadas.forEach(
+
+    function(unidad,index){
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "programada";
+
+
+      let ultima =
+        "Sin actualización";
+
+
+      if(
+        unidad.ubicacion
+      ){
+
+        ultima =
+          `
+          📍 ${unidad.ubicacion}
+          <br>
+          🕐 ${unidad.hora}
+          `;
+
+      }
+
+
+      div.innerHTML =
+
+      `
+
+      <div class="programada-header">
+
+        <h3>
+          🚛 ${unidad.placa}
+        </h3>
+
+        <span class="badge">
+          ${unidad.estado}
+        </span>
+
+      </div>
+
+
+      <div class="info">
+
+        🎯 <strong>Destino:</strong>
+        ${unidad.destino}
+
+        <br>
+
+        ${ultima}
+
+      </div>
+
+
+      <div class="actualizar">
+
+        <input
+          id="ubicacion-${index}"
+          type="text"
+          placeholder="Nueva ubicación"
+        >
+
+
+        <button
+          onclick="actualizarUnidad(${index})">
+
+          🔄 Actualizar
+
+        </button>
+
+      </div>
+
+
+      <div class="acciones">
+
+        <button
+          class="btn-secondary"
+          onclick="cambiarEstado(${index})">
+
+          Estado
+
+        </button>
+
+
+        <button
+          class="btn-secondary"
+          onclick="editarDestino(${index})">
+
+          Destino
+
+        </button>
+
+
+        <button
+          class="btn-success"
+          onclick="finalizarUnidad(${index})">
+
+          Finalizar
+
+        </button>
+
+
+        <button
+          class="btn-danger"
+          onclick="eliminarProgramada(${index})">
+
+          Eliminar
+
+        </button>
+
+      </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        div
+      );
+
+    }
+
+  );
+
+
+  generarReporte();
+
+}
+
+
+
+/* =================================
+   REPORTE
+================================= */
+
+function generarReporte(){
+
+  const reporte =
+    document.getElementById(
+      "reporte"
+    );
+
+
+  const activas =
+    programadas.filter(
+
+      function(unidad){
+
+        return
+          unidad.ubicacion !== "";
+
+      }
+
+    );
+
+
+  if(
+    activas.length === 0
+  ){
+
+    reporte.textContent =
+      "Aún no hay unidades actualizadas.";
+
+    return;
+
+  }
 
 
   let texto =
     "📋 REPORTE DE SEGUIMIENTO\n\n";
 
 
-  unidades.forEach(
+  activas.forEach(
 
     function(unidad,index){
 
       texto +=
         "🚛 " +
-        unidad.unidad +
+        unidad.placa +
         "\n";
 
 
@@ -1382,7 +1231,7 @@ function generarReporte(){
 
       if(
         index <
-        unidades.length - 1
+        activas.length - 1
       ){
 
         texto +=
@@ -1395,7 +1244,7 @@ function generarReporte(){
   );
 
 
-  caja.textContent =
+  reporte.textContent =
     texto;
 
 }
@@ -1424,7 +1273,7 @@ function copiarReporte(){
   ){
 
     alert(
-      "No hay unidades en el reporte."
+      "No hay unidades actualizadas."
     );
 
     return;
@@ -1436,25 +1285,23 @@ function copiarReporte(){
     .writeText(
       texto
     )
-
     .then(
 
       function(){
 
         alert(
-          "Reporte copiado correctamente."
+          "Reporte copiado."
         );
 
       }
 
     )
-
     .catch(
 
       function(){
 
         alert(
-          "No se pudo copiar automáticamente."
+          "No se pudo copiar."
         );
 
       }
@@ -1466,46 +1313,13 @@ function copiarReporte(){
 
 
 /* =================================
-   LIMPIAR FORMULARIO
+   LIMPIAR ACTUALIZACIONES
 ================================= */
 
-function limpiarFormulario(){
-
-  document.getElementById(
-    "unidad"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "ubicacion"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "destino"
-  ).value =
-    "";
-
-
-  document.getElementById(
-    "estado"
-  ).value =
-    "En ruta";
-
-}
-
-
-
-/* =================================
-   LIMPIAR REPORTE
-================================= */
-
-function limpiarUnidades(){
+function limpiarActualizaciones(){
 
   if(
-    unidades.length === 0
+    programadas.length === 0
   ){
 
     return;
@@ -1515,7 +1329,7 @@ function limpiarUnidades(){
 
   if(
     !confirm(
-      "¿Seguro que deseas eliminar todas las unidades del reporte?"
+      "¿Limpiar las ubicaciones y horas actuales?"
     )
   ){
 
@@ -1524,26 +1338,138 @@ function limpiarUnidades(){
   }
 
 
-  unidades =
-    [];
+  programadas.forEach(
+
+    function(unidad){
+
+      unidad.ubicacion =
+        "";
+
+      unidad.hora =
+        "";
+
+    }
+
+  );
 
 
-  guardarUnidades();
+  guardar();
 
 
-  mostrarUnidades();
+  mostrarProgramadas();
+
+
+  generarReporte();
 
 }
 
 
 
 /* =================================
-   INICIAR APP
+   MOSTRAR FINALIZADAS
 ================================= */
 
-mostrarPlacas();
+function mostrarFinalizadas(){
 
-mostrarUnidades();
+  const contenedor =
+    document.getElementById(
+      "listaFinalizadas"
+    );
+
+
+  if(
+    finalizadas.length === 0
+  ){
+
+    contenedor.innerHTML =
+      `
+      <div class="empty">
+        No hay unidades finalizadas.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+    "";
+
+
+  finalizadas.forEach(
+
+    function(unidad){
+
+      const div =
+        document.createElement(
+          "div"
+        );
+
+
+      div.className =
+        "programada";
+
+
+      div.innerHTML =
+
+      `
+
+      <div class="programada-header">
+
+        <h3>
+          🚛 ${unidad.placa}
+        </h3>
+
+        <span class="badge">
+          Finalizada
+        </span>
+
+      </div>
+
+
+      <div class="info">
+
+        🎯 <strong>Destino:</strong>
+        ${unidad.destino}
+
+        <br>
+
+        📍 <strong>Última ubicación:</strong>
+        ${unidad.ubicacion || "Sin ubicación"}
+
+        <br>
+
+        🕐 <strong>Hora:</strong>
+        ${unidad.hora}
+
+      </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        div
+      );
+
+    }
+
+  );
+
+}
+
+
+
+/* =================================
+   INICIO
+================================= */
+
+mostrarProgramadas();
+
+mostrarFinalizadas();
+
+generarReporte();
+
 
 </script>
 

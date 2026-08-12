@@ -2,19 +2,13 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 <meta name="theme-color" content="#111827">
 
-<title>Seguimiento de Unidades V6</title>
+<title>Seguimiento de Unidades V6.1</title>
 
 <style>
-
-*{
-  box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -55,7 +49,6 @@ header p{
 
 h2{
   margin-top:0;
-  font-size:20px;
 }
 
 label{
@@ -64,8 +57,7 @@ label{
   margin:13px 0 7px;
 }
 
-input,
-select{
+input,select{
   width:100%;
   padding:14px;
   border:1px solid #d1d5db;
@@ -77,1399 +69,1123 @@ select{
 button{
   border:0;
   border-radius:10px;
-  padding:13px;
+  padding:14px;
   font-size:15px;
   font-weight:bold;
   cursor:pointer;
 }
 
-.btn-primary{
+.primary{
   background:#2563eb;
   color:white;
   width:100%;
   margin-top:14px;
 }
 
-.btn-success{
+.green{
   background:#16a34a;
   color:white;
-  width:100%;
 }
 
-.btn-secondary{
+.gray{
   background:#e5e7eb;
   color:#111827;
 }
 
-.btn-danger{
+.red{
   background:#dc2626;
   color:white;
 }
 
-.btn-dark{
-  background:#111827;
-  color:white;
-}
-
-.row{
-  display:flex;
-  gap:8px;
-}
-
-.row .grow{
-  flex:1;
-}
-
-.programada{
+.unit{
   border:1px solid #e5e7eb;
-  border-radius:14px;
+  border-radius:15px;
   padding:15px;
   margin-top:12px;
 }
 
-.programada-header{
+.unit-head{
   display:flex;
   justify-content:space-between;
   align-items:center;
   gap:8px;
 }
 
-.programada-header h3{
+.unit-head h3{
   margin:0;
-  font-size:20px;
+  font-size:21px;
 }
 
 .badge{
   background:#dcfce7;
   color:#166534;
   border-radius:20px;
-  padding:6px 9px;
+  padding:6px 10px;
   font-size:12px;
   font-weight:bold;
 }
 
 .info{
   margin-top:10px;
-  line-height:1.65;
-  font-size:14px;
+  line-height:1.7;
 }
 
-.actualizar{
-  margin-top:12px;
+.update{
   display:grid;
-  grid-template-columns:1fr auto;
+  grid-template-columns:1fr;
   gap:8px;
+  margin-top:12px;
 }
 
-.actualizar input{
-  margin:0;
-}
-
-.actualizar button{
+.update button{
   background:#2563eb;
   color:white;
-  white-space:nowrap;
+  width:100%;
 }
 
-.acciones{
-  display:flex;
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:8px;
   margin-top:10px;
 }
 
-.acciones button{
-  flex:1;
+.actions button{
+  width:100%;
 }
 
 .report{
   background:#f9fafb;
-  border:1px solid #e5e7eb;
+  border:1px solid #d1d5db;
   border-radius:12px;
   padding:15px;
   white-space:pre-line;
-  line-height:1.6;
-  font-size:14px;
+  line-height:1.65;
+  font-size:15px;
+  min-height:80px;
+}
+
+.copy{
+  width:100%;
+  margin-top:12px;
+  background:#16a34a;
+  color:white;
+}
+
+.clear{
+  width:100%;
+  margin-top:9px;
+  background:#e5e7eb;
 }
 
 .empty{
   text-align:center;
   color:#6b7280;
-  padding:20px 5px;
+  padding:20px;
 }
 
 .small{
   color:#6b7280;
   font-size:13px;
-  margin-top:7px;
 }
 
 footer{
   text-align:center;
   color:#6b7280;
   padding:25px;
-  font-size:13px;
 }
 
 @media(max-width:500px){
-
-  .container{
-    padding:10px;
-  }
-
-  .row{
-    flex-direction:column;
-  }
-
-  .actualizar{
+  .actions{
     grid-template-columns:1fr;
   }
-
-  .actualizar button{
-    width:100%;
-  }
-
-  .acciones{
-    flex-direction:column;
-  }
-
 }
-
 </style>
 </head>
 
-
 <body>
 
-
 <header>
-
-  <h1>
-    Seguimiento de Unidades
-  </h1>
-
-  <p>
-    Programación y actualización de unidades
-  </p>
-
+  <h1>Seguimiento de Unidades</h1>
+  <p>Programación y actualización de unidades</p>
 </header>
-
 
 <div class="container">
 
-
-<!-- =================================
-     PROGRAMAR UNIDAD
-================================= -->
+<!-- PROGRAMAR -->
 
 <div class="card">
 
-  <h2>
-    🚛 Programar unidad
-  </h2>
+<h2>🚛 Programar unidad</h2>
 
-  <p class="small">
-    Programa la placa y el destino una sola vez.
-    Después solo tendrás que actualizar su ubicación.
-  </p>
+<p class="small">
+Programa la placa y el destino una sola vez.
+Después solo actualiza la ubicación.
+</p>
 
+<label>Placa</label>
 
-  <label>
-    Placa
-  </label>
+<input
+ id="placa"
+ type="text"
+ placeholder="Ej. TCA2222"
+ autocomplete="off">
 
+<label>Destino</label>
 
-  <div class="row">
+<select id="destino">
 
-    <div class="grow">
+<option value="">Seleccionar destino</option>
+<option value="CD JUTICALPA">CD JUTICALPA</option>
+<option value="CD SPS">CD SPS</option>
+<option value="CD COMAYAGUA">CD COMAYAGUA</option>
 
-      <input
-        id="nuevaPlaca"
-        type="text"
-        placeholder="Ej. TCA2222"
-        autocomplete="off"
-      >
+</select>
 
-    </div>
+<button
+ class="primary"
+ onclick="agregarUnidad()">
 
-  </div>
+＋ PROGRAMAR UNIDAD
 
-
-  <label>
-    Destino
-  </label>
-
-
-  <select id="nuevoDestino">
-
-    <option value="">
-      Seleccionar destino
-    </option>
-
-    <option value="CD JUTICALPA">
-      CD JUTICALPA
-    </option>
-
-    <option value="CD SPS">
-      CD SPS
-    </option>
-
-    <option value="CD COMAYAGUA">
-      CD COMAYAGUA
-    </option>
-
-  </select>
-
-
-  <button
-    class="btn-primary"
-    onclick="programarUnidad()">
-
-    ＋ PROGRAMAR UNIDAD
-
-  </button>
+</button>
 
 </div>
 
 
-
-<!-- =================================
-     UNIDADES PROGRAMADAS
-================================= -->
+<!-- UNIDADES -->
 
 <div class="card">
 
-  <h2>
-    📋 Unidades programadas
-  </h2>
+<h2>📋 Unidades programadas</h2>
 
-
-  <div id="listaProgramadas">
-
-    <div class="empty">
-      No hay unidades programadas.
-    </div>
-
-  </div>
+<div id="unidades"></div>
 
 </div>
 
 
-
-<!-- =================================
-     REPORTE
-================================= -->
+<!-- REPORTE -->
 
 <div class="card">
 
-  <h2>
-    📄 Reporte
-  </h2>
+<h2>📄 Reporte</h2>
 
+<div id="reporte" class="report">
+Aún no hay unidades actualizadas.
+</div>
 
-  <div
-    id="reporte"
-    class="report">
+<button
+ class="copy"
+ onclick="copiarReporte()">
 
-    Aún no hay unidades actualizadas.
+📲 COPIAR REPORTE
 
-  </div>
+</button>
 
+<button
+ class="clear"
+ onclick="limpiarActualizaciones()">
 
-  <button
-    class="btn-success"
-    style="margin-top:12px"
-    onclick="copiarReporte()">
+Limpiar actualizaciones
 
-    📲 COPIAR REPORTE
-
-  </button>
-
-
-  <button
-    class="btn-secondary"
-    style="width:100%;margin-top:9px"
-    onclick="limpiarActualizaciones()">
-
-    Limpiar actualizaciones
-
-  </button>
+</button>
 
 </div>
 
 
-
-<!-- =================================
-     FINALIZADAS
-================================= -->
+<!-- FINALIZADAS -->
 
 <div class="card">
 
-  <h2>
-    ✅ Unidades finalizadas
-  </h2>
+<h2>✅ Unidades finalizadas</h2>
 
-
-  <div id="listaFinalizadas">
-
-    <div class="empty">
-      No hay unidades finalizadas.
-    </div>
-
-  </div>
+<div id="finalizadas"></div>
 
 </div>
 
-
 </div>
-
 
 <footer>
-
-  Seguimiento de Unidades V6
-
+Seguimiento de Unidades V6.1
 </footer>
-
 
 
 <script>
 
+/* =====================================
+   CLAVE DE ALMACENAMIENTO
+===================================== */
 
-/* =================================
-   ALMACENAMIENTO
-================================= */
+const STORAGE =
+"seguimiento_unidades_v61";
 
-const CLAVE_PROGRAMADAS =
-  "unidadesProgramadasV6";
-
-
-const CLAVE_FINALIZADAS =
-  "unidadesFinalizadasV6";
+const STORAGE_OLD =
+"unidadesProgramadasV6";
 
 
+/* =====================================
+   CARGAR
+===================================== */
 
-/* =================================
-   CARGAR DATOS
-================================= */
+let unidades =
+JSON.parse(
+localStorage.getItem(STORAGE)
+|| localStorage.getItem(STORAGE_OLD)
+|| "null"
+);
 
-let programadas =
-  JSON.parse(
-    localStorage.getItem(
-      CLAVE_PROGRAMADAS
-    )
-  );
 
+/* =====================================
+   SI NO EXISTEN, CREAR LAS DOS
+===================================== */
+
+if(!Array.isArray(unidades)){
+
+ unidades=[
+
+  {
+   placa:"TCA2222",
+   destino:"CD JUTICALPA",
+   ubicacion:"",
+   hora:"",
+   estado:"En ruta"
+  },
+
+  {
+   placa:"TEA9111",
+   destino:"CD COMAYAGUA",
+   ubicacion:"",
+   hora:"",
+   estado:"En ruta"
+  }
+
+ ];
+
+ guardar();
+
+}
+
+
+/* =====================================
+   FINALIZADAS
+===================================== */
 
 let finalizadas =
-  JSON.parse(
-    localStorage.getItem(
-      CLAVE_FINALIZADAS
-    )
-  );
+JSON.parse(
+localStorage.getItem(
+"seguimiento_finalizadas_v61"
+) || "[]"
+);
 
 
-if(
-  !Array.isArray(programadas)
-){
-
-  programadas = [];
-
-}
-
-
-if(
-  !Array.isArray(finalizadas)
-){
-
-  finalizadas = [];
-
-}
-
-
-
-/* =================================
+/* =====================================
    GUARDAR
-================================= */
+===================================== */
 
 function guardar(){
 
-  localStorage.setItem(
-    CLAVE_PROGRAMADAS,
-    JSON.stringify(programadas)
-  );
+ localStorage.setItem(
+ STORAGE,
+ JSON.stringify(unidades)
+ );
 
-
-  localStorage.setItem(
-    CLAVE_FINALIZADAS,
-    JSON.stringify(finalizadas)
-  );
-
-}
-
-
-
-/* =================================
-   HORA
-================================= */
-
-function obtenerHora(){
-
-  const ahora =
-    new Date();
-
-
-  return ahora.toLocaleTimeString(
-    "es-HN",
-    {
-      hour:"2-digit",
-      minute:"2-digit",
-      hour12:true
-    }
-  );
+ localStorage.setItem(
+ "seguimiento_finalizadas_v61",
+ JSON.stringify(finalizadas)
+ );
 
 }
 
 
+/* =====================================
+   HORA ACTUAL
+===================================== */
 
-/* =================================
-   PROGRAMAR UNIDAD
-================================= */
+function horaActual(){
 
-function programarUnidad(){
+ const ahora=new Date();
 
-  const placa =
-    document.getElementById(
-      "nuevaPlaca"
-    ).value
-    .trim()
-    .toUpperCase();
+ return ahora.toLocaleTimeString(
+ "es-HN",
+ {
+  hour:"2-digit",
+  minute:"2-digit",
+  hour12:true
+ }
+ );
 
-
-  const destino =
-    document.getElementById(
-      "nuevoDestino"
-    ).value;
-
-
-  if(
-    placa === ""
-  ){
-
-    alert(
-      "Escribe la placa."
-    );
-
-    return;
-
-  }
+}
 
 
-  if(
-    destino === ""
-  ){
+/* =====================================
+   AGREGAR
+===================================== */
 
-    alert(
-      "Selecciona el destino."
-    );
+function agregarUnidad(){
 
-    return;
+ const placa=document
+ .getElementById("placa")
+ .value
+ .trim()
+ .toUpperCase();
 
-  }
-
-
-  const existe =
-    programadas.some(
-
-      function(unidad){
-
-        return
-          unidad.placa === placa;
-
-      }
-
-    );
+ const destino=document
+ .getElementById("destino")
+ .value;
 
 
-  if(
-    existe
-  ){
+ if(!placa){
 
-    alert(
-      "Esta placa ya está programada."
-    );
+  alert("Escribe la placa.");
 
-    return;
+  return;
 
-  }
+ }
 
 
-  programadas.push({
+ if(!destino){
 
-    placa:
-      placa,
+  alert("Selecciona el destino.");
 
-    destino:
-      destino,
+  return;
 
-    ubicacion:
-      "",
+ }
 
-    hora:
-      "",
 
-    estado:
-      "En ruta"
+ const existe=unidades.some(
+ u=>u.placa===placa
+ );
+
+
+ if(existe){
+
+  alert(
+   "La placa "+placa+
+   " ya está programada."
+  );
+
+  return;
+
+ }
+
+
+ unidades.push({
+
+  placa:placa,
+  destino:destino,
+  ubicacion:"",
+  hora:"",
+  estado:"En ruta"
+
+ });
+
+
+ guardar();
+
+ document.getElementById("placa")
+ .value="";
+
+ document.getElementById("destino")
+ .value="";
+
+ mostrar();
+
+ alert(
+  "Unidad "+placa+
+  " programada correctamente."
+ );
+
+}
+
+
+/* =====================================
+   ACTUALIZAR
+===================================== */
+
+function actualizar(i){
+
+ const campo=document
+ .getElementById(
+ "ubicacion_"+i
+ );
+
+ const ubicacion=campo
+ .value
+ .trim();
+
+
+ if(!ubicacion){
+
+  alert(
+   "Escribe la ubicación."
+  );
+
+  return;
+
+ }
+
+
+ unidades[i].ubicacion=
+ ubicacion;
+
+ unidades[i].hora=
+ horaActual();
+
+ /*
+  La placa y destino NO cambian.
+ */
+
+ guardar();
+
+ mostrar();
+
+ generarReporte();
+
+ /*
+  Llevar automáticamente
+  al reporte.
+ */
+
+ setTimeout(function(){
+
+  document
+  .getElementById("reporte")
+  .scrollIntoView({
+   behavior:"smooth",
+   block:"center"
+  });
+
+ },100);
+
+}
+
+
+/* =====================================
+   CAMBIAR ESTADO
+===================================== */
+
+function cambiarEstado(i){
+
+ const opciones=[
+  "En ruta",
+  "Detenida",
+  "Llegó al CD JUTICALPA",
+  "Llegó al CD SPS",
+  "Llegó al CD COMAYAGUA"
+ ];
+
+ let texto=
+ "Selecciona el estado:\n\n";
+
+ opciones.forEach(
+ function(x,n){
+
+  texto+=
+  (n+1)+". "+x+"\n";
+
+ });
+
+
+ const respuesta=
+ prompt(texto);
+
+
+ if(respuesta===null)return;
+
+
+ const numero=parseInt(
+ respuesta
+ );
+
+
+ if(
+ isNaN(numero) ||
+ numero<1 ||
+ numero>opciones.length
+ ){
+
+  alert("Opción inválida.");
+
+  return;
+
+ }
+
+
+ unidades[i].estado=
+ opciones[numero-1];
+
+ unidades[i].hora=
+ horaActual();
+
+ guardar();
+
+ mostrar();
+
+ generarReporte();
+
+}
+
+
+/* =====================================
+   CAMBIAR DESTINO
+===================================== */
+
+function cambiarDestino(i){
+
+ const nuevo=prompt(
+ "Escribe el nuevo destino:\n\n"+
+ "CD JUTICALPA\n"+
+ "CD SPS\n"+
+ "CD COMAYAGUA"
+ );
+
+
+ if(nuevo===null)return;
+
+
+ const destino=
+ nuevo.trim().toUpperCase();
+
+
+ if(
+ destino!=="CD JUTICALPA" &&
+ destino!=="CD SPS" &&
+ destino!=="CD COMAYAGUA"
+ ){
+
+  alert("Destino no válido.");
+
+  return;
+
+ }
+
+
+ unidades[i].destino=
+ destino;
+
+ guardar();
+
+ mostrar();
+
+ generarReporte();
+
+}
+
+
+/* =====================================
+   FINALIZAR
+===================================== */
+
+function finalizar(i){
+
+ const unidad=unidades[i];
+
+
+ if(!confirm(
+ "¿Finalizar la unidad "+
+ unidad.placa+"?"
+ ))return;
+
+
+ unidad.estado=
+ "Finalizada";
+
+ unidad.hora=
+ horaActual();
+
+
+ finalizadas.push(unidad);
+
+ unidades.splice(i,1);
+
+ guardar();
+
+ mostrar();
+
+ generarReporte();
+
+}
+
+
+/* =====================================
+   ELIMINAR
+===================================== */
+
+function eliminar(i){
+
+ const unidad=unidades[i];
+
+
+ if(!confirm(
+ "¿Eliminar la unidad "+
+ unidad.placa+"?"
+ ))return;
+
+
+ unidades.splice(i,1);
+
+ guardar();
+
+ mostrar();
+
+ generarReporte();
+
+}
+
+
+/* =====================================
+   MOSTRAR UNIDADES
+===================================== */
+
+function mostrar(){
+
+ const contenedor=
+ document.getElementById(
+ "unidades"
+ );
+
+
+ if(unidades.length===0){
+
+  contenedor.innerHTML=
+  `
+  <div class="empty">
+  No hay unidades programadas.
+  </div>
+  `;
+
+ }else{
+
+  contenedor.innerHTML="";
+
+
+  unidades.forEach(
+  function(u,i){
+
+   const div=
+   document.createElement("div");
+
+   div.className="unit";
+
+
+   div.innerHTML=`
+
+   <div class="unit-head">
+
+    <h3>🚛 ${u.placa}</h3>
+
+    <span class="badge">
+    ${u.estado}
+    </span>
+
+   </div>
+
+
+   <div class="info">
+
+   🎯 <strong>Destino:</strong>
+   ${u.destino}
+
+   <br>
+
+   📍 <strong>Ubicado en:</strong>
+   ${u.ubicacion || "Sin actualización"}
+
+   <br>
+
+   🕐 <strong>Hora:</strong>
+   ${u.hora || "Sin actualización"}
+
+   </div>
+
+
+   <div class="update">
+
+    <input
+     id="ubicacion_${i}"
+     type="text"
+     placeholder="Nueva ubicación">
+
+    <button
+     onclick="actualizar(${i})">
+
+     🔄 Actualizar
+
+    </button>
+
+   </div>
+
+
+   <div class="actions">
+
+    <button
+     class="gray"
+     onclick="cambiarEstado(${i})">
+
+     Estado
+
+    </button>
+
+
+    <button
+     class="gray"
+     onclick="cambiarDestino(${i})">
+
+     Destino
+
+    </button>
+
+
+    <button
+     class="green"
+     onclick="finalizar(${i})">
+
+     Finalizar
+
+    </button>
+
+
+    <button
+     class="red"
+     onclick="eliminar(${i})">
+
+     Eliminar
+
+    </button>
+
+   </div>
+
+   `;
+
+
+   contenedor.appendChild(div);
 
   });
 
-
-  guardar();
-
-
-  document.getElementById(
-    "nuevaPlaca"
-  ).value =
-    "";
+ }
 
 
-  document.getElementById(
-    "nuevoDestino"
-  ).value =
-    "";
+ mostrarFinalizadas();
 
-
-  mostrarProgramadas();
-
-
-  alert(
-    "Unidad programada correctamente."
-  );
+ generarReporte();
 
 }
 
 
-
-/* =================================
-   ACTUALIZAR UBICACIÓN
-================================= */
-
-function actualizarUnidad(index){
-
-  const unidad =
-    programadas[index];
-
-
-  const input =
-    document.getElementById(
-      "ubicacion-" + index
-    );
-
-
-  const ubicacion =
-    input.value.trim();
-
-
-  if(
-    ubicacion === ""
-  ){
-
-    alert(
-      "Escribe la ubicación actual."
-    );
-
-    return;
-
-  }
-
-
-  unidad.ubicacion =
-    ubicacion;
-
-
-  unidad.hora =
-    obtenerHora();
-
-
-  /*
-     Cada actualización vuelve
-     a dejar la unidad activa.
-  */
-
-  unidad.estado =
-    "En ruta";
-
-
-  guardar();
-
-
-  mostrarProgramadas();
-
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   CAMBIAR ESTADO
-================================= */
-
-function cambiarEstado(index){
-
-  const estados = [
-
-    "En ruta",
-
-    "Detenida",
-
-    "Llegó al CD JUTICALPA",
-
-    "Llegó al CD SPS",
-
-    "Llegó al CD COMAYAGUA"
-
-  ];
-
-
-  let mensaje =
-    "Selecciona el estado:\n\n";
-
-
-  estados.forEach(
-
-    function(estado,i){
-
-      mensaje +=
-        (i + 1) +
-        ". " +
-        estado +
-        "\n";
-
-    }
-
-  );
-
-
-  const opcion =
-    prompt(
-      mensaje
-    );
-
-
-  if(
-    opcion === null
-  ){
-
-    return;
-
-  }
-
-
-  const numero =
-    parseInt(
-      opcion
-    );
-
-
-  if(
-    isNaN(numero) ||
-    numero < 1 ||
-    numero > estados.length
-  ){
-
-    alert(
-      "Opción inválida."
-    );
-
-    return;
-
-  }
-
-
-  unidadEstado =
-    estados[
-      numero - 1
-    ];
-
-
-  programadas[index].estado =
-    unidadEstado;
-
-
-  programadas[index].hora =
-    obtenerHora();
-
-
-  /*
-     Si llega al CD, se conserva
-     la ubicación que ya tenía.
-  */
-
-
-  guardar();
-
-
-  mostrarProgramadas();
-
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   FINALIZAR UNIDAD
-================================= */
-
-function finalizarUnidad(index){
-
-  const unidad =
-    programadas[index];
-
-
-  if(
-    !confirm(
-      "¿Marcar " +
-      unidad.placa +
-      " como finalizada?"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  unidad.estado =
-    "Finalizada";
-
-
-  unidad.hora =
-    obtenerHora();
-
-
-  finalizadas.push(
-    unidad
-  );
-
-
-  programadas.splice(
-    index,
-    1
-  );
-
-
-  guardar();
-
-
-  mostrarProgramadas();
-
-  mostrarFinalizadas();
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   EDITAR DESTINO
-================================= */
-
-function editarDestino(index){
-
-  const unidad =
-    programadas[index];
-
-
-  const nuevoDestino =
-    prompt(
-
-      "Destino actual:\n" +
-      unidad.destino +
-      "\n\n" +
-      "Escribe el nuevo destino:\n" +
-      "CD JUTICALPA\n" +
-      "CD SPS\n" +
-      "CD COMAYAGUA"
-
-    );
-
-
-  if(
-    nuevoDestino === null
-  ){
-
-    return;
-
-  }
-
-
-  const destino =
-    nuevoDestino
-      .trim()
-      .toUpperCase();
-
-
-  if(
-    destino !==
-      "CD JUTICALPA" &&
-
-    destino !==
-      "CD SPS" &&
-
-    destino !==
-      "CD COMAYAGUA"
-  ){
-
-    alert(
-      "Destino no válido."
-    );
-
-    return;
-
-  }
-
-
-  unidad.destino =
-    destino;
-
-
-  guardar();
-
-
-  mostrarProgramadas();
-
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   ELIMINAR PROGRAMACIÓN
-================================= */
-
-function eliminarProgramada(index){
-
-  const unidad =
-    programadas[index];
-
-
-  if(
-    !confirm(
-      "¿Eliminar la programación de " +
-      unidad.placa +
-      "?"
-    )
-  ){
-
-    return;
-
-  }
-
-
-  programadas.splice(
-    index,
-    1
-  );
-
-
-  guardar();
-
-
-  mostrarProgramadas();
-
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   MOSTRAR PROGRAMADAS
-================================= */
-
-function mostrarProgramadas(){
-
-  const contenedor =
-    document.getElementById(
-      "listaProgramadas"
-    );
-
-
-  if(
-    programadas.length === 0
-  ){
-
-    contenedor.innerHTML =
-      `
-      <div class="empty">
-        No hay unidades programadas.
-      </div>
-      `;
-
-    generarReporte();
-
-    return;
-
-  }
-
-
-  contenedor.innerHTML =
-    "";
-
-
-  programadas.forEach(
-
-    function(unidad,index){
-
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "programada";
-
-
-      let ultima =
-        "Sin actualización";
-
-
-      if(
-        unidad.ubicacion
-      ){
-
-        ultima =
-          `
-          📍 ${unidad.ubicacion}
-          <br>
-          🕐 ${unidad.hora}
-          `;
-
-      }
-
-
-      div.innerHTML =
-
-      `
-
-      <div class="programada-header">
-
-        <h3>
-          🚛 ${unidad.placa}
-        </h3>
-
-        <span class="badge">
-          ${unidad.estado}
-        </span>
-
-      </div>
-
-
-      <div class="info">
-
-        🎯 <strong>Destino:</strong>
-        ${unidad.destino}
-
-        <br>
-
-        ${ultima}
-
-      </div>
-
-
-      <div class="actualizar">
-
-        <input
-          id="ubicacion-${index}"
-          type="text"
-          placeholder="Nueva ubicación"
-        >
-
-
-        <button
-          onclick="actualizarUnidad(${index})">
-
-          🔄 Actualizar
-
-        </button>
-
-      </div>
-
-
-      <div class="acciones">
-
-        <button
-          class="btn-secondary"
-          onclick="cambiarEstado(${index})">
-
-          Estado
-
-        </button>
-
-
-        <button
-          class="btn-secondary"
-          onclick="editarDestino(${index})">
-
-          Destino
-
-        </button>
-
-
-        <button
-          class="btn-success"
-          onclick="finalizarUnidad(${index})">
-
-          Finalizar
-
-        </button>
-
-
-        <button
-          class="btn-danger"
-          onclick="eliminarProgramada(${index})">
-
-          Eliminar
-
-        </button>
-
-      </div>
-
-      `;
-
-
-      contenedor.appendChild(
-        div
-      );
-
-    }
-
-  );
-
-
-  generarReporte();
-
-}
-
-
-
-/* =================================
-   REPORTE
-================================= */
+/* =====================================
+   GENERAR REPORTE
+===================================== */
 
 function generarReporte(){
 
-  const reporte =
-    document.getElementById(
-      "reporte"
-    );
+ const reporte=
+ document.getElementById(
+ "reporte"
+ );
 
 
-  const activas =
-    programadas.filter(
+ const actualizadas=
+ unidades.filter(
+ u=>u.ubicacion &&
+ u.hora
+ );
 
-      function(unidad){
 
-        return
-          unidad.ubicacion !== "";
+ if(actualizadas.length===0){
 
-      }
+  reporte.textContent=
+  "Aún no hay unidades actualizadas.";
 
-    );
+  return;
 
+ }
+
+
+ let texto=
+ "📋 REPORTE DE SEGUIMIENTO\n\n";
+
+
+ actualizadas.forEach(
+ function(u,i){
+
+  texto+=
+  "🚛 "+u.placa+"\n";
+
+  texto+=
+  "📍 Ubicado en: "+
+  u.ubicacion+"\n";
+
+  texto+=
+  "🎯 Destino: "+
+  u.destino+"\n";
+
+  texto+=
+  "🕐 Hora: "+
+  u.hora+"\n";
+
+
+  /*
+   Solo mostramos estado si
+   no es simplemente En ruta.
+  */
 
   if(
-    activas.length === 0
+   u.estado &&
+   u.estado!=="En ruta"
   ){
 
-    reporte.textContent =
-      "Aún no hay unidades actualizadas.";
-
-    return;
+   texto+=
+   "📌 Estado: "+
+   u.estado+"\n";
 
   }
 
 
-  let texto =
-    "📋 REPORTE DE SEGUIMIENTO\n\n";
+  if(
+   i<actualizadas.length-1
+  ){
+
+   texto+=
+   "\n━━━━━━━━━━━━━━━━━━━━\n\n";
+
+  }
+
+ });
 
 
-  activas.forEach(
-
-    function(unidad,index){
-
-      texto +=
-        "🚛 " +
-        unidad.placa +
-        "\n";
-
-
-      texto +=
-        "📍 Ubicado en: " +
-        unidad.ubicacion +
-        "\n";
-
-
-      texto +=
-        "🎯 Destino: " +
-        unidad.destino +
-        "\n";
-
-
-      texto +=
-        "🕐 Hora: " +
-        unidad.hora +
-        "\n";
-
-
-      if(
-        index <
-        activas.length - 1
-      ){
-
-        texto +=
-          "\n";
-
-      }
-
-    }
-
-  );
-
-
-  reporte.textContent =
-    texto;
+ reporte.textContent=
+ texto;
 
 }
 
 
-
-/* =================================
+/* =====================================
    COPIAR REPORTE
-================================= */
+===================================== */
 
 function copiarReporte(){
 
-  generarReporte();
+ generarReporte();
 
 
-  const texto =
-    document.getElementById(
-      "reporte"
-    ).textContent;
+ const texto=
+ document.getElementById(
+ "reporte"
+ ).textContent;
 
 
-  if(
-    texto.includes(
-      "Aún no hay"
-    )
-  ){
+ if(
+ texto===
+ "Aún no hay unidades actualizadas."
+ ){
 
-    alert(
-      "No hay unidades actualizadas."
-    );
+  alert(
+   "Primero actualiza una unidad."
+  );
 
-    return;
+  return;
 
-  }
+ }
 
+
+ /*
+  Método moderno
+ */
+
+ if(
+ navigator.clipboard &&
+ navigator.clipboard.writeText
+ ){
 
   navigator.clipboard
-    .writeText(
-      texto
-    )
-    .then(
+  .writeText(texto)
+  .then(
+   function(){
 
-      function(){
-
-        alert(
-          "Reporte copiado."
-        );
-
-      }
-
-    )
-    .catch(
-
-      function(){
-
-        alert(
-          "No se pudo copiar."
-        );
-
-      }
-
+    alert(
+     "✅ Reporte copiado."
     );
+
+   }
+  )
+  .catch(
+   function(){
+
+    copiarAlternativo(texto);
+
+   }
+  );
+
+ }else{
+
+  copiarAlternativo(texto);
+
+ }
 
 }
 
 
+/* =====================================
+   COPIADO ALTERNATIVO
+===================================== */
 
-/* =================================
+function copiarAlternativo(texto){
+
+ const area=
+ document.createElement(
+ "textarea"
+ );
+
+ area.value=texto;
+
+ area.style.position=
+ "fixed";
+
+ area.style.left=
+ "-9999px";
+
+ document.body.appendChild(area);
+
+ area.select();
+
+ try{
+
+  document.execCommand(
+   "copy"
+  );
+
+  alert(
+   "✅ Reporte copiado."
+  );
+
+ }catch(e){
+
+  alert(
+   "No se pudo copiar automáticamente. "+
+   "Mantén presionado el texto para copiarlo."
+  );
+
+ }
+
+ document.body.removeChild(
+  area
+ );
+
+}
+
+
+/* =====================================
    LIMPIAR ACTUALIZACIONES
-================================= */
+===================================== */
 
 function limpiarActualizaciones(){
 
-  if(
-    programadas.length === 0
-  ){
-
-    return;
-
-  }
+ if(unidades.length===0)return;
 
 
-  if(
-    !confirm(
-      "¿Limpiar las ubicaciones y horas actuales?"
-    )
-  ){
-
-    return;
-
-  }
+ if(!confirm(
+ "¿Limpiar ubicación y hora de todas las unidades?"
+ ))return;
 
 
-  programadas.forEach(
+ unidades.forEach(
+ function(u){
 
-    function(unidad){
+  u.ubicacion="";
+  u.hora="";
 
-      unidad.ubicacion =
-        "";
-
-      unidad.hora =
-        "";
-
-    }
-
-  );
+ });
 
 
-  guardar();
+ guardar();
 
-
-  mostrarProgramadas();
-
-
-  generarReporte();
+ mostrar();
 
 }
 
 
-
-/* =================================
-   MOSTRAR FINALIZADAS
-================================= */
+/* =====================================
+   FINALIZADAS
+===================================== */
 
 function mostrarFinalizadas(){
 
-  const contenedor =
-    document.getElementById(
-      "listaFinalizadas"
-    );
+ const contenedor=
+ document.getElementById(
+ "finalizadas"
+ );
 
 
-  if(
-    finalizadas.length === 0
-  ){
+ if(finalizadas.length===0){
 
-    contenedor.innerHTML =
-      `
-      <div class="empty">
-        No hay unidades finalizadas.
-      </div>
-      `;
+  contenedor.innerHTML=
+  `
+  <div class="empty">
+  No hay unidades finalizadas.
+  </div>
+  `;
 
-    return;
+  return;
 
-  }
+ }
 
 
-  contenedor.innerHTML =
-    "";
+ contenedor.innerHTML="";
 
 
-  finalizadas.forEach(
+ finalizadas.forEach(
+ function(u){
 
-    function(unidad){
+  const div=
+  document.createElement("div");
 
-      const div =
-        document.createElement(
-          "div"
-        );
-
-
-      div.className =
-        "programada";
+  div.className="unit";
 
 
-      div.innerHTML =
+  div.innerHTML=`
 
-      `
+  <div class="unit-head">
 
-      <div class="programada-header">
+   <h3>🚛 ${u.placa}</h3>
 
-        <h3>
-          🚛 ${unidad.placa}
-        </h3>
+   <span class="badge">
+   Finalizada
+   </span>
 
-        <span class="badge">
-          Finalizada
-        </span>
+  </div>
 
-      </div>
+  <div class="info">
 
+  🎯 <strong>Destino:</strong>
+  ${u.destino}
 
-      <div class="info">
+  <br>
 
-        🎯 <strong>Destino:</strong>
-        ${unidad.destino}
+  📍 <strong>Ubicado en:</strong>
+  ${u.ubicacion || "Sin ubicación"}
 
-        <br>
+  <br>
 
-        📍 <strong>Última ubicación:</strong>
-        ${unidad.ubicacion || "Sin ubicación"}
+  🕐 <strong>Hora:</strong>
+  ${u.hora || "Sin hora"}
 
-        <br>
+  </div>
 
-        🕐 <strong>Hora:</strong>
-        ${unidad.hora}
-
-      </div>
-
-      `;
+  `;
 
 
-      contenedor.appendChild(
-        div
-      );
+  contenedor.appendChild(div);
 
-    }
-
-  );
+ });
 
 }
 
 
+/* =====================================
+   INICIAR
+===================================== */
 
-/* =================================
-   INICIO
-================================= */
-
-mostrarProgramadas();
-
-mostrarFinalizadas();
-
-generarReporte();
-
+mostrar();
 
 </script>
 

@@ -1078,9 +1078,9 @@ function actualizarResumen(){
 const total=unidades.length,completadas=finalizadas.length,enRuta=unidades.filter(u=>(u.estado||"En ruta").toLowerCase()!=="finalizada").length,actualizadas=unidades.filter(u=>u.ubicacion&&u.ubicacion!=="Sin actualización").length;
 const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
 set("resumen-programadas",total);set("resumen-ruta",enRuta);set("resumen-finalizadas",completadas);set("resumen-actualizaciones",actualizadas);set("donut-total",total+completadas);
-const base=total+completadas||1,rutaPct=Math.round(enRuta/base*100),finPct=Math.round(completadas/base*100),sinActualizar=Math.max(0,total-actualizadas),sinPct=Math.round(sinActualizar/base*100);
-set("leyenda-ruta",enRuta+" ("+rutaPct+"%)");set("leyenda-finalizadas",completadas+" ("+finPct+"%)");set("leyenda-sinactualizar",sinActualizar+" ("+sinPct+"%)");
-const donut=document.getElementById("estado-donut");if(donut){const p1=enRuta/base*100,p2=(enRuta+completadas)/base*100;donut.style.background="conic-gradient(#00c98a 0% "+p1+"%,#ff9b36 "+p1+"% "+p2+"%,#ff4b5c "+p2+"% 100%)";}
+const base=total+completadas||1,sinActualizar=Math.max(0,total-actualizadas),rutaPct=Math.round(actualizadas/base*100),finPct=Math.round(completadas/base*100),sinPct=Math.round(sinActualizar/base*100);
+set("leyenda-ruta",actualizadas+" ("+rutaPct+"%)");set("leyenda-finalizadas",completadas+" ("+finPct+"%)");set("leyenda-sinactualizar",sinActualizar+" ("+sinPct+"%)");
+const donut=document.getElementById("estado-donut");if(donut){const p1=actualizadas/base*100,p2=(actualizadas+completadas)/base*100;donut.style.background="conic-gradient(#00c98a 0% "+p1+"%,#ff9b36 "+p1+"% "+p2+"%,#ff4b5c "+p2+"% 100%)";}
 const now=new Date(),date=document.getElementById("fecha-inicio");if(date)date.textContent=now.toLocaleDateString("es-HN",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
 const greeting=document.getElementById("saludo-inicio");if(greeting){const h=now.getHours();greeting.textContent=h<12?"¡Buenos días!":h<19?"¡Buenas tardes!":"¡Buenas noches!";}
 renderInicioTabla();renderUltimasActualizaciones();
@@ -1100,7 +1100,7 @@ box.innerHTML=recientes.map(u=>'<div class="latest-item"><span class="legend-dot
 function filtrarTablaInicio(){renderInicioTabla();}
 function abrirVistaUnidadesDesdeInicio(){abrirVista("view-unidades");}
 function editarDesdeInicio(i){abrirVista("view-unidades");setTimeout(()=>document.getElementById("ubicacion_"+i)?.focus(),100);}
-function finalizarDesdeInicio(i){if(confirm("¿Deseas finalizar la unidad "+(unidades[i]?.placa||"")+"?"))finalizar(i);}
+function finalizarDesdeInicio(i){finalizar(i);}
 function escapeHtmlInicio(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 window.addEventListener("hashchange",()=>{
   const link=document.querySelector('.nav-link[href="'+location.hash+'"]');

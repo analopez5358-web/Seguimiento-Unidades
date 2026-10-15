@@ -15,9 +15,9 @@ header{position:fixed;inset:0 auto 0 0;width:260px;background:linear-gradient(18
 .brand{display:flex;gap:12px;align-items:flex-start;margin:2px 5px 32px}.brand-icon{display:grid;place-items:center;flex:0 0 43px;height:43px;border-radius:13px;background:linear-gradient(135deg,#2684ff,#4b5dff);font-size:23px;box-shadow:0 8px 25px #1674ff38}.brand h1{font-size:18px;line-height:1.25;margin:0;letter-spacing:-.4px}.brand p{font-size:11px;line-height:1.5;color:var(--muted);margin:7px 0 0}
 .side-nav{display:grid;gap:7px}.nav-link{display:flex;align-items:center;gap:12px;min-height:45px;padding:12px;border-radius:11px;color:#c5d2e6;text-decoration:none;font-size:13px;font-weight:650;transition:background .2s,color .2s}.nav-link span{display:inline-grid;place-items:center;width:20px;font-size:17px;color:#8fbaff}.nav-link:hover{background:#1b2c46;color:#fff}.nav-link.active{background:linear-gradient(100deg,#1265e8,#174bd0);color:white;box-shadow:0 8px 20px #1265e833}.nav-link.active span{color:white}
 .sidebar-status{margin-top:auto;padding:15px 13px;background:#10213a;border:1px solid #24415f;border-radius:14px;font-size:12px;color:#d4e1f4}.sidebar-status strong{color:#43e6b1;margin-left:6px}.sidebar-status small{display:block;color:#9eb0c9;line-height:1.5;margin-top:10px}.status-dot{display:inline-block;width:8px;height:8px;background:#19c78a;border-radius:50%}.version{padding:18px 8px 0;color:#7187a6;font-size:12px;font-weight:700}
-.container{max-width:1500px;margin:0 0 0 260px;padding:30px;display:grid;grid-template-columns:minmax(290px,.8fr) minmax(400px,1.3fr);gap:20px;align-items:start}
+.container{max-width:1500px;margin:0 0 0 260px;padding:30px;display:block}.view{display:none;max-width:1050px;margin:0 auto}.view.active{display:block}.view .card{margin:0}.home-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:20px}.stat-card{padding:20px;background:#111c31;border:1px solid var(--line);border-radius:16px}.stat-card strong{display:block;font-size:28px;margin-top:8px;color:#fff}.stat-card span{font-size:12px;color:var(--muted)}.home-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}.home-actions button{width:auto;margin:0}
 .card{min-width:0;background:linear-gradient(145deg,rgba(20,33,55,.97),rgba(13,24,42,.97));border:1px solid var(--line);border-radius:20px;padding:23px;margin-bottom:0;box-shadow:0 15px 40px #0002;scroll-margin-top:24px}
-.card:nth-child(1){grid-column:1;grid-row:1}.card:nth-child(2){grid-column:2;grid-row:1 / span 2}.card:nth-child(3){grid-column:1;grid-row:2}.card:nth-child(4){grid-column:1 / -1;grid-row:3}
+.view .card{width:100%}
 h2{margin:0 0 18px;font-size:20px;letter-spacing:-.3px}h2:after{content:"";display:block;width:38px;height:3px;border-radius:3px;background:var(--blue);margin-top:11px}
 label{display:block;font-size:12px;letter-spacing:.4px;text-transform:uppercase;color:#a8bad3;font-weight:750;margin:16px 0 8px}
 input,select{width:100%;padding:14px 15px;border:1px solid #30425e;border-radius:12px;font-size:15px;background:#0b1527;color:var(--text);outline:none;transition:border .2s,box-shadow .2s}input:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #2583ff22}input::placeholder{color:#6f829e}
@@ -29,8 +29,8 @@ button{border:1px solid transparent;border-radius:11px;padding:12px 15px;font-si
 .actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:12px}.actions button{width:100%}
 .report{background:#0a1425;border:1px solid #2a3b57;border-radius:13px;padding:16px;white-space:pre-line;line-height:1.8;font-size:14px;min-height:100px;color:#dce8f8}.copy{width:100%;margin-top:12px;background:linear-gradient(135deg,#13a878,#087e67);color:white}.clear{width:100%;margin-top:9px}
 .empty{text-align:center;color:var(--muted);padding:26px 15px;background:#0c1728;border:1px dashed #2a3b57;border-radius:13px;font-size:13px}.small{color:var(--muted);font-size:13px;line-height:1.6}.newPlate{display:none;margin-top:10px}footer{grid-column:1/-1;text-align:center;color:#657995;padding:8px 20px 25px;font-size:12px}
-@media(max-width:1050px){.container{grid-template-columns:1fr;margin-left:240px;padding:22px}.card:nth-child(n){grid-column:1;grid-row:auto}}
-@media(max-width:700px){header{position:relative;width:auto;inset:auto;padding:18px;border-right:0;border-bottom:1px solid var(--line)}.brand{margin-bottom:15px}.side-nav{display:flex;overflow-x:auto;padding-bottom:3px}.nav-link{flex:0 0 auto;min-height:39px;padding:9px 11px;font-size:12px}.sidebar-status,.version{display:none}.container{margin:0;padding:14px;display:block}.card{padding:18px;border-radius:16px;margin-bottom:14px}.unit-head h3{font-size:18px}.update{display:block}.update input{margin-bottom:8px}.update button{width:100%}.actions{grid-template-columns:1fr 1fr}}
+@media(max-width:1050px){.container{margin-left:240px;padding:22px}.home-grid{grid-template-columns:1fr}}
+@media(max-width:700px){header{position:relative;width:auto;inset:auto;padding:18px;border-right:0;border-bottom:1px solid var(--line)}.brand{margin-bottom:15px}.side-nav{display:flex;overflow-x:auto;padding-bottom:3px}.nav-link{flex:0 0 auto;min-height:39px;padding:9px 11px;font-size:12px}.sidebar-status,.version{display:none}.container{margin:0;padding:14px;display:block}.view{max-width:none}.home-grid{grid-template-columns:1fr}.card{padding:18px;border-radius:16px;margin-bottom:14px}.unit-head h3{font-size:18px}.update{display:block}.update input{margin-bottom:8px}.update button{width:100%}.actions{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 
@@ -42,18 +42,36 @@ button{border:1px solid transparent;border-radius:11px;padding:12px 15px;font-si
     <div><h1>Seguimiento de Unidades</h1><p>Programación y actualización de unidades</p></div>
   </div>
   <nav class="side-nav" aria-label="Navegación principal">
-    <a class="nav-link active" href="#inicio" data-target="inicio"><span>▦</span> Inicio</a>
-    <a class="nav-link" href="#programar" data-target="programar"><span>＋</span> Programar unidad</a>
-    <a class="nav-link" href="#unidades-section" data-target="unidades-section"><span>◉</span> Unidades programadas</a>
-    <a class="nav-link" href="#reporte-section" data-target="reporte-section"><span>▤</span> Reportes</a>
-    <a class="nav-link" href="#finalizadas-section" data-target="finalizadas-section"><span>✓</span> Finalizadas</a>
+    <a class="nav-link active" href="#inicio" data-view="view-inicio"><span>▦</span> Inicio</a>
+    <a class="nav-link" href="#programar" data-view="view-programar"><span>＋</span> Programar unidad</a>
+    <a class="nav-link" href="#unidades-section" data-view="view-unidades"><span>◉</span> Unidades programadas</a>
+    <a class="nav-link" href="#reporte-section" data-view="view-reporte"><span>▤</span> Reportes</a>
+    <a class="nav-link" href="#finalizadas-section" data-view="view-finalizadas"><span>✓</span> Finalizadas</a>
   </nav>
   <div class="sidebar-status"><span class="status-dot"></span><strong>Aplicación activa</strong><small>Los cambios se guardan en este navegador.</small></div>
   <div class="version">V6.2</div>
 </header>
 
-<div class="container" id="inicio">
+<div class="container" id="app-container">
 
+<section class="view active" id="view-inicio">
+  <div class="card">
+    <h2>🏠 Inicio</h2>
+    <p class="small">Panel principal de Seguimiento de Unidades. Usa el menú para entrar a cada módulo por separado.</p>
+    <div class="home-grid">
+      <div class="stat-card"><span>UNIDADES PROGRAMADAS</span><strong id="resumen-programadas">0</strong></div>
+      <div class="stat-card"><span>UNIDADES FINALIZADAS</span><strong id="resumen-finalizadas">0</strong></div>
+      <div class="stat-card"><span>ACTUALIZACIONES REGISTRADAS</span><strong id="resumen-actualizaciones">0</strong></div>
+    </div>
+    <div class="home-actions">
+      <button class="primary" onclick="abrirVista('view-programar')">＋ Programar unidad</button>
+      <button class="gray" onclick="abrirVista('view-unidades')">📋 Ver unidades</button>
+      <button class="gray" onclick="abrirVista('view-reporte')">📄 Ver reporte</button>
+    </div>
+  </div>
+</section>
+
+<section class="view" id="view-programar">
 <!-- PROGRAMAR UNIDAD -->
 
 <div class="card">
@@ -98,8 +116,9 @@ Selecciona una placa y su destino. Después solo tendrás que actualizar la ubic
 </button>
 
 </div>
+</section>
 
-
+<section class="view" id="view-unidades">
 <!-- UNIDADES -->
 
 <div class="card">
@@ -109,8 +128,9 @@ Selecciona una placa y su destino. Después solo tendrás que actualizar la ubic
 <div id="unidades"></div>
 
 </div>
+</section>
 
-
+<section class="view" id="view-reporte">
 <!-- REPORTE -->
 
 <div class="card">
@@ -138,8 +158,9 @@ Limpiar actualizaciones
 </button>
 
 </div>
+</section>
 
-
+<section class="view" id="view-finalizadas">
 <!-- FINALIZADAS -->
 
 <div class="card">
@@ -151,6 +172,7 @@ Limpiar actualizaciones
 </div>
 
 </div>
+</section>
 
 <footer>
 Seguimiento de Unidades V6.2
@@ -1019,21 +1041,42 @@ guardar();
 cargarListaPlacas();
 
 mostrar();
+actualizarResumen();
 
 
 /* Navegación lateral funcional */
+function abrirVista(viewId){
+  const vista=document.getElementById(viewId);
+  if(!vista) return;
+  document.querySelectorAll(".view").forEach(v=>v.classList.remove("active"));
+  vista.classList.add("active");
+  document.querySelectorAll(".nav-link").forEach(a=>{
+    a.classList.toggle("active",a.dataset.view===viewId);
+  });
+  const enlace=document.querySelector('.nav-link[data-view="'+viewId+'"]');
+  if(enlace && history.replaceState) history.replaceState(null,"",enlace.getAttribute("href"));
+  window.scrollTo({top:0,behavior:"smooth"});
+  actualizarResumen();
+}
 document.querySelectorAll(".nav-link").forEach(link=>{
   link.addEventListener("click",function(ev){
     ev.preventDefault();
-    const target=document.getElementById(this.dataset.target);
-    if(target){
-      target.scrollIntoView({behavior:"smooth",block:"start"});
-      document.querySelectorAll(".nav-link").forEach(a=>a.classList.remove("active"));
-      this.classList.add("active");
-      if(history.replaceState) history.replaceState(null,"","#"+this.dataset.target);
-    }
+    abrirVista(this.dataset.view);
   });
 });
+function actualizarResumen(){
+  const prog=document.getElementById("resumen-programadas");
+  const fin=document.getElementById("resumen-finalizadas");
+  const act=document.getElementById("resumen-actualizaciones");
+  if(prog) prog.textContent=Array.isArray(unidades)?unidades.length:0;
+  if(fin) fin.textContent=Array.isArray(finalizadas)?finalizadas.length:0;
+  if(act) act.textContent=Array.isArray(unidades)?unidades.reduce((n,u)=>n+(Array.isArray(u.actualizaciones)?u.actualizaciones.length:((u.ubicacion&&u.ubicacion!=="Sin actualización")?1:0)),0):0;
+}
+window.addEventListener("hashchange",()=>{
+  const link=document.querySelector('.nav-link[href="'+location.hash+'"]');
+  if(link) abrirVista(link.dataset.view);
+});
+
 </script>
 
 </body>

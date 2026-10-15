@@ -180,8 +180,8 @@ Limpiar actualizaciones
 <h2 id="finalizadas-section">✅ Unidades finalizadas</h2>
 <p class="small">Consulta los viajes por fecha de llegada, placa o destino. La fecha se registra al presionar Finalizar.</p>
 <div class="final-filter-panel">
-  <div class="filter-field"><label for="filtro-fecha-desde">Desde (fecha de llegada)</label><input id="filtro-fecha-desde" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
-  <div class="filter-field"><label for="filtro-fecha-hasta">Hasta (fecha de llegada)</label><input id="filtro-fecha-hasta" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
+  <div class="filter-field"><label for="filtro-fecha-desde">Desde (jornada nocturna)</label><input id="filtro-fecha-desde" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
+  <div class="filter-field"><label for="filtro-fecha-hasta">Hasta (jornada nocturna)</label><input id="filtro-fecha-hasta" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
   <div class="filter-field"><label for="filtro-placa-finalizadas">Buscar placa</label><input id="filtro-placa-finalizadas" type="search" placeholder="Ej. TCA2222" oninput="reiniciarPaginaFinalizadas()"></div>
   <div class="filter-field"><label for="filtro-destino-finalizadas">Destino</label><select id="filtro-destino-finalizadas" onchange="reiniciarPaginaFinalizadas()"><option value="">Todos los destinos</option><option value="CD JUTICALPA">CD JUTICALPA</option><option value="CD SPS">CD SPS</option><option value="CD COMAYAGUA">CD COMAYAGUA</option></select></div>
   <button class="gray filter-clear" onclick="limpiarFiltrosFinalizadas()">Limpiar filtros</button>
@@ -487,6 +487,8 @@ function agregarUnidad(){
     ubicacion:"",
     hora:"",
     fechaSalida:fechaLocalISO(),
+    horaProgramacion:horaActual(),
+    fechaJornada:fechaJornadaOperativa(new Date()),
     estado:"En ruta"
   });
 
@@ -978,10 +980,16 @@ function limpiarActualizaciones(){
 
 let paginaFinalizadas=1;
 const porPaginaFinalizadas=10;
-function fechaLocalISO(){
-  const d=new Date();
+function fechaLocalISO(d=new Date()){
   return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
+function fechaJornadaOperativa(fechaHora=new Date()){
+  const d=new Date(fechaHora);
+  // Las horas antes de las 8 a. m. pertenecen a la jornada nocturna iniciada el día anterior.
+  if(d.getHours()<8)d.setDate(d.getDate()-1);
+  return fechaLocalISO(d);
+}
+function jornadaDeUnidad(u){return u.fechaJornada||u.fechaSalida||"";}
 function reiniciarPaginaFinalizadas(){paginaFinalizadas=1;mostrarFinalizadas();}
 function limpiarFiltrosFinalizadas(){
   ["filtro-fecha-desde","filtro-fecha-hasta","filtro-placa-finalizadas","filtro-destino-finalizadas"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
@@ -995,7 +1003,7 @@ function mostrarFinalizadas(){
   const placa=(document.getElementById("filtro-placa-finalizadas")?.value||"").trim().toLowerCase();
   const destino=(document.getElementById("filtro-destino-finalizadas")?.value||"").toLowerCase();
   const lista=finalizadas.filter(u=>{
-    const fecha=u.fechaFinalizacion||"";
+    const fecha=jornadaDeUnidad(u);
     if(desde&&(!fecha||fecha<desde))return false;
     if(hasta&&(!fecha||fecha>hasta))return false;
     if(placa&&!String(u.placa||"").toLowerCase().includes(placa))return false;
@@ -1005,7 +1013,7 @@ function mostrarFinalizadas(){
   const totalEl=document.getElementById("total-filtradas-finalizadas");
   if(totalEl)totalEl.textContent=lista.length;
   const rango=document.getElementById("rango-finalizadas");
-  if(rango)rango.textContent=desde||hasta?("Fecha de llegada: "+(desde||"inicio") +" — "+(hasta||"hoy")):"Mostrando todas las fechas";
+  if(rango)rango.textContent=desde||hasta?("Jornada nocturna: "+(desde||"inicio")+" — "+(hasta||"hoy")):"Mostrando todas las jornadas";
   const totalPaginas=Math.max(1,Math.ceil(lista.length/porPaginaFinalizadas));
   paginaFinalizadas=Math.min(paginaFinalizadas,totalPaginas);
   const inicio=(paginaFinalizadas-1)*porPaginaFinalizadas;
@@ -1017,13 +1025,15 @@ function mostrarFinalizadas(){
     pagina.forEach(u=>{
       const div=document.createElement("div");div.className="unit";
       const fechaSalida=u.fechaSalida?formatearFechaViaje(u.fechaSalida):"No registrada";
+      const fechaJornada=jornadaDeUnidad(u)?formatearFechaViaje(jornadaDeUnidad(u)):"No registrada";
       const fechaLlegada=u.fechaFinalizacion?formatearFechaViaje(u.fechaFinalizacion):"Fecha no registrada";
       const horaLlegada=u.horaFinalizacion||u.hora||"Sin hora";
       div.innerHTML=`
         <div class="unit-head"><h3>🚛 ${escaparTextoViaje(u.placa)}</h3><span class="badge">Finalizada</span></div>
         <div class="info">
           🎯 <strong>Destino:</strong> ${escaparTextoViaje(u.destino||"Sin destino")}<br>
-          📅 <strong>Salida:</strong> ${fechaSalida}<br>
+          🌙 <strong>Jornada nocturna:</strong> ${fechaJornada}<br>
+          📅 <strong>Fecha programada:</strong> ${fechaSalida}<br>
           🏁 <strong>Llegada:</strong> ${fechaLlegada} · ${escaparTextoViaje(horaLlegada)}<br>
           📍 <strong>Última ubicación:</strong> ${escaparTextoViaje(u.ubicacion||"Sin ubicación")}
         </div>`;
@@ -1083,13 +1093,15 @@ document.querySelectorAll(".nav-link").forEach(link=>{
 });
 function actualizarResumen(){
 const total=unidades.length,completadas=finalizadas.length,enRuta=unidades.filter(u=>(u.estado||"En ruta").toLowerCase()!=="finalizada").length,actualizadas=unidades.filter(u=>u.ubicacion&&u.ubicacion!=="Sin actualización").length;
+const jornadaActual=fechaJornadaOperativa(new Date());
+const finalizadasJornada=finalizadas.filter(u=>jornadaDeUnidad(u)===jornadaActual).length;
 const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
-set("resumen-programadas",total);set("resumen-ruta",enRuta);set("resumen-finalizadas",completadas);set("resumen-actualizaciones",actualizadas);set("donut-total",total+completadas);
-const base=total+completadas||1,sinActualizar=Math.max(0,total-actualizadas),rutaPct=Math.round(actualizadas/base*100),finPct=Math.round(completadas/base*100),sinPct=Math.round(sinActualizar/base*100);
-set("leyenda-ruta",actualizadas+" ("+rutaPct+"%)");set("leyenda-finalizadas",completadas+" ("+finPct+"%)");set("leyenda-sinactualizar",sinActualizar+" ("+sinPct+"%)");
-const donut=document.getElementById("estado-donut");if(donut){const p1=actualizadas/base*100,p2=(actualizadas+completadas)/base*100;donut.style.background="conic-gradient(#00c98a 0% "+p1+"%,#ff9b36 "+p1+"% "+p2+"%,#ff4b5c "+p2+"% 100%)";}
+set("resumen-programadas",total);set("resumen-ruta",enRuta);set("resumen-finalizadas",completadas);set("resumen-actualizaciones",actualizadas);
+set("donut-total",finalizadasJornada);set("leyenda-ruta","0 (0%)");set("leyenda-finalizadas",finalizadasJornada+" ("+(finalizadasJornada?100:0)+"%)");set("leyenda-sinactualizar","0 (0%)");
+const donut=document.getElementById("estado-donut");if(donut){donut.style.background=finalizadasJornada?"conic-gradient(#ff9b36 0% 100%)":"conic-gradient(#243b56 0% 100%)";}
 const now=new Date(),date=document.getElementById("fecha-inicio");if(date)date.textContent=now.toLocaleDateString("es-HN",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
 const greeting=document.getElementById("saludo-inicio");if(greeting){const h=now.getHours();greeting.textContent=h<12?"¡Buenos días!":h<19?"¡Buenas tardes!":"¡Buenas noches!";}
+const estadoTitulo=document.querySelector("#view-inicio .home-panel .panel-head h3");if(estadoTitulo)estadoTitulo.textContent="🌙 Finalizadas en la jornada nocturna ("+formatearFechaViaje(jornadaActual)+")";
 renderInicioTabla();renderUltimasActualizaciones();
 }
 function renderInicioTabla(){

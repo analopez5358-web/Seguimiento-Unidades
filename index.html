@@ -41,6 +41,10 @@ button{border:1px solid transparent;border-radius:11px;padding:12px 15px;font-si
 .quick-list{display:grid;gap:8px;padding:12px}.quick-action{display:flex;align-items:center;gap:11px;text-align:left;width:100%;margin:0;padding:12px;border:1px solid #1c416b;background:linear-gradient(100deg,#0b2442,#0a1b33);color:#e9f3ff;border-radius:12px}.quick-action:first-child{background:linear-gradient(100deg,#0866f5,#0750ce);border-color:#237cff}.quick-icon{font-size:21px}.quick-copy{flex:1;min-width:0}.quick-copy strong{display:block;font-size:12px}.quick-copy small{display:block;margin-top:4px;color:#9fb9d9;font-size:11px;font-weight:400}.quick-action:first-child .quick-copy small{color:#d1e4ff}.quick-arrow{font-size:20px}
 .recent-panel{border:1px solid #18395e;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#091d35,#07162a)}.recent-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 18px}.recent-head h3{margin:0;font-size:16px}.recent-tools{display:flex;gap:8px;align-items:center;min-width:min(420px,50%)}.search-wrap{display:flex;align-items:center;gap:8px;flex:1;padding:0 12px;border:1px solid #1e4168;background:#07162a;border-radius:11px}.search-wrap span{color:#8daed3}.search-wrap input{border:0;background:transparent;padding:11px 0;min-width:0;box-shadow:none!important}.recent-tools button{white-space:nowrap;margin:0}.table-scroll{overflow-x:auto}table.recent-table{width:100%;border-collapse:collapse;min-width:650px;font-size:12px}.recent-table th{padding:12px 15px;text-align:left;background:#102a49;color:#bcd1ec;font-weight:700;border-top:1px solid #19395b;border-bottom:1px solid #19395b}.recent-table td{padding:11px 15px;border-bottom:1px solid #102b48;color:#d4e3f5}.recent-table tr:last-child td{border-bottom:0}.recent-table tbody tr:hover{background:#0d2745}.table-plate{font-weight:800;color:#f1f7ff!important}.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:30px;background:#064b3c;color:#6bffcc;font-weight:750;white-space:nowrap}.status-pill.done{background:#263d5c;color:#d5e5ff}.status-pill.delayed{background:#692431;color:#ffbac3}.table-actions{display:flex;gap:5px}.table-actions button{padding:7px 9px;margin:0;font-size:12px}.action-location{background:#0759e9;color:#fff}.action-edit{background:#007d5a;color:#fff}.action-finish{background:#a52b36;color:#fff}.recent-empty{padding:24px;text-align:center;color:#8ca6c8;font-size:13px}
 @media(max-width:1200px){.home-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.home-middle{grid-template-columns:1fr 1fr}.home-middle .quick-panel{grid-column:1/-1}.quick-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:1050px){.container{margin-left:240px;padding:22px}.home-middle{grid-template-columns:1fr}.home-middle .quick-panel{grid-column:auto}.quick-list{grid-template-columns:1fr}}@media(max-width:700px){.container{margin:0;padding:14px}.home-kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{padding:13px;min-height:108px}.kpi-icon{width:40px;height:40px;font-size:19px}.kpi strong{font-size:25px}.kpi-bars{display:none}.home-topbar{align-items:flex-start}.home-date{display:none}.home-greeting h2{font-size:21px}.home-greeting p{font-size:12px}.status-layout{flex-direction:column;padding:10px}.status-legend{width:100%}.recent-head{align-items:stretch;flex-direction:column}.recent-tools{min-width:0;width:100%}}
+
+/* Filtros y paginación de Finalizadas */
+.final-filter-panel{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:18px;margin:18px 0;border:1px solid #203c5d;border-radius:15px;background:#0a1a2e}.filter-field{display:flex;flex-direction:column;gap:7px;min-width:0}.filter-field label{font-size:12px;font-weight:700;color:#a9c2e2}.filter-field input,.filter-field select{width:100%;min-width:0;box-sizing:border-box;background:#071426;border:1px solid #294766;border-radius:10px;color:#f0f6ff;padding:12px;font:inherit}.filter-clear{align-self:end;min-height:42px;margin:0}.final-summary{display:flex;align-items:center;flex-wrap:wrap;gap:10px;padding:12px 14px;margin-bottom:14px;border:1px solid #203c5d;border-radius:12px;background:#0d2037;color:#a9c2e2;font-size:13px}.final-summary strong{font-size:20px;color:#fff}.final-summary-note{margin-left:auto}.final-pagination{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:18px}.final-pagination button{width:auto;margin:0;padding:9px 13px}.final-pagination button:disabled{opacity:.4;cursor:not-allowed}.final-page-label{font-size:12px;color:#a9c2e2;padding:0 8px}
+@media(max-width:700px){.final-filter-panel{grid-template-columns:1fr;padding:13px}.filter-clear{width:100%}.final-summary-note{width:100%;margin-left:0}.finalizadas-card{padding:15px}}
 </style>
 </head>
 
@@ -172,12 +176,19 @@ Limpiar actualizaciones
 <section class="view" id="view-finalizadas">
 <!-- FINALIZADAS -->
 
-<div class="card">
-
+<div class="card finalizadas-card">
 <h2 id="finalizadas-section">✅ Unidades finalizadas</h2>
-
+<p class="small">Consulta los viajes por fecha de llegada, placa o destino. La fecha se registra al presionar Finalizar.</p>
+<div class="final-filter-panel">
+  <div class="filter-field"><label for="filtro-fecha-desde">Desde (fecha de llegada)</label><input id="filtro-fecha-desde" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
+  <div class="filter-field"><label for="filtro-fecha-hasta">Hasta (fecha de llegada)</label><input id="filtro-fecha-hasta" type="date" onchange="reiniciarPaginaFinalizadas()"></div>
+  <div class="filter-field"><label for="filtro-placa-finalizadas">Buscar placa</label><input id="filtro-placa-finalizadas" type="search" placeholder="Ej. TCA2222" oninput="reiniciarPaginaFinalizadas()"></div>
+  <div class="filter-field"><label for="filtro-destino-finalizadas">Destino</label><select id="filtro-destino-finalizadas" onchange="reiniciarPaginaFinalizadas()"><option value="">Todos los destinos</option><option value="CD JUTICALPA">CD JUTICALPA</option><option value="CD SPS">CD SPS</option><option value="CD COMAYAGUA">CD COMAYAGUA</option></select></div>
+  <button class="gray filter-clear" onclick="limpiarFiltrosFinalizadas()">Limpiar filtros</button>
+</div>
+<div class="final-summary"><span>Resultados encontrados</span><strong id="total-filtradas-finalizadas">0</strong><span class="final-summary-note" id="rango-finalizadas">Mostrando todas las fechas</span></div>
 <div id="finalizadas"></div>
-
+<div class="final-pagination" id="paginacion-finalizadas"></div>
 </div>
 </section>
 
@@ -471,13 +482,12 @@ function agregarUnidad(){
 
 
   unidades.push({
-
     placa:placa,
     destino:destino,
     ubicacion:"",
     hora:"",
+    fechaSalida:fechaLocalISO(),
     estado:"En ruta"
-
   });
 
 
@@ -591,13 +601,10 @@ function finalizar(i){
   )) return;
 
 
-  unidad.estado=
-    "Finalizada";
-
-  unidad.hora=
-    horaActual();
-
-
+  unidad.estado="Finalizada";
+  unidad.fechaFinalizacion=fechaLocalISO();
+  unidad.horaFinalizacion=horaActual();
+  unidad.hora=unidad.horaFinalizacion;
   finalizadas.push(unidad);
 
   unidades.splice(i,1);
@@ -969,77 +976,77 @@ function limpiarActualizaciones(){
    FINALIZADAS
 ===================================== */
 
-function mostrarFinalizadas(){
-
-  const contenedor=
-    document.getElementById(
-      "finalizadas"
-    );
-
-
-  if(finalizadas.length===0){
-
-    contenedor.innerHTML=
-    `
-      <div class="empty">
-        No hay unidades finalizadas.
-      </div>
-    `;
-
-    return;
-
-  }
-
-
-  contenedor.innerHTML="";
-
-
-  finalizadas.forEach(u=>{
-
-    const div=
-      document.createElement("div");
-
-    div.className="unit";
-
-
-    div.innerHTML=`
-
-      <div class="unit-head">
-
-        <h3>🚛 ${u.placa}</h3>
-
-        <span class="badge">
-          Finalizada
-        </span>
-
-      </div>
-
-
-      <div class="info">
-
-        🎯 <strong>Destino:</strong>
-        ${u.destino}
-
-        <br>
-
-        📍 <strong>Ubicado en:</strong>
-        ${u.ubicacion || "Sin ubicación"}
-
-        <br>
-
-        🕐 <strong>Hora:</strong>
-        ${u.hora || "Sin hora"}
-
-      </div>
-
-    `;
-
-
-    contenedor.appendChild(div);
-
-  });
-
+let paginaFinalizadas=1;
+const porPaginaFinalizadas=10;
+function fechaLocalISO(){
+  const d=new Date();
+  return d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
 }
+function reiniciarPaginaFinalizadas(){paginaFinalizadas=1;mostrarFinalizadas();}
+function limpiarFiltrosFinalizadas(){
+  ["filtro-fecha-desde","filtro-fecha-hasta","filtro-placa-finalizadas","filtro-destino-finalizadas"].forEach(id=>{const el=document.getElementById(id);if(el)el.value="";});
+  paginaFinalizadas=1;mostrarFinalizadas();
+}
+function mostrarFinalizadas(){
+  const contenedor=document.getElementById("finalizadas");
+  if(!contenedor)return;
+  const desde=document.getElementById("filtro-fecha-desde")?.value||"";
+  const hasta=document.getElementById("filtro-fecha-hasta")?.value||"";
+  const placa=(document.getElementById("filtro-placa-finalizadas")?.value||"").trim().toLowerCase();
+  const destino=(document.getElementById("filtro-destino-finalizadas")?.value||"").toLowerCase();
+  const lista=finalizadas.filter(u=>{
+    const fecha=u.fechaFinalizacion||"";
+    if(desde&&(!fecha||fecha<desde))return false;
+    if(hasta&&(!fecha||fecha>hasta))return false;
+    if(placa&&!String(u.placa||"").toLowerCase().includes(placa))return false;
+    if(destino&&!String(u.destino||"").toLowerCase().includes(destino))return false;
+    return true;
+  }).sort((a,b)=>String(b.fechaFinalizacion||"").localeCompare(String(a.fechaFinalizacion||""))||String(b.horaFinalizacion||b.hora||"").localeCompare(String(a.horaFinalizacion||a.hora||"")));
+  const totalEl=document.getElementById("total-filtradas-finalizadas");
+  if(totalEl)totalEl.textContent=lista.length;
+  const rango=document.getElementById("rango-finalizadas");
+  if(rango)rango.textContent=desde||hasta?("Fecha de llegada: "+(desde||"inicio") +" — "+(hasta||"hoy")):"Mostrando todas las fechas";
+  const totalPaginas=Math.max(1,Math.ceil(lista.length/porPaginaFinalizadas));
+  paginaFinalizadas=Math.min(paginaFinalizadas,totalPaginas);
+  const inicio=(paginaFinalizadas-1)*porPaginaFinalizadas;
+  const pagina=lista.slice(inicio,inicio+porPaginaFinalizadas);
+  if(!pagina.length){
+    contenedor.innerHTML='<div class="empty">'+(finalizadas.length?'No hay viajes que coincidan con los filtros.':'No hay unidades finalizadas todavía.')+'</div>';
+  }else{
+    contenedor.innerHTML="";
+    pagina.forEach(u=>{
+      const div=document.createElement("div");div.className="unit";
+      const fechaSalida=u.fechaSalida?formatearFechaViaje(u.fechaSalida):"No registrada";
+      const fechaLlegada=u.fechaFinalizacion?formatearFechaViaje(u.fechaFinalizacion):"Fecha no registrada";
+      const horaLlegada=u.horaFinalizacion||u.hora||"Sin hora";
+      div.innerHTML=`
+        <div class="unit-head"><h3>🚛 ${escaparTextoViaje(u.placa)}</h3><span class="badge">Finalizada</span></div>
+        <div class="info">
+          🎯 <strong>Destino:</strong> ${escaparTextoViaje(u.destino||"Sin destino")}<br>
+          📅 <strong>Salida:</strong> ${fechaSalida}<br>
+          🏁 <strong>Llegada:</strong> ${fechaLlegada} · ${escaparTextoViaje(horaLlegada)}<br>
+          📍 <strong>Última ubicación:</strong> ${escaparTextoViaje(u.ubicacion||"Sin ubicación")}
+        </div>`;
+      contenedor.appendChild(div);
+    });
+  }
+  const pag=document.getElementById("paginacion-finalizadas");
+  if(pag){
+    pag.innerHTML="";
+    if(lista.length>porPaginaFinalizadas){
+      const prev=document.createElement("button");prev.className="gray";prev.textContent="← Anterior";prev.disabled=paginaFinalizadas===1;prev.onclick=()=>{paginaFinalizadas--;mostrarFinalizadas();};pag.appendChild(prev);
+      const label=document.createElement("span");label.className="final-page-label";label.textContent="Página "+paginaFinalizadas+" de "+totalPaginas;pag.appendChild(label);
+      const next=document.createElement("button");next.className="gray";next.textContent="Siguiente →";next.disabled=paginaFinalizadas===totalPaginas;next.onclick=()=>{paginaFinalizadas++;mostrarFinalizadas();};pag.appendChild(next);
+    }else if(lista.length){
+      const label=document.createElement("span");label.className="final-page-label";label.textContent="Mostrando "+lista.length+" de "+lista.length+" viajes";pag.appendChild(label);
+    }
+  }
+}
+function formatearFechaViaje(fecha){
+  if(!/^\d{4}-\d{2}-\d{2}$/.test(fecha))return fecha;
+  const [y,m,d]=fecha.split("-");return d+"/"+m+"/"+y;
+}
+function escaparTextoViaje(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 
 
 /* =====================================

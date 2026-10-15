@@ -31,6 +31,16 @@ button{border:1px solid transparent;border-radius:11px;padding:12px 15px;font-si
 .empty{text-align:center;color:var(--muted);padding:26px 15px;background:#0c1728;border:1px dashed #2a3b57;border-radius:13px;font-size:13px}.small{color:var(--muted);font-size:13px;line-height:1.6}.newPlate{display:none;margin-top:10px}footer{grid-column:1/-1;text-align:center;color:#657995;padding:8px 20px 25px;font-size:12px}
 @media(max-width:1050px){.container{margin-left:240px;padding:22px}.home-grid{grid-template-columns:1fr}}
 @media(max-width:700px){header{position:relative;width:auto;inset:auto;padding:18px;border-right:0;border-bottom:1px solid var(--line)}.brand{margin-bottom:15px}.side-nav{display:flex;overflow-x:auto;padding-bottom:3px}.nav-link{flex:0 0 auto;min-height:39px;padding:9px 11px;font-size:12px}.sidebar-status,.version{display:none}.container{margin:0;padding:14px;display:block}.view{max-width:none}.home-grid{grid-template-columns:1fr}.card{padding:18px;border-radius:16px;margin-bottom:14px}.unit-head h3{font-size:18px}.update{display:block}.update input{margin-bottom:8px}.update button{width:100%}.actions{grid-template-columns:1fr 1fr}}
+
+/* Dashboard Inicio - diseño actualizado */
+.container{max-width:1800px;margin:0 0 0 286px;padding:28px}.view{max-width:1500px}
+.home-topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:22px}.home-greeting{display:flex;align-items:center;gap:14px}.greeting-icon{display:grid;place-items:center;width:54px;height:54px;border-radius:16px;background:linear-gradient(145deg,#0e3970,#0c2547);border:1px solid #174d86;font-size:26px}.home-greeting h2{margin:0;font-size:25px}.home-greeting h2:after{display:none}.home-greeting p{margin:6px 0 0}.home-date{padding:11px 15px;border:1px solid #1b3b60;border-radius:13px;background:#0a1b33;color:#b9cce7;font-size:12px;white-space:nowrap}
+.home-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-bottom:18px}.kpi{position:relative;overflow:hidden;min-height:128px;padding:18px;border-radius:16px;border:1px solid #183b62;background:linear-gradient(135deg,#0d2441,#091a30)}.kpi-top{display:flex;align-items:center;gap:12px}.kpi-icon{display:grid;place-items:center;width:52px;height:52px;border-radius:15px;font-size:24px;flex-shrink:0}.kpi.blue .kpi-icon{background:#0754d9;color:#d9eaff}.kpi.green .kpi-icon{background:#007b5b;color:#b5ffe5}.kpi.orange .kpi-icon{background:#c75c0b;color:#fff0db}.kpi.purple .kpi-icon{background:#5828d6;color:#e9ddff}.kpi-label{font-size:12px;color:#b9cce7}.kpi strong{display:block;font-size:30px;line-height:1.1;margin-top:7px;color:#fff}.kpi-sub{font-size:11px;color:#8ea9c9;margin-top:8px}.kpi-bars{position:absolute;right:15px;bottom:15px;display:flex;align-items:end;gap:4px;height:34px;opacity:.8}.kpi-bars i{display:block;width:6px;border-radius:3px 3px 0 0;background:currentColor}.kpi.blue .kpi-bars{color:#4c95ff}.kpi.green .kpi-bars{color:#00d79a}.kpi.orange .kpi-bars{color:#ff963b}.kpi.purple .kpi-bars{color:#9868ff}
+.home-middle{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.12fr) minmax(245px,.82fr);gap:14px;margin-bottom:18px}.home-panel{min-width:0;overflow:hidden;border:1px solid #18395e;border-radius:16px;background:linear-gradient(145deg,#091d35,#07162a)}.panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:17px 18px;border-bottom:1px solid #163352}.panel-head h3{font-size:15px;margin:0}.status-layout{display:flex;align-items:center;justify-content:center;gap:18px;min-height:205px}.donut{width:150px;height:150px;flex:0 0 150px;border-radius:50%;display:grid;place-items:center;position:relative;background:conic-gradient(#00c98a 0% 70%,#ff9b36 70% 90%,#ff4b5c 90% 100%)}.donut:before{content:"";position:absolute;inset:17px;border-radius:50%;background:#09192d;border:1px solid #173654}.donut-center{position:relative;text-align:center}.donut-center strong{display:block;font-size:28px}.donut-center span{font-size:11px;color:#a8bdd8}.status-legend{display:grid;gap:13px;min-width:0}.legend-row{display:grid;grid-template-columns:10px minmax(0,1fr) auto;align-items:center;gap:8px;font-size:12px;color:#c7d8ed}.legend-dot{width:10px;height:10px;border-radius:50%}.legend-value{color:#8fa9ca;white-space:nowrap}
+.latest-list{display:grid}.latest-item{display:grid;grid-template-columns:10px minmax(65px,.6fr) minmax(0,1fr) auto;align-items:center;gap:10px;padding:13px 18px;border-bottom:1px solid #102b48;font-size:12px}.latest-item:last-child{border-bottom:0}.latest-plate{font-weight:800;color:#e7f1ff}.latest-dest{color:#a9bfda;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.latest-time{color:#7997bb;white-space:nowrap}
+.quick-list{display:grid;gap:8px;padding:12px}.quick-action{display:flex;align-items:center;gap:11px;text-align:left;width:100%;margin:0;padding:12px;border:1px solid #1c416b;background:linear-gradient(100deg,#0b2442,#0a1b33);color:#e9f3ff;border-radius:12px}.quick-action:first-child{background:linear-gradient(100deg,#0866f5,#0750ce);border-color:#237cff}.quick-icon{font-size:21px}.quick-copy{flex:1;min-width:0}.quick-copy strong{display:block;font-size:12px}.quick-copy small{display:block;margin-top:4px;color:#9fb9d9;font-size:11px;font-weight:400}.quick-action:first-child .quick-copy small{color:#d1e4ff}.quick-arrow{font-size:20px}
+.recent-panel{border:1px solid #18395e;border-radius:16px;overflow:hidden;background:linear-gradient(145deg,#091d35,#07162a)}.recent-head{display:flex;align-items:center;justify-content:space-between;gap:15px;padding:17px 18px}.recent-head h3{margin:0;font-size:16px}.recent-tools{display:flex;gap:8px;align-items:center;min-width:min(420px,50%)}.search-wrap{display:flex;align-items:center;gap:8px;flex:1;padding:0 12px;border:1px solid #1e4168;background:#07162a;border-radius:11px}.search-wrap span{color:#8daed3}.search-wrap input{border:0;background:transparent;padding:11px 0;min-width:0;box-shadow:none!important}.recent-tools button{white-space:nowrap;margin:0}.table-scroll{overflow-x:auto}table.recent-table{width:100%;border-collapse:collapse;min-width:650px;font-size:12px}.recent-table th{padding:12px 15px;text-align:left;background:#102a49;color:#bcd1ec;font-weight:700;border-top:1px solid #19395b;border-bottom:1px solid #19395b}.recent-table td{padding:11px 15px;border-bottom:1px solid #102b48;color:#d4e3f5}.recent-table tr:last-child td{border-bottom:0}.recent-table tbody tr:hover{background:#0d2745}.table-plate{font-weight:800;color:#f1f7ff!important}.status-pill{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:30px;background:#064b3c;color:#6bffcc;font-weight:750;white-space:nowrap}.status-pill.done{background:#263d5c;color:#d5e5ff}.status-pill.delayed{background:#692431;color:#ffbac3}.table-actions{display:flex;gap:5px}.table-actions button{padding:7px 9px;margin:0;font-size:12px}.action-location{background:#0759e9;color:#fff}.action-edit{background:#007d5a;color:#fff}.action-finish{background:#a52b36;color:#fff}.recent-empty{padding:24px;text-align:center;color:#8ca6c8;font-size:13px}
+@media(max-width:1200px){.home-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.home-middle{grid-template-columns:1fr 1fr}.home-middle .quick-panel{grid-column:1/-1}.quick-list{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:1050px){.container{margin-left:240px;padding:22px}.home-middle{grid-template-columns:1fr}.home-middle .quick-panel{grid-column:auto}.quick-list{grid-template-columns:1fr}}@media(max-width:700px){.container{margin:0;padding:14px}.home-kpis{grid-template-columns:1fr 1fr;gap:9px}.kpi{padding:13px;min-height:108px}.kpi-icon{width:40px;height:40px;font-size:19px}.kpi strong{font-size:25px}.kpi-bars{display:none}.home-topbar{align-items:flex-start}.home-date{display:none}.home-greeting h2{font-size:21px}.home-greeting p{font-size:12px}.status-layout{flex-direction:column;padding:10px}.status-legend{width:100%}.recent-head{align-items:stretch;flex-direction:column}.recent-tools{min-width:0;width:100%}}
 </style>
 </head>
 
@@ -55,20 +65,19 @@ button{border:1px solid transparent;border-radius:11px;padding:12px 15px;font-si
 <div class="container" id="app-container">
 
 <section class="view active" id="view-inicio">
-  <div class="card">
-    <h2>🏠 Inicio</h2>
-    <p class="small">Panel principal de Seguimiento de Unidades. Usa el menú para entrar a cada módulo por separado.</p>
-    <div class="home-grid">
-      <div class="stat-card"><span>UNIDADES PROGRAMADAS</span><strong id="resumen-programadas">0</strong></div>
-      <div class="stat-card"><span>UNIDADES FINALIZADAS</span><strong id="resumen-finalizadas">0</strong></div>
-      <div class="stat-card"><span>ACTUALIZACIONES REGISTRADAS</span><strong id="resumen-actualizaciones">0</strong></div>
-    </div>
-    <div class="home-actions">
-      <button class="primary" onclick="abrirVista('view-programar')">＋ Programar unidad</button>
-      <button class="gray" onclick="abrirVista('view-unidades')">📋 Ver unidades</button>
-      <button class="gray" onclick="abrirVista('view-reporte')">📄 Ver reporte</button>
-    </div>
-  </div>
+<div class="home-topbar"><div class="home-greeting"><div class="greeting-icon">☀️</div><div><h2 id="saludo-inicio">¡Bienvenido!</h2><p class="small">Panel principal de Seguimiento de Unidades. Administra los viajes y sus actualizaciones desde aquí.</p></div></div><div class="home-date">◷ <span id="fecha-inicio">Hoy</span></div></div>
+<div class="home-kpis">
+<div class="kpi blue"><div class="kpi-top"><div class="kpi-icon">🚛</div><div><div class="kpi-label">Unidades programadas</div><strong id="resumen-programadas">0</strong></div></div><div class="kpi-sub">Unidades activas en seguimiento</div><div class="kpi-bars"><i style="height:10px"></i><i style="height:16px"></i><i style="height:22px"></i><i style="height:28px"></i><i style="height:34px"></i></div></div>
+<div class="kpi green"><div class="kpi-top"><div class="kpi-icon">▶</div><div><div class="kpi-label">En ruta</div><strong id="resumen-ruta">0</strong></div></div><div class="kpi-sub">Viajes en proceso</div><div class="kpi-bars"><i style="height:10px"></i><i style="height:16px"></i><i style="height:23px"></i><i style="height:28px"></i><i style="height:34px"></i></div></div>
+<div class="kpi orange"><div class="kpi-top"><div class="kpi-icon">⚑</div><div><div class="kpi-label">Finalizadas</div><strong id="resumen-finalizadas">0</strong></div></div><div class="kpi-sub">Viajes completados</div><div class="kpi-bars"><i style="height:10px"></i><i style="height:16px"></i><i style="height:23px"></i><i style="height:28px"></i><i style="height:34px"></i></div></div>
+<div class="kpi purple"><div class="kpi-top"><div class="kpi-icon">◷</div><div><div class="kpi-label">Actualizaciones</div><strong id="resumen-actualizaciones">0</strong></div></div><div class="kpi-sub">Ubicaciones registradas</div><div class="kpi-bars"><i style="height:10px"></i><i style="height:16px"></i><i style="height:23px"></i><i style="height:28px"></i><i style="height:34px"></i></div></div>
+</div>
+<div class="home-middle">
+<section class="home-panel"><div class="panel-head"><h3>◉ Estado de unidades</h3></div><div class="panel-body status-layout"><div class="donut" id="estado-donut"><div class="donut-center"><strong id="donut-total">0</strong><span>Unidades</span></div></div><div class="status-legend"><div class="legend-row"><span class="legend-dot" style="background:#00c98a"></span><span>En ruta</span><span class="legend-value" id="leyenda-ruta">0 (0%)</span></div><div class="legend-row"><span class="legend-dot" style="background:#ff9b36"></span><span>Finalizadas</span><span class="legend-value" id="leyenda-finalizadas">0 (0%)</span></div><div class="legend-row"><span class="legend-dot" style="background:#ff4b5c"></span><span>Sin actualizar</span><span class="legend-value" id="leyenda-sinactualizar">0 (0%)</span></div></div></div></section>
+<section class="home-panel"><div class="panel-head"><h3>♧ Últimas actualizaciones</h3><button class="gray" onclick="abrirVista('view-unidades')">Ver todas</button></div><div class="latest-list" id="ultimas-actualizaciones"><div class="recent-empty">Todavía no hay actualizaciones.</div></div></section>
+<section class="home-panel quick-panel"><div class="panel-head"><h3>⚡ Acciones rápidas</h3></div><div class="quick-list"><button class="quick-action" onclick="abrirVista('view-programar')"><span class="quick-icon">⊕</span><span class="quick-copy"><strong>Programar unidad</strong><small>Agregar una nueva unidad y destino</small></span><span class="quick-arrow">›</span></button><button class="quick-action" onclick="abrirVista('view-unidades')"><span class="quick-icon">🚛</span><span class="quick-copy"><strong>Ver unidades programadas</strong><small>Actualizar, finalizar o eliminar</small></span><span class="quick-arrow">›</span></button><button class="quick-action" onclick="abrirVista('view-reporte')"><span class="quick-icon">▤</span><span class="quick-copy"><strong>Ver reporte</strong><small>Consultar y copiar actualizaciones</small></span><span class="quick-arrow">›</span></button><button class="quick-action" onclick="abrirVista('view-finalizadas')"><span class="quick-icon">✓</span><span class="quick-copy"><strong>Ver finalizadas</strong><small>Unidades con viaje finalizado</small></span><span class="quick-arrow">›</span></button></div></section>
+</div>
+<section class="recent-panel"><div class="recent-head"><h3>🚚 Unidades recientes</h3><div class="recent-tools"><label class="search-wrap"><span>⌕</span><input id="buscar-unidades-inicio" type="search" placeholder="Buscar placa o destino..." oninput="filtrarTablaInicio()"></label><button class="gray" onclick="abrirVista('view-unidades')">Ver todas ↗</button></div></div><div class="table-scroll"><table class="recent-table"><thead><tr><th>Placa</th><th>Destino</th><th>Estado</th><th>Última actualización</th><th>Acciones</th></tr></thead><tbody id="tabla-unidades-inicio"></tbody></table></div></section>
 </section>
 
 <section class="view" id="view-programar">
@@ -751,6 +760,7 @@ function mostrar(){
   mostrarFinalizadas();
 
   generarReporte();
+  actualizarResumen();
 
 }
 
@@ -1065,13 +1075,33 @@ document.querySelectorAll(".nav-link").forEach(link=>{
   });
 });
 function actualizarResumen(){
-  const prog=document.getElementById("resumen-programadas");
-  const fin=document.getElementById("resumen-finalizadas");
-  const act=document.getElementById("resumen-actualizaciones");
-  if(prog) prog.textContent=Array.isArray(unidades)?unidades.length:0;
-  if(fin) fin.textContent=Array.isArray(finalizadas)?finalizadas.length:0;
-  if(act) act.textContent=Array.isArray(unidades)?unidades.reduce((n,u)=>n+(Array.isArray(u.actualizaciones)?u.actualizaciones.length:((u.ubicacion&&u.ubicacion!=="Sin actualización")?1:0)),0):0;
+const total=unidades.length,completadas=finalizadas.length,enRuta=unidades.filter(u=>(u.estado||"En ruta").toLowerCase()!=="finalizada").length,actualizadas=unidades.filter(u=>u.ubicacion&&u.ubicacion!=="Sin actualización").length;
+const set=(id,val)=>{const el=document.getElementById(id);if(el)el.textContent=val;};
+set("resumen-programadas",total);set("resumen-ruta",enRuta);set("resumen-finalizadas",completadas);set("resumen-actualizaciones",actualizadas);set("donut-total",total+completadas);
+const base=total+completadas||1,rutaPct=Math.round(enRuta/base*100),finPct=Math.round(completadas/base*100),sinActualizar=Math.max(0,total-actualizadas),sinPct=Math.round(sinActualizar/base*100);
+set("leyenda-ruta",enRuta+" ("+rutaPct+"%)");set("leyenda-finalizadas",completadas+" ("+finPct+"%)");set("leyenda-sinactualizar",sinActualizar+" ("+sinPct+"%)");
+const donut=document.getElementById("estado-donut");if(donut){const p1=enRuta/base*100,p2=(enRuta+completadas)/base*100;donut.style.background="conic-gradient(#00c98a 0% "+p1+"%,#ff9b36 "+p1+"% "+p2+"%,#ff4b5c "+p2+"% 100%)";}
+const now=new Date(),date=document.getElementById("fecha-inicio");if(date)date.textContent=now.toLocaleDateString("es-HN",{weekday:"short",day:"numeric",month:"short",year:"numeric"});
+const greeting=document.getElementById("saludo-inicio");if(greeting){const h=now.getHours();greeting.textContent=h<12?"¡Buenos días!":h<19?"¡Buenas tardes!":"¡Buenas noches!";}
+renderInicioTabla();renderUltimasActualizaciones();
 }
+function renderInicioTabla(){
+const body=document.getElementById("tabla-unidades-inicio");if(!body)return;const q=(document.getElementById("buscar-unidades-inicio")?.value||"").trim().toLowerCase();
+const lista=unidades.filter(u=>(u.placa+" "+u.destino+" "+u.estado+" "+u.ubicacion).toLowerCase().includes(q));
+if(!lista.length){body.innerHTML='<tr><td colspan="5"><div class="recent-empty">No hay unidades que coincidan con la búsqueda.</div></td></tr>';return;}
+body.innerHTML=lista.slice(0,8).map(u=>{const idx=unidades.indexOf(u),estado=u.estado||"En ruta",cls=estado.toLowerCase().includes("final")?"done":estado.toLowerCase().includes("retras")?"delayed":"",ultima=u.hora||(u.ubicacion?"Ubicación registrada":"Sin actualización");
+return '<tr><td class="table-plate">'+escapeHtmlInicio(u.placa)+'</td><td>'+escapeHtmlInicio(u.destino)+'</td><td><span class="status-pill '+cls+'">'+escapeHtmlInicio(estado)+'</span></td><td>'+escapeHtmlInicio(ultima)+'</td><td><div class="table-actions"><button class="action-location" title="Ver unidades" onclick="abrirVistaUnidadesDesdeInicio()">⌖</button><button class="action-edit" title="Actualizar ubicación" onclick="editarDesdeInicio('+idx+')">✎</button><button class="action-finish" title="Finalizar unidad" onclick="finalizarDesdeInicio('+idx+')">⚑</button></div></td></tr>';}).join("");
+}
+function renderUltimasActualizaciones(){
+const box=document.getElementById("ultimas-actualizaciones");if(!box)return;const recientes=unidades.filter(u=>u.ubicacion&&u.ubicacion!=="Sin actualización").slice().reverse().slice(0,5);
+if(!recientes.length){box.innerHTML='<div class="recent-empty">Todavía no hay actualizaciones registradas.</div>';return;}
+box.innerHTML=recientes.map(u=>'<div class="latest-item"><span class="legend-dot" style="background:#00c98a"></span><strong class="latest-plate">'+escapeHtmlInicio(u.placa)+'</strong><span class="latest-dest">'+escapeHtmlInicio(u.ubicacion)+'</span><span class="latest-time">'+escapeHtmlInicio(u.hora||"Registrada")+'</span></div>').join("");
+}
+function filtrarTablaInicio(){renderInicioTabla();}
+function abrirVistaUnidadesDesdeInicio(){abrirVista("view-unidades");}
+function editarDesdeInicio(i){abrirVista("view-unidades");setTimeout(()=>document.getElementById("ubicacion_"+i)?.focus(),100);}
+function finalizarDesdeInicio(i){if(confirm("¿Deseas finalizar la unidad "+(unidades[i]?.placa||"")+"?"))finalizar(i);}
+function escapeHtmlInicio(value){return String(value??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));}
 window.addEventListener("hashchange",()=>{
   const link=document.querySelector('.nav-link[href="'+location.hash+'"]');
   if(link) abrirVista(link.dataset.view);

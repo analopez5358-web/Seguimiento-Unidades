@@ -267,6 +267,7 @@ if(!Array.isArray(unidades)){
 
 unidades=unidades.map(u=>({
 
+  ...u,
   placa:u.placa || "",
   destino:u.destino || "",
   ubicacion:u.ubicacion || "",
@@ -316,12 +317,13 @@ async function sincronizarConGoogleSheets(){
       (u.fechaSalida || u.fechaJornada) &&
       (u.horaProgramacion || u.hora))
     .map(u => ({
+      ...u,
       placa: String(u.placa || "").trim().toUpperCase(),
       destino: String(u.destino || "").trim(),
-      fechaInicio: u.fechaSalida || u.fechaJornada || "",
-      horaInicio: u.horaProgramacion || u.hora || "",
-      fechaFinal: u.fechaFinalizacion || "",
-      horaFinal: u.horaFinalizacion || "",
+      fechaSalida: u.fechaSalida || u.fechaJornada || "",
+      horaProgramacion: u.horaProgramacion || u.hora || "",
+      fechaFinalizacion: u.fechaFinalizacion || "",
+      horaFinalizacion: u.horaFinalizacion || "",
       ubicacion: u.ubicacion || "",
       estado: u.estado || "En ruta"
     }));

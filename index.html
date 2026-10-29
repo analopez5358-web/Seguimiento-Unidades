@@ -213,7 +213,7 @@ const FINAL_STORAGE=
 "seguimiento_finalizadas_v62";
   
   const API_URL=
-"https://script.google.com/macros/s/AKfycbwxHNznuuE71sv5MZpwIN9dfjGLT0DZaiHi0Y_f9dOTjRiqO0XCJj5y-ScuKR-ZtZNv/exec";
+"https://dry-fog-efc2.analopez5358.workers.dev/";
 
 
 /* =====================================
@@ -299,6 +299,55 @@ function guardar(){
     JSON.stringify(finalizadas)
   );
 
+  sincronizarConGoogleSheets();
+}
+
+let sincronizacionEnCurso = false;
+
+async function sincronizarConGoogleSheets(){
+
+  if(sincronizacionEnCurso) return;
+
+  const todos = [...unidades, ...finalizadas];
+
+  // No enviar datos de ejemplo o registros que no tengan fecha y hora reales.
+  const viajes = todos
+    .filter(u => u && u.placa && u.destino &&
+      (u.fechaSalida || u.fechaJornada) &&
+      (u.horaProgramacion || u.hora))
+    .map(u => ({
+      placa: String(u.placa || "").trim().toUpperCase(),
+      destino: String(u.destino || "").trim(),
+      fechaInicio: u.fechaSalida || u.fechaJornada || "",
+      horaInicio: u.horaProgramacion || u.hora || "",
+      fechaFinal: u.fechaFinalizacion || "",
+      horaFinal: u.horaFinalizacion || "",
+      ubicacion: u.ubicacion || "",
+      estado: u.estado || "En ruta"
+    }));
+
+  if(!viajes.length) return;
+
+  sincronizacionEnCurso = true;
+
+  try {
+    const respuesta = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ action: "sync", viajes })
+    });
+
+    if(!respuesta.ok) {
+      console.error("Error al sincronizar viajes:", respuesta.status);
+    } else {
+      const resultado = await respuesta.text();
+      console.info("Respuesta de sincronización:", resultado);
+    }
+  } catch(error) {
+    console.error("No se pudo conectar con Google Sheets:", error);
+  } finally {
+    sincronizacionEnCurso = false;
+  }
 }
 
 

@@ -290,65 +290,79 @@ localStorage.getItem(FINAL_STORAGE)
 
 function guardar(){
 
-  localStorage.setItem(
-    STORAGE,
-    JSON.stringify(unidades)
-  );
+  localStorage.setItem(STORAGE, JSON.stringify(unidades));
+  localStorage.setItem(FINAL_STORAGE, JSON.stringify(finalizadas));
 
-  localStorage.setItem(
-    FINAL_STORAGE,
-    JSON.stringify(finalizadas)
-  );
-
+  // Sincroniza en segundo plano sin bloquear el guardado local.
   sincronizarConGoogleSheets();
 }
 
+let sincronizacionPendiente = false;
 let sincronizacionEnCurso = false;
 
 async function sincronizarConGoogleSheets(){
-
-  if(sincronizacionEnCurso) return;
-
-  const todos = [...unidades, ...finalizadas];
-
-  // No enviar datos de ejemplo o registros que no tengan fecha y hora reales.
-  const viajes = todos
-    .filter(u => u && u.placa && u.destino &&
-      (u.fechaSalida || u.fechaJornada) &&
-      (u.horaProgramacion || u.hora))
-    .map(u => ({
-      ...u,
-      placa: String(u.placa || "").trim().toUpperCase(),
-      destino: String(u.destino || "").trim(),
-      fechaSalida: u.fechaSalida || u.fechaJornada || "",
-      horaProgramacion: u.horaProgramacion || u.hora || "",
-      fechaFinalizacion: u.fechaFinalizacion || "",
-      horaFinalizacion: u.horaFinalizacion || "",
-      ubicacion: u.ubicacion || "",
-      estado: u.estado || "En ruta"
-    }));
-
-  if(!viajes.length) return;
+  // Si ya hay una petición, deja marcada otra sincronización para no perder cambios.
+  if(sincronizacionEnCurso){
+    sincronizacionPendiente = true;
+    return;
+  }
 
   sincronizacionEnCurso = true;
 
   try {
-    const respuesta = await fetch(API_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "sync", viajes })
-    });
+    do {
+      sincronizacionPendiente = false;
 
-    if(!respuesta.ok) {
-      console.error("Error al sincronizar viajes:", respuesta.status);
-    } else {
-      const resultado = await respuesta.text();
-      console.info("Respuesta de sincronización:", resultado);
-    }
+      const todos = [...unidades, ...finalizadas];
+      const viajes = todos
+        .filter(u => u && u.placa && u.destino &&
+          (u.fechaSalida || u.fechaJornada) &&
+          (u.horaProgramacion || u.hora))
+        .map(u => ({
+          placa: String(u.placa || "").trim().toUpperCase(),
+          destino: String(u.destino || "").trim(),
+          fechaInicio: u.fechaSalida || u.fechaJornada || "",
+          horaInicio: u.horaProgramacion || "",
+          fechaSalida: u.fechaSalida || u.fechaJornada || "",
+          horaProgramacion: u.horaProgramacion || u.hora || "",
+          fechaFinalizacion: u.fechaFinalizacion || "",
+          horaFinalizacion: u.horaFinalizacion || "",
+          tiempoEnCalle: u.tiempoEnCalle || "",
+          ubicacion: u.ubicacion || "",
+          estado: u.estado || "En ruta"
+        }));
+
+      if(!viajes.length) break;
+
+      const respuesta = await fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ action: "sync", viajes })
+      });
+
+      const texto = await respuesta.text();
+      let resultado;
+      try {
+        resultado = JSON.parse(texto);
+      } catch (_) {
+        throw new Error("El servidor no devolvió JSON válido: " + texto.slice(0, 180));
+      }
+
+      if(!respuesta.ok || !resultado.ok){
+        throw new Error(resultado.error || ("Error HTTP " + respuesta.status));
+      }
+
+      console.info("Google Sheets sincronizado:", resultado);
+    } while(sincronizacionPendiente);
   } catch(error) {
-    console.error("No se pudo conectar con Google Sheets:", error);
+    console.error("No se pudo sincronizar con Google Sheets:", error);
+    // El registro local permanece guardado; el error queda visible en la consola.
   } finally {
     sincronizacionEnCurso = false;
+    if(sincronizacionPendiente){
+      sincronizacionPendiente = false;
+      sincronizarConGoogleSheets();
+    }
   }
 }
 
